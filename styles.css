@@ -449,3 +449,178 @@ body.dark .highlight-points li {
   object-fit: cover;
   max-height: 340px; /* matches the container */
 }
+/* About page layout refinements */
+.about-hero .intro-content {
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 48px;
+}
+
+.about-hero .intro-text {
+  flex: 1 1 56%;
+  max-width: 640px;
+}
+
+.about-hero .intro-avatar {
+  flex: 0 1 38%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.about-hero .intro-avatar img {
+  width: min(420px, 100%);
+}
+
+.about-section {
+  margin-top: 56px;
+}
+
+.about-story p + p {
+  margin-top: 14px;
+}
+
+.about-cta {
+  margin-top: 72px;
+  padding-bottom: 12px;
+}
+
+.about-cta p {
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.about-cta .buttons {
+  margin-top: 28px;
+}
+
+@media (max-width: 768px) {
+  .about-hero .intro-content {
+    flex-wrap: wrap;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .about-hero .intro-text {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+
+  .about-hero .intro-avatar {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .about-hero .intro-avatar img {
+    width: min(340px, 100%);
+  }
+
+  .about-section {
+    margin-top: 44px;
+  }
+
+  .about-cta {
+    margin-top: 56px;
+  }
+}
+
+/* Projects page skeleton */
+.projects-hero .buttons {
+  margin-top: 28px;
+}
+
+.projects-section {
+  margin-top: 64px;
+}
+
+.featured-work-grid {
+  align-items: stretch;
+}
+
+.project-preview-card {
+  flex: 1 1 calc(50% - 20px);
+  min-width: 320px;
+  padding: 28px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.project-preview-card h3,
+.category-card h3 {
+  margin-bottom: 10px;
+}
+
+.project-preview-card .designation {
+  margin-bottom: 12px;
+}
+
+.project-preview-card .buttons {
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.category-card-grid {
+  align-items: stretch;
+}
+
+.projects-card-link {
+  color: inherit;
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.project-card-cta,
+.coming-soon-label {
+  display: inline-block;
+  margin-top: 18px;
+  color: #f59e0b;
+  font-weight: bold;
+}
+
+.coming-soon-label {
+  font-size: 0.9rem;
+}
+
+.projects-cta {
+  margin-top: 72px;
+  padding-bottom: 12px;
+}
+
+.projects-cta p {
+  max-width: 760px;
+  line-height: 1.6;
+}
+
+.projects-cta .buttons {
+  margin-top: 28px;
+}
+
+@media (max-width: 768px) {
+  .projects-hero .buttons,
+  .projects-cta .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .projects-section {
+    margin-top: 48px;
+  }
+
+  .project-preview-card {
+    flex-basis: 100%;
+    min-width: 280px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .projects-cta {
+    margin-top: 56px;
+  }
+}
