@@ -522,3 +522,105 @@ body.dark .highlight-points li {
     margin-top: 56px;
   }
 }
+
+/* Projects page skeleton */
+.projects-hero .buttons {
+  margin-top: 28px;
+}
+
+.projects-section {
+  margin-top: 64px;
+}
+
+.featured-work-grid {
+  align-items: stretch;
+}
+
+.project-preview-card {
+  flex: 1 1 calc(50% - 20px);
+  min-width: 320px;
+  padding: 28px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.project-preview-card h3,
+.category-card h3 {
+  margin-bottom: 10px;
+}
+
+.project-preview-card .designation {
+  margin-bottom: 12px;
+}
+
+.project-preview-card .buttons {
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.category-card-grid {
+  align-items: stretch;
+}
+
+.projects-card-link {
+  color: inherit;
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.project-card-cta,
+.coming-soon-label {
+  display: inline-block;
+  margin-top: 18px;
+  color: #f59e0b;
+  font-weight: bold;
+}
+
+.coming-soon-label {
+  font-size: 0.9rem;
+}
+
+.projects-cta {
+  margin-top: 72px;
+  padding-bottom: 12px;
+}
+
+.projects-cta p {
+  max-width: 760px;
+  line-height: 1.6;
+}
+
+.projects-cta .buttons {
+  margin-top: 28px;
+}
+
+@media (max-width: 768px) {
+  .projects-hero .buttons,
+  .projects-cta .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .projects-section {
+    margin-top: 48px;
+  }
+
+  .project-preview-card {
+    flex-basis: 100%;
+    min-width: 280px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .projects-cta {
+    margin-top: 56px;
+  }
+}
