@@ -1349,175 +1349,83 @@ body.dark .case-study-carousel-status {
   }
 }
 
-/* Projects and About visual polish */
-.project-card-visual {
+/* Projects and About placeholders */
+.project-thumbnail-placeholder,
+.about-visual-placeholder {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(245, 158, 11, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(17, 17, 17, 0.02)),
+    repeating-linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0, rgba(245, 158, 11, 0.05) 1px, transparent 1px, transparent 14px),
+    #181818;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.project-thumbnail-placeholder {
   width: 100%;
+  height: 180px;
   margin-bottom: 22px;
 }
 
-.project-card-visual-thumb {
-  overflow: hidden;
-  border-radius: 8px;
-  background: #fff7ed;
-  border: 1px solid rgba(245, 158, 11, 0.18);
-  aspect-ratio: 16 / 10;
-}
-
-.project-card-thumb {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.project-card-visual-badge {
-  display: inline-flex;
-  width: auto;
-  align-items: center;
-  gap: 10px;
-  align-self: flex-start;
-  padding: 9px 12px;
-  border: 1px solid rgba(245, 158, 11, 0.18);
-  border-radius: 999px;
-  background: rgba(245, 158, 11, 0.07);
-  color: #8a5a08;
-  font-size: 0.82rem;
+.project-thumbnail-placeholder span,
+.about-visual-placeholder span {
+  position: relative;
+  z-index: 1;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0;
+  text-transform: uppercase;
 }
 
-.project-card-icon,
-.category-card-icon,
-.about-skill-icon,
-.about-visual-badge img,
-.about-tool-strip img {
-  display: block;
-  object-fit: contain;
-}
-
-.project-card-icon {
-  width: 24px;
-  height: 24px;
-  margin: 0;
-}
-
-.category-card-icon {
-  width: 42px;
-  height: 42px;
-  margin: 0 0 18px;
-  padding: 8px;
-  border-radius: 12px;
-  background: rgba(245, 158, 11, 0.09);
-  border: 1px solid rgba(245, 158, 11, 0.18);
-}
-
-.about-visual-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 26px;
-}
-
-.about-visual-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 9px 12px;
-  border-radius: 999px;
-  background: rgba(245, 158, 11, 0.08);
-  border: 1px solid rgba(245, 158, 11, 0.18);
-  color: #7c5208;
-  font-size: 0.88rem;
-  font-weight: 700;
-}
-
-.about-visual-badge img {
-  width: 22px;
-  height: 22px;
-}
-
-.about-skill-card {
-  text-align: left;
-  display: flex;
+.about-visual-stack {
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
+  gap: 18px;
 }
 
-.about-skill-icon {
-  width: 44px;
-  height: 44px;
-  margin: 0 0 16px;
-  padding: 8px;
-  border-radius: 12px;
-  background: rgba(245, 158, 11, 0.08);
-  border: 1px solid rgba(245, 158, 11, 0.18);
+.about-visual-placeholder {
+  width: 100%;
+  max-width: 420px;
+  height: 220px;
 }
 
-.about-tool-strip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 4px 0 22px;
+body.dark .project-thumbnail-placeholder,
+body.dark .about-visual-placeholder {
+  border-color: rgba(245, 158, 11, 0.22);
+  background:
+    linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(255, 255, 255, 0.02)),
+    repeating-linear-gradient(135deg, rgba(245, 158, 11, 0.06) 0, rgba(245, 158, 11, 0.06) 1px, transparent 1px, transparent 14px),
+    #151515;
 }
 
-.about-tool-strip span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 14px;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-}
+@media (max-width: 992px) {
+  .project-thumbnail-placeholder {
+    height: 160px;
+  }
 
-.about-tool-strip img {
-  width: 24px;
-  height: 24px;
-}
+  .about-visual-stack {
+    align-items: center;
+  }
 
-.about-tool-card {
-  min-height: 82px;
-  border-radius: 8px;
-}
-
-body.dark .project-card-visual-thumb,
-body.dark .project-card-visual-badge,
-body.dark .category-card-icon,
-body.dark .about-visual-badge,
-body.dark .about-skill-icon,
-body.dark .about-tool-strip span {
-  background: rgba(245, 158, 11, 0.1);
-  border-color: rgba(245, 158, 11, 0.28);
-}
-
-body.dark .project-card-visual-badge,
-body.dark .about-visual-badge {
-  color: #fbbf24;
+  .about-visual-placeholder {
+    max-width: 100%;
+    height: 180px;
+  }
 }
 
 @media (max-width: 768px) {
-  .project-card-visual {
+  .project-thumbnail-placeholder {
+    height: 150px;
     margin-bottom: 18px;
   }
 
-  .project-card-visual-badge {
-    align-self: center;
-  }
-
-  .category-card-icon,
-  .about-skill-icon {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .about-visual-badges,
-  .about-tool-strip {
-    justify-content: center;
-  }
-
-  .about-skill-card {
-    text-align: center;
-    align-items: center;
+  .about-visual-placeholder {
+    width: 100%;
+    height: 160px;
   }
 }
