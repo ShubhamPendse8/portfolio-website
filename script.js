@@ -34,3 +34,34 @@ function scrollCarousel(id, direction = 1) {
 }
 
 
+
+// Case study carousel
+const caseStudyCarousel = document.querySelector('[data-case-study-carousel]');
+if (caseStudyCarousel) {
+  const carouselImages = Array.from(caseStudyCarousel.querySelectorAll('[data-carousel-image]'));
+  const prevButton = caseStudyCarousel.querySelector('[data-carousel-prev]');
+  const nextButton = caseStudyCarousel.querySelector('[data-carousel-next]');
+  const statusText = caseStudyCarousel.querySelector('[data-carousel-status]');
+  let activeImageIndex = 0;
+
+  const updateCaseStudyCarousel = () => {
+    carouselImages.forEach((image, index) => {
+      image.classList.toggle('active', index === activeImageIndex);
+    });
+
+    if (statusText) {
+      statusText.textContent = `Creative ${activeImageIndex + 1} of ${carouselImages.length}`;
+    }
+  };
+
+  const showCaseStudyImage = (direction) => {
+    activeImageIndex = (activeImageIndex + direction + carouselImages.length) % carouselImages.length;
+    updateCaseStudyCarousel();
+  };
+
+  if (carouselImages.length && prevButton && nextButton) {
+    prevButton.addEventListener('click', () => showCaseStudyImage(-1));
+    nextButton.addEventListener('click', () => showCaseStudyImage(1));
+    updateCaseStudyCarousel();
+  }
+}
