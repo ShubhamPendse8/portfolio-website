@@ -1139,23 +1139,40 @@ body.dark .highlight-points li {
 }
 
 .case-study-section {
-  margin-top: 72px;
+  margin-top: 56px;
+}
+
+.case-study-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.78fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.case-study-column {
+  min-width: 0;
 }
 
 .project-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
+  gap: 16px;
 }
 
 .project-overview-grid .service-card,
-.case-study-approach .service-card {
-  min-height: 190px;
+.case-study-approach-cards .service-card {
+  min-width: 0;
+  min-height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  padding: 22px;
+  text-align: left;
 }
 
 .project-overview-grid .service-card p,
-.case-study-approach .service-card p {
+.case-study-approach-cards .service-card p {
   line-height: 1.65;
 }
 
@@ -1172,24 +1189,85 @@ body.dark .case-study-copy p {
   color: #f1f1f1;
 }
 
-.case-study-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-  margin-top: 20px;
+.case-study-copy-card {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 28px;
 }
 
-.case-study-gallery img {
+body.dark .case-study-copy-card {
+  background: #1a1a1a;
+  border-color: #333;
+}
+
+.case-study-approach-gallery {
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1fr);
+}
+
+.case-study-approach-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.case-study-carousel {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.case-study-carousel-frame {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.case-study-carousel-image {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  max-height: 420px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+  object-fit: contain;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
-body.dark .case-study-gallery img {
+.case-study-carousel-image.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.case-study-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.case-study-carousel-status {
+  color: #555;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+body.dark .case-study-carousel {
+  background: #1a1a1a;
   border-color: #333;
+}
+
+body.dark .case-study-carousel-frame {
+  background: #111;
+}
+
+body.dark .case-study-carousel-status {
+  color: #ccc;
 }
 
 .case-study-cta {
@@ -1210,7 +1288,7 @@ body.dark .case-study-gallery img {
   margin-top: 30px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .case-study-hero {
     padding: 20px 0 28px;
   }
@@ -1225,21 +1303,48 @@ body.dark .case-study-gallery img {
     margin-top: 52px;
   }
 
+  .case-study-split,
+  .case-study-approach-gallery {
+    grid-template-columns: 1fr;
+  }
+
   .project-overview-grid .service-card,
-  .case-study-approach .service-card {
+  .case-study-approach-cards .service-card {
     min-height: auto;
   }
 
-  .case-study-gallery {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .case-study-gallery img {
-    max-height: none;
+  .case-study-carousel-frame {
+    height: 440px;
   }
 
   .case-study-cta {
     margin-top: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .case-study-split {
+    gap: 28px;
+  }
+
+  .project-overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .case-study-copy-card,
+  .case-study-carousel {
+    padding: 14px;
+  }
+
+  .case-study-carousel-frame {
+    height: min(420px, 105vw);
+  }
+
+  .case-study-carousel-controls {
+    gap: 10px;
+  }
+
+  .case-study-carousel-status {
+    font-size: 0.9rem;
   }
 }
