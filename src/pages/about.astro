@@ -117,32 +117,32 @@ const link = (p: string) => `${base}${p}`;
 </BaseLayout>
 
 <style>
-  .about-hero { padding-top: 30px; }
+  .about-hero { padding-top: 20px; padding-bottom: clamp(12px, 2vw, 24px); }
   .about-hero__inner {
     display: grid;
     grid-template-columns: 1.4fr 1fr;
-    gap: clamp(30px, 5vw, 80px);
+    gap: clamp(24px, 5vw, 72px);
     align-items: center;
-    min-height: 60vh;
   }
   .about-hero__title {
     font-family: var(--font-display);
-    font-size: clamp(2.4rem, 5.4vw, 4.6rem);
-    line-height: 1.02;
+    font-size: clamp(2.2rem, 4.8vw, 4rem);
+    line-height: 1.04;
     letter-spacing: -0.03em;
-    margin: 20px 0 22px;
+    margin: 18px 0 18px;
     font-weight: 350;
+    text-wrap: balance;
   }
   .about-hero__title em { color: var(--accent); font-style: italic; font-weight: 350; }
   .about-hero__body { max-width: 620px; }
-  .about-hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .about-hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 
   .about-hero__portrait { display: grid; place-items: center; }
   .about-hero__portrait-frame {
     position: relative;
-    max-width: 420px;
+    max-width: 380px;
     width: 100%;
-    padding: 20px;
+    padding: 16px;
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     background: var(--surface);
@@ -195,12 +195,12 @@ const link = (p: string) => `${base}${p}`;
   }
   .timeline__item {
     position: relative;
-    padding: 16px 0 36px;
+    padding: 12px 0 28px;
     transition-delay: var(--stagger);
   }
   .timeline__dot {
     position: absolute;
-    left: -34px; top: 22px;
+    left: -34px; top: 18px;
     width: 12px; height: 12px;
     background: var(--accent);
     border-radius: 50%;
@@ -240,8 +240,8 @@ const link = (p: string) => `${base}${p}`;
     counter-reset: tools;
   }
   .tool {
-    display: flex; align-items: center; gap: 16px;
-    padding: 22px 24px;
+    display: flex; align-items: center; gap: 14px;
+    padding: 18px 22px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -265,7 +265,7 @@ const link = (p: string) => `${base}${p}`;
     gap: 16px;
   }
   .phil {
-    padding: 30px 26px;
+    padding: 26px 24px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);

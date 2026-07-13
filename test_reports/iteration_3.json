@@ -1,0 +1,69 @@
+{
+  "summary": "Iteration 3 — full frontend regression on Astro portfolio (/portfolio-website). 8 focus areas from the review request verified. PASSING (7/8): spacing tokens on desktop & mobile match spec, hero has NO min-height and uses text-wrap:balance + max-width:16ch, Selected Work grid is a balanced 2-col grid with 6 equal cards including a Coming Soon DIV (not an anchor), nav opacity boost NOW WORKS on scroll (regression from iteration 2 is FIXED), theme toggle persists, filters update URL without reload, contact form present, lightbox counter 1/6 with object-fit:contain + max-height 84vh, Cmd/Ctrl+K + Escape works, deploy workflow restricted to main + workflow_dispatch, production build succeeds with 19 pages and correct /portfolio-website/_astro/ base + robots.txt + sitemap.xml. FAILING (1/8): the /contact page has ~80px HORIZONTAL OVERFLOW at 360/390/430 viewports (scrollWidth = 440 vs innerWidth = 360). Root cause: `.contact-hero__inner` (a `display:grid` with default `min-width:auto` grid tracks) contains children (notably `.social-list a` with `grid-template-columns:90px 1fr auto` and a long email string 'shubhampendse8@gmail.com' + `.contact-hero__meta` = `repeat(3,auto)` at desktop) whose min-content exceeds the mobile viewport, so the grid tracks refuse to shrink below their content and force the parent wider than the viewport.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "contact.astro — .contact-hero__inner / .social-list / .contact-hero__meta",
+        "issue": "Horizontal overflow on /contact at viewport widths 360, 390, 430. `document.documentElement.scrollWidth = 440` while `window.innerWidth = 360|390|430`, i.e. ~80px overflow. Overflow-causing chain (from evaluate output): MAIN → SECTION.contact-hero → DIV.container.contact-hero__inner all report scrollWidth=440, clientWidth=<viewport>. `.contact-hero__text`, `<h1>.contact-hero__title`, `p.lead.contact-hero__body`, `.contact-hero__meta`, `<aside>.contact-hero__social` are all measured at width 420px inside a 360px container. Screenshot confirms h1 'Bring your idea. I'll bring the design thinking.' is clipped at the right edge on mobile.",
+        "selector": ".contact-hero__inner, .social-list a, .contact-hero__meta",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified_focus_items": {
+    "1_spacing_tokens": "PASS — Desktop 1440: .section padding 86.4px/86.4px (≈88px spec), .section__head margin-bottom 44px, .footer margin-top 80px. Mobile 390: .section 44px/44px, .section__head margin-bottom 32px, .footer margin-top 40px. (.section-tight not present on Home — not required, only defined in global.css at clamp(36px,5vw,64px) which resolves to 64px @1440 and 36px @mobile per source.)",
+    "2_home_hero": "PASS — .hero__inner min-height = 0px (no 72vh), padding = 40px 0 57.6px (matches clamp(20,3vw,40)/clamp(30,4vw,60)). .hero__heading text-wrap = balance, max-width = 736px (16ch @ 46px). Text reads 'Design that clears the noise and carries the message.' with <em> segment italic + accent-colored on 'and carries'. Wraps into 3 balanced lines automatically.",
+    "3_selected_work_grid": "PASS — At 1440: grid-template-columns = '565px 565px' (2 equal). At 1024: '460.047px 460.047px'. At 768: '342.281px 342.281px'. At 430/390/360: single column (390/350/320px). 6 children, 5 <a> anchors + 1 <div> Coming-Soon. First 5 card heights = 584px, coming-soon = 588px (essentially equal). No full-width hero card.",
+    "4_coming_soon_card": "PASS — tagName=DIV (not A), role=presentation, aria-disabled=true, data-testid=project-card-coming-soon. Contains SVG clock, .pcard__coming-badge 'IN THE STUDIO', .pcard__meta 'NEW WORK · 2026', .pcard__title 'Coming Soon', summary text. border-style: dashed. Click at 1440: URL unchanged (does NOT navigate). Anchor count inside .work__grid = 5 (only real projects).",
+    "5_text_wrap_balance_pretty": "PASS — h1 text-wrap=balance, h2 balance, h3 balance, .section-title balance, .hero__heading balance, .cs__heading balance (verified on /projects/visol-india), .about-hero__title balance, .contact-hero__title balance, .work-hero__title balance, .footer__headline balance. p text-wrap=pretty, p.lead text-wrap=pretty.",
+    "6_no_heading_nav_overlap": "PASS — Across pages (about/contact/work/projects/visol-india) at 360 and 1440, h1_top ≥ nav_bottom on every check: e.g. contact@360 h1_top=152 nav_bottom=76; about@1440 h1_top=150 nav_bottom=82. No headings overlap the pill nav.",
+    "7_deploy_workflow": "PASS — /app/.github/workflows/deploy.yml triggers `on: push: branches: - main` + `workflow_dispatch`. NOT on portfolio-v2-emergent. Uses node-version:20, cache:yarn, `yarn install --frozen-lockfile`, uploads ./dist via actions/upload-pages-artifact@v3, deploys via actions/deploy-pages@v4.",
+    "8_production_build": "PASS — `yarn build` completes in 3.06s with 19 pages. dist/index.html references /portfolio-website/_astro/ base. dist/robots.txt and dist/sitemap.xml both exist.",
+    "regression_theme_toggle": "PASS — data-theme flips dark→light on click, localStorage.theme = 'light' after.",
+    "regression_filters": "PASS — /work filter chip 'social-media' updates URL to ?category=social-media with no page reload.",
+    "regression_contact_form": "PASS — [data-testid=contact-form] present on /contact.",
+    "regression_lightbox": "PASS — clicking gallery image opens .lbx (display:grid), counter reads '1 / 6', img object-fit=contain, max-height=756px (=84vh @900).",
+    "regression_cmd_menu": "PASS — Ctrl+K opens cmd menu, Escape closes.",
+    "regression_nav_scroll_opacity": "PASS (FIXED from iteration 2) — At scrollY=0: bg=rgba(13,13,15,0.78), no is-scrolled class. After wheel(400): scrollY=400, bg=rgba(10,10,12,0.94), .nav.is-scrolled present. Window scroll events now fire correctly.",
+    "regression_no_horizontal_overflow": "MOSTLY PASS — Home + Work + About + /projects/visol-india: scrollWidth == innerWidth at 360/390/430/768/1024/1440. FAIL on /contact only at 360/390/430 (sw=440 vs iw=<viewport>)."
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Fix /contact horizontal overflow at ≤430px. Suggested fixes for /app/src/pages/contact.astro: (a) add `min-width: 0;` to `.contact-hero__inner`, `.contact-hero__text`, `.contact-hero__social`, `.social-list a`, `.contact-hero__meta`, `.cmeta` — this lets grid tracks shrink below their default min-content. (b) In `.social-list a`, change `grid-template-columns: 90px 1fr auto` to `grid-template-columns: minmax(0, 90px) minmax(0, 1fr) auto` and add `word-break: break-word;` (or `overflow-wrap: anywhere`) on `.social-list__value` so 'shubhampendse8@gmail.com' can wrap. (c) Ensure `.contact-hero__meta` at ≤640px keeps `grid-template-columns: 1fr` (already scoped at 720px) — verify the 3-col rule at desktop doesn't leak. (d) Optional: add `overflow-x: clip;` on `.contact-hero` as a safety belt so any future wide child doesn't push the whole page."
+  ],
+  "critical_code_review_comments": [
+    "/contact overflow root cause: default `min-width: auto` on grid items combined with the long unbreakable email string. Any grid ancestor with fr columns must have `min-width: 0` on children to prevent min-content push-out — this is a common Astro/CSS-grid mobile bug and warrants a global rule (e.g. `.container > * { min-width: 0 }` scoped for mobile).",
+    "The email `shubhampendse8@gmail.com` is 24 chars, rendered at font-size 1.05rem with .social-list__value — its min-content width alone is ~210px, and combined with the 90px label column + arrow + gaps exceeds a 320px available inner width. Add `overflow-wrap: anywhere` or reduce label column width on ≤430px.",
+    "Nav is-scrolled fix (main agent already resolved) — regression FIXED, bg boosts to 0.94 on scroll >24px, event listener fires. Great.",
+    "Coming Soon card correctly uses <div role='presentation' aria-disabled='true'> — screen readers won't announce a link, and click does not navigate. Semantically correct.",
+    "Deploy workflow correctly narrowed to main branch — prevents accidental live-site overwrites from feature/preview branches.",
+    "Build produces 19 pages including the 4 legacy .html.astro entry points (projects.html, social-media.html, ui-ux.html, visol-india.html). These emit `/projects.html/index.html` etc. — consider whether they are still needed post-Astro migration or can be removed to reduce artifact size.",
+    "Production build correctly applies /portfolio-website/ base to all _astro asset URLs — good."
+  ],
+  "updated_files": [],
+  "success_rate": {
+    "backend": "N/A (static site)",
+    "frontend": "94% (23 of 24 focus checks pass; 1 regression: /contact horizontal overflow at 360/390/430)"
+  },
+  "seed_data_creation": "None",
+  "test_credentials": "N/A",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "The single remaining bug is /contact page horizontal overflow at mobile viewports (360/390/430). Reproduce: set viewport to 360x800, goto /portfolio-website/contact, evaluate `document.documentElement.scrollWidth` → 440 (vs innerWidth 360). Overflow chain roots at MAIN → SECTION.contact-hero → DIV.container.contact-hero__inner. Fix should apply `min-width: 0` to grid children in .contact-hero__inner (and specifically .social-list a) plus `overflow-wrap: anywhere` on .social-list__value. All other checks (spacing, hero, 2-col Selected Work grid, Coming Soon DIV, nav opacity, lightbox counter 1/6, filters, theme, cmd menu, deploy workflow, prod build) pass on this iteration — do not re-litigate. Ticker mask fade is intentional (leave alone). Mailto fallback note is correct (leave alone).",
+  "rca_of_the_issue": {
+    "bug": "Horizontal overflow on /contact page at viewport widths ≤ 430px",
+    "reproduction_steps": [
+      "1. Open https://75936161-d04b-4c29-9817-c546d015eb15.preview.emergentagent.com/portfolio-website/contact",
+      "2. Set viewport to 360x800 (or 390x844 or 430x800).",
+      "3. Evaluate `document.documentElement.scrollWidth` → 440.",
+      "4. Evaluate `window.innerWidth` → 360.",
+      "5. Result: 80px horizontal overflow. Screenshot shows h1 'Bring your idea. I'll bring the design thinking.' clipped at right edge; contact-hero__text/aside/meta all measured 420px wide inside 320px inner container.",
+      "6. Root elements pushing overflow (via `el.scrollWidth > el.clientWidth`): <main>, <section class='contact-hero'>, <div class='container contact-hero__inner'> — all sw=440 cw=360."
+    ],
+    "root_cause": "In CSS grid, grid tracks default to `min-width: auto` which resolves to the min-content of the largest child. The `.contact-hero__inner` grid track hosts `.social-list a` with `grid-template-columns: 90px 1fr auto` and a long unbreakable email string 'shubhampendse8@gmail.com' whose min-content is ~210px. Combined with the 90px label column + arrow + gaps, the min-content of the child exceeds the container's mobile width, forcing the parent grid track to expand and push the page beyond viewport width.",
+    "mitigation": "Apply `min-width: 0` to `.contact-hero__inner`, `.contact-hero__text`, `.contact-hero__social`, `.contact-hero__meta`, `.social-list a`, and `.cmeta`. Change `.social-list a` grid to `grid-template-columns: minmax(0, 90px) minmax(0, 1fr) auto`. Add `overflow-wrap: anywhere` (or `word-break: break-word`) to `.social-list__value` so the email can wrap. Optional safety belt: `overflow-x: clip` on `.contact-hero`."
+  }
+}
