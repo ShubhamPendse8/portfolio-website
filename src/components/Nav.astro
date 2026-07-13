@@ -313,12 +313,19 @@ const items = [
     })
   );
 
-  // Nav elevation on scroll
+  // Nav elevation on scroll — robust to whichever element is the scroll root
   const nav = document.querySelector('[data-nav]');
+  const getScrollTop = () =>
+    window.scrollY ||
+    (document.scrollingElement && document.scrollingElement.scrollTop) ||
+    document.documentElement.scrollTop ||
+    document.body.scrollTop ||
+    0;
   const onScroll = () => {
-    if (window.scrollY > 24) nav?.classList.add('is-scrolled');
+    if (getScrollTop() > 24) nav?.classList.add('is-scrolled');
     else nav?.classList.remove('is-scrolled');
   };
   window.addEventListener('scroll', onScroll, { passive: true });
+  document.addEventListener('scroll', onScroll, { passive: true, capture: true });
   onScroll();
 </script>

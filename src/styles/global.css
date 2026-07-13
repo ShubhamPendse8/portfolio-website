@@ -101,7 +101,6 @@ body {
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
   transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 
