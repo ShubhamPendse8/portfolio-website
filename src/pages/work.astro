@@ -135,8 +135,16 @@ const totalCount = projects.length;
   }
   .pgrid__cell { transition-delay: var(--stagger, 0ms); }
   .pgrid__cell.is-hidden { display: none; }
-  @media (max-width: 900px) { .pgrid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .pgrid { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .pgrid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
+  @media (max-width: 560px) { .pgrid { grid-template-columns: 1fr; gap: 18px; } }
+
+  @media (max-width: 640px) {
+    .work-hero { padding-top: 20px; padding-bottom: 30px; }
+    .work-hero__title { margin: 16px 0 14px; }
+    .filters { top: calc(var(--nav-height) + 12px); padding: 10px 0; }
+    .filters__bar { padding: 6px; }
+    .chip { padding: 8px 12px; font-size: 0.82rem; }
+  }
 
   .pgrid__empty {
     text-align: center;

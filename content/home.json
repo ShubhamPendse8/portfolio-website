@@ -5,7 +5,11 @@
     "subheading": "I create visual identities, digital experiences and communication systems that turn complex ideas into clear and memorable design.",
     "primary_cta": { "label": "Explore My Work", "url": "/work" },
     "secondary_cta": { "label": "Contact Me", "url": "/contact" },
-    "resume_cta": { "label": "Resume", "url": "/assets/resume/shubham-pendse-resume.pdf" }
+    "resume_cta": { "label": "Resume", "url": "/assets/resume/shubham-pendse-resume.pdf" },
+    "avatar_caption": {
+      "left": "01 · Shubham Pendse",
+      "right": "Designer"
+    }
   },
   "capabilities": [
     {

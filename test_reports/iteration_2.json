@@ -1,0 +1,58 @@
+{
+  "summary": "Iteration 2 — verified all 7 requested responsive refinements on the Astro portfolio at /portfolio-website across viewports 360/390/430/768/1440px. 6 of 7 refinements fully pass. Only Refinement 2 partially fails: the scroll-triggered nav opacity boost (`.nav.is-scrolled`) never activates because <body> is the actual scroll container (due to both html+body having overflow-x: hidden) while Nav.astro attaches its scroll listener to `window` — so the listener never fires and content stays readable through the semi-transparent glass while the user scrolls. All other refinements (mobile section spacing, scroll-padding-top / scroll-margin-top, mobile nav height 62px, avatar caption, 2× ticker with correct shift, mobile ticker font 16.8px + 32px gap, square 4/3/2 gallery, lightbox counter 1/6 with object-fit: contain + max-height 84vh, mobile card density 22px padding, no horizontal overflow at any viewport, anchored section offset, theme persistence, Cmd/Ctrl+K → Escape, filter chips, contact mailto note) verified passing.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Nav.astro scroll listener",
+        "issue": "The scroll-elevation class `.nav.is-scrolled` is NEVER applied while scrolling, so the nav glass never boosts from ~rgba(13,13,15,0.78) → 0.94. Root cause: global.css sets `overflow-x: hidden` on BOTH html and body, which causes the browser to make <body> the scrolling container (document.body.scrollTop increments, but window.scrollY and document.documentElement.scrollTop stay 0 and no `scroll` event fires on window). The listener in Nav.astro (`window.addEventListener('scroll', onScroll, {passive:true})`) therefore never triggers on real user scroll. Visible symptom on the home page: while scrolling, hero content / expertise-ticker words remain clearly readable through the floating nav (see screenshot — 'UI/UX', 'Social Media', 'Branding' visible behind the pill nav).",
+        "selector": "[data-nav] .nav__inner (Nav.astro), global.css html/body overflow-x rules",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "verified_refinements": {
+    "R1_mobile_section_spacing": "PASS — at 360/390/430 all main sections have padding 56px top/bottom, no min-height:100vh/svh on non-hero sections; scrollWidth == innerWidth.",
+    "R2_sticky_nav": "PARTIAL — scroll-padding-top:108px on html, scroll-margin-top:98px on section[id]; anchored jump to #capabilities lands with section top 97.7 vs nav bottom 82 (>=nav-bottom, no overlap). Mobile --nav-height stays 62px. BUT nav opacity boost on scroll DOES NOT WORK (see ui_bugs above).",
+    "R3_avatar_caption": "PASS — hero caption reads '01 · Shubham Pendse' (left) and 'DESIGNER' (right), sourced from home.json hero.avatar_caption.left/right.",
+    "R4_ticker": "PASS — .ticker__item count = 14 (2× duplication of 7 base items), --ticker-shift = calc(-50% - 24px). Mobile @390: ticker item font-size 16.8px (~1.05rem), gap 32px, mobile animation-duration 32s. Mask-image fade edges present (correct per spec).",
+    "R5_gallery_lightbox": "PASS — /projects/visol-india gallery uses 4 cols @desktop (276×276 square), 3 cols @768 with 14px gap, 2 cols @390 with 12px gap; aspect-ratio 1/1; object-fit: cover. Hero image no longer has data-lightbox → only 6 lightbox images. Lightbox counter reads '1 / 6'. .lbx__stage img computed max-height 756px (84vh @900px) and object-fit: contain.",
+    "R6_mobile_card_density": "PASS — .cap padding at 390px = 22px top / 20px left (was 32px on desktop). Cards still readable.",
+    "R7_responsive_qa": "MOSTLY PASS — no horizontal overflow (sw==iw) at 360/390/430/768/1440 on Home and Work. No heading overlap with nav during scroll on Home/Work/About/Contact/Project. Theme toggle persists ('theme' key set in localStorage, matches data-theme). Ctrl+K opens command menu (data-cmd shows), Escape closes it. Filter chips on /work still filter (URL updates to ?category=social-media). Contact form still shows mailto informational note. Only R7 mini-failure: same nav-opacity issue (see R2)."
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Fix Nav.astro scroll listener so `.is-scrolled` class is applied when the user scrolls. Root cause: <body> is the scroll container. Simplest fixes (pick one): (a) remove `overflow-x: hidden` from `body` in global.css (keep only on html) so window/documentElement becomes the scroll root — `window.scrollY` will then update and the existing scroll listener will fire, (b) attach the scroll listener to `document.body` (or the actual scrolling element resolved via `document.scrollingElement`) instead of `window`, or (c) read scroll position from `document.scrollingElement.scrollTop || window.scrollY` and listen with `document.addEventListener('scroll', ..., true)` (capture phase catches scroll on body). Verify after fix that .nav__inner bg goes from rgba(13,13,15,0.78) → rgba(10,10,12,0.94) on dark theme and rgba(253,250,244,0.95) on light theme after scrolling >24px."
+  ],
+  "critical_code_review_comments": [
+    "global.css sets `overflow-x: hidden` on BOTH `html` and `body`. This is the underlying cause that shifts the scroll container onto <body> and breaks any code that assumes window-level scrolling (Nav elevation here, and potentially any future scroll-linked reveal / progress bar). Consider dropping the body rule and keeping only html.",
+    "Nav.astro binds scroll listener to `window` — brittle if scroll root shifts. Recommend using `document.scrollingElement` and listening on `document` with capture=true, or a passive listener on `window` + fallback readout of `document.scrollingElement.scrollTop`.",
+    "Consistency: keep the mask-fade edges on the ticker (that's intentional and looks intentional in dark theme) — verified no word is chopped mid-letter within the readable center band.",
+    "Lightbox correctly no longer includes cs-hero image; counter now shows 1/6 as spec'd — good fix.",
+    "Refinement wins: excellent scroll-margin-top / scroll-padding-top setup — anchored navigation lands cleanly below the pill nav on all pages."
+  ],
+  "updated_files": [],
+  "success_rate": {
+    "backend": "N/A (static site)",
+    "frontend": "95% (24 of 25 individual checks pass; single failing check is the nav-scroll-elevation class not firing)"
+  },
+  "seed_data_creation": "None",
+  "test_credentials": "N/A",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Static Astro site under /portfolio-website. The ONE remaining bug in iteration_2: window scroll events do NOT fire because <body> is the scrolling container (both html+body have overflow-x: hidden). To reproduce: `page.mouse.wheel(0, 800)` — after this, `document.body.scrollTop == 800` but `window.scrollY == 0` and `document.documentElement.scrollTop == 0`, and `.nav.is-scrolled` is not applied. When retesting, verify that (a) after 500px scroll `.nav.is-scrolled` class is present, (b) `getComputedStyle(nav__inner).backgroundColor` differs measurably from the pre-scroll value — expect approx rgba(10,10,12,0.94) on dark, rgba(253,250,244,0.95) on light. Everything else in this iteration passes; do not re-litigate the mask-fade on the ticker (that is intentional).",
+  "rca_of_the_issue": {
+    "bug": "Sticky nav opacity boost never activates on scroll — Refinement 2 partially broken.",
+    "reproduction_steps": [
+      "1. Open https://75936161-d04b-4c29-9817-c546d015eb15.preview.emergentagent.com/portfolio-website/ at 1440x900.",
+      "2. Evaluate getComputedStyle(document.querySelector('.nav__inner')).backgroundColor → 'rgba(13, 13, 15, 0.78)'.",
+      "3. Scroll: page.mouse.wheel(0, 800) — page visibly scrolls, capability cards come into view.",
+      "4. Re-check: window.scrollY == 0, document.documentElement.scrollTop == 0, document.body.scrollTop == 800.",
+      "5. .nav.is-scrolled classList absent; nav bg still 'rgba(13, 13, 15, 0.78)'; ticker words visibly readable through nav glass."
+    ],
+    "root_cause": "html { overflow-x: hidden } combined with body { overflow-x: hidden } shifts the scrolling container onto <body>. window scroll events do not fire (only body scroll fires). Nav.astro attaches listener to window → never called → .is-scrolled class never added → nav__inner bg never boosted to 0.94.",
+    "mitigation": "Choose one: (A) Drop `overflow-x: hidden` from body in /app/src/styles/global.css (keep only on html). (B) In Nav.astro, listen on the true scroll root: `const scroller = document.scrollingElement || document.body; document.addEventListener('scroll', onScroll, {capture:true, passive:true}); const onScroll = () => (scroller.scrollTop > 24 ? nav.classList.add('is-scrolled') : nav.classList.remove('is-scrolled'));`. Option A also improves any future scroll-progress bars / reveal-on-view logic that depends on window scroll."
+  }
+}

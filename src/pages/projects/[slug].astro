@@ -218,7 +218,14 @@ const metaRows: { label: string; value: string }[] = [
   .cs-nav__all:hover { color: var(--accent); border-color: var(--accent); }
 
   @media (max-width: 780px) {
-    .cs-nav { grid-template-columns: 1fr; }
+    .cs-nav { grid-template-columns: 1fr; gap: 14px; padding: clamp(32px, 6vw, 50px) var(--gutter); }
+    .cs-nav__link { padding: 18px 20px; }
     .cs-nav__link--next { text-align: left; }
+  }
+  @media (max-width: 640px) {
+    .cs-hero { padding: 12px var(--gutter) 24px; }
+    .cs-hero__title { margin-bottom: 18px; }
+    .cs-hero__meta { padding: 20px 0; margin: 22px 0; gap: 18px; }
+    .cs-body { padding-bottom: 40px; }
   }
 </style>

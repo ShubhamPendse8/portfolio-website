@@ -68,9 +68,9 @@ const glyphSVG: Record<string, string> = {
             decoding="async"
           />
           <div class="hero__caption glass">
-            <span class="mono hero__caption-label">01 · portrait.png</span>
+            <span class="mono hero__caption-label">{home.hero.avatar_caption?.left || `01 · ${site.name}`}</span>
             <span class="hero__caption-line"></span>
-            <span class="mono hero__caption-scale">100%</span>
+            <span class="mono hero__caption-scale">{(home.hero.avatar_caption?.right || 'Designer').toUpperCase()}</span>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@ const glyphSVG: Record<string, string> = {
     <!-- Ticker -->
     <div class="ticker" aria-hidden="true">
       <div class="ticker__track">
-        {[...site.expertise_ticker, ...site.expertise_ticker, ...site.expertise_ticker].map((t) => (
+        {[...site.expertise_ticker, ...site.expertise_ticker].map((t) => (
           <span class="ticker__item">
             <span class="ticker__dot"></span>
             {t}
@@ -198,7 +198,7 @@ const glyphSVG: Record<string, string> = {
     grid-template-columns: 1.15fr 1fr;
     gap: clamp(30px, 5vw, 80px);
     align-items: center;
-    min-height: 78vh;
+    min-height: 72vh;
   }
   .hero__text { padding: 20px 0; }
   .hero__heading {
@@ -305,16 +305,22 @@ const glyphSVG: Record<string, string> = {
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     padding: 20px 0;
-    -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
-            mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    --ticker-shift: calc(-50% - 24px);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+            mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
   }
   .ticker__track {
-    display: inline-flex; gap: 44px;
+    display: inline-flex;
+    gap: 48px;
+    padding-right: 48px; /* trailing gap that matches inter-item gap */
     white-space: nowrap;
-    animation: tick 45s linear infinite;
-    padding-left: 44px;
+    animation: tick 42s linear infinite;
+    will-change: transform;
   }
-  @keyframes tick { to { transform: translateX(-33.3333%); } }
+  @keyframes tick {
+    from { transform: translateX(0); }
+    to   { transform: translateX(var(--ticker-shift)); }
+  }
   .ticker__item {
     display: inline-flex; align-items: center; gap: 14px;
     font-family: var(--font-display);
@@ -322,10 +328,21 @@ const glyphSVG: Record<string, string> = {
     color: var(--text-muted);
     font-weight: 400;
     letter-spacing: -0.01em;
+    flex-shrink: 0;
   }
   .ticker__dot {
     width: 6px; height: 6px; border-radius: 50%;
     background: var(--accent);
+    flex-shrink: 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ticker { -webkit-mask-image: none; mask-image: none; overflow-x: auto; }
+    .ticker__track { animation: none; padding-right: 0; }
+  }
+  @media (max-width: 640px) {
+    .ticker { margin-top: 16px; padding: 14px 0; --ticker-shift: calc(-50% - 16px); }
+    .ticker__item { font-size: 1.05rem; }
+    .ticker__track { gap: 32px; padding-right: 32px; animation-duration: 32s; }
   }
 
   /* Section head */
@@ -452,9 +469,30 @@ const glyphSVG: Record<string, string> = {
 
   /* Responsive hero */
   @media (max-width: 900px) {
-    .hero__inner { grid-template-columns: 1fr; min-height: auto; }
-    .hero__visual { justify-self: center; max-width: 420px; margin-top: 20px; }
+    .hero__inner { grid-template-columns: 1fr; min-height: auto; gap: 20px; }
+    .hero__visual { justify-self: center; max-width: 380px; margin-top: 8px; }
     .hero__heading br { display: none; }
+    .hero { padding-top: 20px; }
+  }
+  @media (max-width: 640px) {
+    .hero__inner { min-height: auto; }
+    .hero__text { padding: 12px 0 0; }
+    .hero__heading { margin: 16px 0 18px; }
+    .hero__ctas { margin-top: 26px; gap: 10px; }
+    .hero__meta { margin-top: 22px; }
+    .hero__visual { max-width: 320px; }
+    .work__grid { gap: 14px; }
+    .cap-grid { gap: 12px; }
+    .cap { padding: 22px 20px 24px; }
+    .cap__glyph { margin-bottom: 16px; width: 40px; height: 40px; }
+    .cap__title { font-size: 1.2rem; }
+    .cap__body { font-size: 0.9rem; }
+    .cap__num { top: 20px; right: 22px; }
+    .work__head { margin-bottom: 28px; }
+    .section__head { margin-bottom: 32px; }
+    .finalcta { padding: 32px 22px; }
+    .finalcta__heading { margin: 10px 0 10px; }
+    .finalcta__decor svg { width: 140px; height: 140px; }
   }
   @media (max-width: 520px) {
     .hero__ctas .btn { flex: 1 1 auto; justify-content: center; }

@@ -123,7 +123,7 @@ const link = (p: string) => `${base}${p}`;
     grid-template-columns: 1.4fr 1fr;
     gap: clamp(30px, 5vw, 80px);
     align-items: center;
-    min-height: 66vh;
+    min-height: 60vh;
   }
   .about-hero__title {
     font-family: var(--font-display);
@@ -154,8 +154,28 @@ const link = (p: string) => `${base}${p}`;
     color: var(--text-muted); font-size: 0.78rem;
   }
   @media (max-width: 900px) {
-    .about-hero__inner { grid-template-columns: 1fr; min-height: auto; }
-    .about-hero__portrait { max-width: 360px; margin: 0 auto; }
+    .about-hero__inner { grid-template-columns: 1fr; min-height: auto; gap: 24px; }
+    .about-hero { padding-top: 20px; }
+    .about-hero__portrait { max-width: 320px; margin: 0 auto; }
+    .about-hero__portrait-frame { padding: 14px; }
+    .about-hero__portrait-tag { bottom: 24px; left: 24px; }
+  }
+  @media (max-width: 640px) {
+    .about-hero__title { margin: 14px 0 16px; }
+    .about-hero__ctas { margin-top: 22px; gap: 10px; }
+    .about-hero__ctas .btn { flex: 1 1 auto; justify-content: center; }
+    .timeline { padding-left: 28px; }
+    .timeline::before { left: 6px; }
+    .timeline__dot { left: -28px; top: 20px; width: 10px; height: 10px; }
+    .timeline__item { padding: 8px 0 26px; }
+    .timeline__title { font-size: 1.2rem; }
+    .exp { gap: 14px; }
+    .tool { padding: 16px 18px; gap: 12px; }
+    .tool__name { font-size: 1.05rem; }
+    .phil { padding: 22px 20px; }
+    .phil__title { font-size: 1.2rem; margin: 10px 0 8px; }
+    .interest { padding: 10px 16px; font-size: 1rem; gap: 10px; }
+    .interests { gap: 10px; margin-top: 22px; }
   }
 
   /* Timeline */

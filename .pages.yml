@@ -83,6 +83,12 @@ content:
             fields:
               - { name: label, label: Button Label, type: string }
               - { name: url,   label: Button URL,   type: string }
+          - name: avatar_caption
+            label: Avatar Caption (small tag under portrait)
+            type: object
+            fields:
+              - { name: left,  label: Left Text,  type: string, description: "e.g. 01 · Your Name" }
+              - { name: right, label: Right Text, type: string, description: "e.g. Designer" }
       - name: capabilities
         label: Capabilities
         type: object
