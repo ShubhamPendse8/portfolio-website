@@ -390,3 +390,7 @@ main { padding-top: calc(var(--nav-height) + 16px); }
 
 /* Image reset */
 img { max-width: 100%; height: auto; display: block; }
+
+/* Grid-child min-width safety belt — prevents min-content children from
+   forcing horizontal overflow on mobile. */
+.container, main > section, [class*="__inner"], [class*="__grid"] { min-width: 0; }

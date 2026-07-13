@@ -151,14 +151,16 @@ const socialLinks = [
 </BaseLayout>
 
 <style>
-  .contact-hero { padding-top: 20px; padding-bottom: clamp(12px, 2vw, 24px); }
+  .contact-hero { padding-top: 20px; padding-bottom: clamp(12px, 2vw, 24px); overflow-x: clip; }
   .contact-hero__inner {
     display: grid;
     grid-template-columns: 1.4fr 1fr;
     gap: clamp(24px, 5vw, 56px);
     align-items: start;
     padding-top: 20px;
+    min-width: 0;
   }
+  .contact-hero__text, .contact-hero__social, .contact-hero__meta, .cmeta { min-width: 0; }
   .contact-hero__title {
     font-family: var(--font-display);
     font-size: clamp(2.2rem, 4.8vw, 4rem);
@@ -209,18 +211,26 @@ const socialLinks = [
   .social-list { list-style: none; }
   .social-list a {
     display: grid;
-    grid-template-columns: 90px 1fr auto;
+    grid-template-columns: minmax(0, 88px) minmax(0, 1fr) auto;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     padding: 14px 0;
     border-bottom: 1px solid var(--border);
     color: var(--text);
     transition: color var(--dur) var(--ease);
+    min-width: 0;
   }
   .social-list li:last-child a { border-bottom: 0; }
   .social-list a:hover { color: var(--accent); }
   .social-list__label { color: var(--text-dim); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; }
-  .social-list__value { font-family: var(--font-display); font-size: 1.05rem; letter-spacing: -0.01em; }
+  .social-list__value {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    letter-spacing: -0.01em;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
   .social-list__arrow { color: var(--accent); }
 
   @media (max-width: 900px) {
