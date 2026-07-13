@@ -1,0 +1,300 @@
+# Pages CMS configuration
+# https://pagescms.org
+# After connecting this repo to https://pagescms.org, this file drives the entire content editor.
+
+media:
+  input: public/uploads
+  output: /uploads
+
+content:
+  # -------- SITE SETTINGS --------
+  - name: site
+    label: Site Settings
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - { name: name,           label: Your Name,          type: string, required: true }
+      - { name: title,          label: Professional Title, type: string, required: true }
+      - { name: email,          label: Email,              type: string, required: true }
+      - { name: linkedin,       label: LinkedIn URL,       type: string }
+      - { name: fiverr,         label: Fiverr URL,         type: string }
+      - { name: instagram,      label: Instagram URL,      type: string }
+      - { name: behance,        label: Behance URL,        type: string }
+      - { name: location,       label: Location,           type: string }
+      - { name: availability,   label: Availability Status, type: string, description: "e.g. Open to freelance & full-time opportunities" }
+      - { name: resume,         label: Resume PDF,         type: image, description: "Upload the PDF (image field accepts PDFs)" }
+      - { name: avatar,         label: Avatar / Portrait,  type: image }
+      - { name: footer_text,    label: Footer Text,        type: string }
+      - name: seo
+        label: SEO / Social Sharing
+        type: object
+        fields:
+          - { name: title,        label: SEO Page Title,        type: string }
+          - { name: description,  label: SEO Description,       type: text }
+          - { name: og_image,     label: Social Sharing Image,  type: image }
+      - name: contact_form
+        label: Contact Form Delivery
+        type: object
+        description: "Choose how the contact form is delivered. If left empty, mailto fallback is used and NO fake success is shown."
+        fields:
+          - name: provider
+            label: Provider
+            type: select
+            options: { values: [auto, formspree, web3forms, mailto] }
+            default: auto
+            description: "'auto' picks whichever is configured. 'mailto' always uses the email fallback."
+          - { name: formspree_endpoint, label: Formspree Endpoint URL, type: string, description: "e.g. https://formspree.io/f/xyz — get it at formspree.io" }
+          - { name: web3forms_key,      label: Web3Forms Access Key,   type: string, description: "Get a free key at web3forms.com" }
+      - name: expertise_ticker
+        label: Expertise Ticker Items
+        type: string
+        list: true
+
+  # -------- HOME PAGE --------
+  - name: home
+    label: Home Page
+    type: file
+    path: content/home.json
+    format: json
+    fields:
+      - name: hero
+        label: Hero Section
+        type: object
+        fields:
+          - { name: eyebrow,     label: Eyebrow Line,           type: string }
+          - { name: heading,     label: Hero Heading,           type: text }
+          - { name: subheading,  label: Hero Subheading,        type: text }
+          - name: primary_cta
+            label: Primary Button
+            type: object
+            fields:
+              - { name: label, label: Button Label, type: string }
+              - { name: url,   label: Button URL,   type: string }
+          - name: secondary_cta
+            label: Secondary Button
+            type: object
+            fields:
+              - { name: label, label: Button Label, type: string }
+              - { name: url,   label: Button URL,   type: string }
+          - name: resume_cta
+            label: Resume Button
+            type: object
+            fields:
+              - { name: label, label: Button Label, type: string }
+              - { name: url,   label: Button URL,   type: string }
+      - name: capabilities
+        label: Capabilities
+        type: object
+        list: true
+        fields:
+          - { name: title,       label: Title,       type: string }
+          - { name: description, label: Description, type: text }
+          - name: glyph
+            label: Icon Glyph
+            type: select
+            options: { values: [brand, social, uiux, deck, print, motion] }
+      - name: about_preview
+        label: About Preview
+        type: object
+        fields:
+          - { name: heading, label: Heading, type: string }
+          - { name: body,    label: Body,    type: text }
+          - name: cta
+            label: CTA Link
+            type: object
+            fields:
+              - { name: label, label: Label, type: string }
+              - { name: url,   label: URL,   type: string }
+      - name: final_cta
+        label: Final CTA Section
+        type: object
+        fields:
+          - { name: heading, label: Heading, type: string }
+          - { name: body,    label: Body,    type: text }
+          - name: primary
+            label: Primary Button
+            type: object
+            fields:
+              - { name: label, label: Label, type: string }
+              - { name: url,   label: URL,   type: string }
+          - name: secondary
+            label: Secondary Button
+            type: object
+            fields:
+              - { name: label, label: Label, type: string }
+              - { name: url,   label: URL,   type: string }
+
+  # -------- ABOUT PAGE --------
+  - name: about
+    label: About Page
+    type: file
+    path: content/about.json
+    format: json
+    fields:
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - { name: eyebrow, label: Eyebrow, type: string }
+          - { name: heading, label: Heading, type: text }
+          - { name: body,    label: Body,    type: text }
+      - name: journey
+        label: Journey Timeline
+        type: object
+        list: true
+        fields:
+          - { name: year,        label: Year Label,   type: string }
+          - { name: title,       label: Title,        type: string }
+          - { name: description, label: Description,  type: text }
+      - { name: experience_summary, label: Experience Summary, type: text }
+      - name: tools
+        label: Tools I Use (in order)
+        type: string
+        list: true
+      - name: philosophy
+        label: Design Philosophy
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: body,  label: Body,  type: text }
+      - name: interests
+        label: Beyond Design
+        type: string
+        list: true
+
+  # -------- CONTACT PAGE --------
+  - name: contact
+    label: Contact Page
+    type: file
+    path: content/contact.json
+    format: json
+    fields:
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - { name: eyebrow, label: Eyebrow, type: string }
+          - { name: heading, label: Heading, type: text }
+          - { name: body,    label: Body,    type: text }
+      - name: project_types
+        label: Project Type Options
+        type: string
+        list: true
+      - name: budget_ranges
+        label: Budget Range Options
+        type: string
+        list: true
+      - { name: success_message, label: Success Message, type: string }
+      - { name: error_message,   label: Error Message,   type: string }
+
+  # -------- PROJECTS COLLECTION --------
+  - name: projects
+    label: Projects
+    type: collection
+    path: content/projects
+    format: json
+    filename: '{slug}.json'
+    view:
+      fields: [title, categories, year, featured, published]
+      primary: title
+      sort: [order, title]
+      default:
+        sort: order
+    fields:
+      - { name: title, label: Project Title, type: string, required: true }
+      - { name: slug,  label: URL Slug, type: string, required: true, pattern: '^[a-z0-9-]+$', description: "lowercase, hyphens only, no spaces" }
+      - { name: client, label: Client / Brand, type: string }
+      - { name: year,   label: Year,           type: string }
+      - name: categories
+        label: Categories
+        type: select
+        multiple: true
+        options:
+          values:
+            - { value: social-media,   label: Social Media }
+            - { value: ui-ux,          label: UI/UX }
+            - { value: branding,       label: Branding }
+            - { value: presentations,  label: Presentations }
+            - { value: print,          label: Print }
+            - { value: motion,         label: Motion }
+      - name: disciplines
+        label: Disciplines / Tags
+        type: string
+        list: true
+      - { name: summary, label: Short Summary, type: text }
+      - { name: thumbnail, label: Thumbnail Image, type: image }
+      - { name: thumbnail_alt, label: Thumbnail Alt Text, type: string }
+      - { name: hero_image, label: Hero Image, type: image }
+      - { name: hero_image_alt, label: Hero Image Alt Text, type: string }
+      - { name: featured,     label: Featured Project?,  type: boolean, default: false }
+      - { name: published,    label: Published?,         type: boolean, default: true }
+      - { name: show_on_home, label: Show on Homepage?,  type: boolean, default: false }
+      - { name: order,        label: Display Order,      type: number, default: 100 }
+      - { name: role,         label: My Role,            type: string }
+      - name: tools
+        label: Tools Used
+        type: string
+        list: true
+      - name: services
+        label: Services Provided
+        type: string
+        list: true
+      - { name: outcome, label: Outcome / Impact, type: text }
+      - name: seo
+        label: Project SEO
+        type: object
+        fields:
+          - { name: title,       label: SEO Title,       type: string }
+          - { name: description, label: SEO Description, type: text }
+      - name: sections
+        label: Case Study Sections
+        type: object
+        list: true
+        description: "Reorderable, addable, removable blocks. Each project can use any combination."
+        fields:
+          - name: type
+            label: Block Type
+            type: select
+            options:
+              values:
+                - { value: rich_text,    label: Text Block }
+                - { value: image_full,   label: Full-Width Image }
+                - { value: text_image,   label: Text + Image }
+                - { value: image_pair,   label: Two-Image Row }
+                - { value: gallery,      label: Image Gallery }
+                - { value: before_after, label: Before / After }
+                - { value: video,        label: Video }
+                - { value: outcome,      label: Outcome Block }
+          - { name: heading, label: Heading, type: string }
+          - { name: body,    label: Body Text, type: text }
+          - { name: image,   label: Single Image, type: image }
+          - { name: alt,     label: Image Alt Text, type: string }
+          - { name: caption, label: Caption, type: string }
+          - name: image_position
+            label: Image Position (for Text + Image)
+            type: select
+            options: { values: [right, left] }
+          - name: images
+            label: Multiple Images (Gallery / Two-Image Row)
+            type: object
+            list: true
+            fields:
+              - { name: src, label: Image, type: image }
+              - { name: alt, label: Alt Text, type: string }
+          - name: before
+            label: Before Image (Before/After block)
+            type: object
+            fields:
+              - { name: src, label: Image, type: image }
+              - { name: alt, label: Alt Text, type: string }
+          - name: after
+            label: After Image (Before/After block)
+            type: object
+            fields:
+              - { name: src, label: Image, type: image }
+              - { name: alt, label: Alt Text, type: string }
+          - { name: url,    label: Video URL (YouTube / Vimeo embed URL), type: string }
+          - { name: file,   label: Video File (upload MP4), type: image, description: "Or upload a video file directly" }
+          - { name: poster, label: Video Poster Image, type: image }

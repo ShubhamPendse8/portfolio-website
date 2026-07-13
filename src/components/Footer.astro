@@ -1,0 +1,148 @@
+---
+import { site } from '../lib/content';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const link = (p: string) => `${base}${p}`;
+const year = new Date().getFullYear();
+
+const socials = [
+  site.email && { label: 'Email', href: `mailto:${site.email}` },
+  site.linkedin && { label: 'LinkedIn', href: site.linkedin },
+  site.fiverr && { label: 'Fiverr', href: site.fiverr },
+  site.instagram && { label: 'Instagram', href: site.instagram },
+  site.behance && { label: 'Behance', href: site.behance },
+].filter(Boolean) as { label: string; href: string }[];
+---
+<footer class="footer" data-testid="site-footer">
+  <div class="container footer__inner">
+    <div class="footer__lead">
+      <p class="eyebrow">Get in touch</p>
+      <h2 class="footer__headline">
+        Let's design something worth <em>showing off</em>.
+      </h2>
+      <div class="footer__ctas">
+        <a class="btn btn--primary" href={link('/contact')} data-testid="footer-cta-contact">
+          Start a project <span class="arrow">→</span>
+        </a>
+        <a class="btn btn--ghost" href={`mailto:${site.email}`} data-testid="footer-cta-email">
+          {site.email}
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__grid">
+      <div>
+        <p class="footer__label">Navigate</p>
+        <ul>
+          <li><a href={link('/')}>Home</a></li>
+          <li><a href={link('/work')}>Work</a></li>
+          <li><a href={link('/about')}>About</a></li>
+          <li><a href={link('/contact')}>Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__label">Elsewhere</p>
+        <ul>
+          {socials.map((s) => (
+            <li><a href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel="noopener">{s.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <p class="footer__label">Studio</p>
+        <ul class="footer__plain">
+          <li>{site.location}</li>
+          <li>{site.availability}</li>
+          <li><a href={link(site.resume)} target="_blank" rel="noopener">Download resume</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <span>© {year} {site.name}. {site.footer_text}</span>
+    <span class="footer__version">v2 · Dark Editorial</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-top: clamp(80px, 12vw, 160px);
+    padding: clamp(64px, 10vw, 120px) 0 32px;
+    border-top: 1px solid var(--border);
+    position: relative;
+  }
+  .footer::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.35;
+  }
+  .footer__inner {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+  .footer__headline {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin-top: 14px;
+    font-weight: 350;
+  }
+  .footer__headline em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 350;
+  }
+  .footer__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 32px;
+  }
+  .footer__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .footer__label {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+  .footer__grid ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer__grid a {
+    color: var(--text-muted);
+    font-size: 0.94rem;
+    transition: color var(--dur) var(--ease);
+  }
+  .footer__grid a:hover { color: var(--accent); }
+  .footer__plain li { color: var(--text-muted); font-size: 0.94rem; }
+
+  .footer__bottom {
+    margin-top: clamp(48px, 8vw, 80px);
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+  }
+  .footer__version { font-family: var(--font-mono); }
+
+  @media (max-width: 900px) {
+    .footer__inner { grid-template-columns: 1fr; }
+    .footer__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .footer__grid { grid-template-columns: 1fr; gap: 28px; }
+    .footer__bottom { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>

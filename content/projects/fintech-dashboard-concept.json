@@ -1,0 +1,32 @@
+{
+  "title": "Fintech Dashboard",
+  "slug": "fintech-dashboard-concept",
+  "client": "Concept Project",
+  "year": "2024",
+  "categories": ["ui-ux"],
+  "disciplines": ["UI Design", "Dashboard Design", "Figma"],
+  "summary": "A finance-focused interface concept built around data clarity, quick scanning and confident decision-making.",
+  "thumbnail": "",
+  "thumbnail_alt": "Fintech dashboard UI concept placeholder",
+  "hero_image": "",
+  "hero_image_alt": "",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 11,
+  "role": "UI/UX Designer",
+  "tools": ["Figma"],
+  "services": ["Dashboard UI", "Data Visualisation"],
+  "outcome": "A layout system where the important numbers, trends and actions all read within seconds.",
+  "seo": {
+    "title": "Fintech Dashboard Concept — UI/UX | Shubham Pendse",
+    "description": "A fintech dashboard UI concept focused on data clarity, quick scanning and confident decision-making."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Overview",
+      "body": "A dashboard concept exploring how a finance product might present portfolio, activity and quick actions without overwhelming the user. Full case-study visuals are being prepared."
+    }
+  ]
+}

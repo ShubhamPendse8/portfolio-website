@@ -1,0 +1,32 @@
+{
+  "title": "Corporate Website Design",
+  "slug": "corporate-website-concept",
+  "client": "Concept Project",
+  "year": "2024",
+  "categories": ["ui-ux"],
+  "disciplines": ["UI Design", "Website Design", "Figma"],
+  "summary": "A professional website concept focused on trust, clear hierarchy and smooth visitor flow.",
+  "thumbnail": "",
+  "thumbnail_alt": "Corporate website UI concept placeholder",
+  "hero_image": "",
+  "hero_image_alt": "",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 10,
+  "role": "UI/UX Designer",
+  "tools": ["Figma"],
+  "services": ["Website UI Design", "Layout & Hierarchy"],
+  "outcome": "A calm, credibility-first interface direction with clear paths for services, contact and case studies.",
+  "seo": {
+    "title": "Corporate Website Concept — UI/UX | Shubham Pendse",
+    "description": "A corporate website UI concept focused on trust, clarity and confident hierarchy."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Overview",
+      "body": "A concept exploration of a modern corporate website with a focus on quiet credibility, structured information architecture and easy visitor navigation. Full case study visuals are being prepared."
+    }
+  ]
+}

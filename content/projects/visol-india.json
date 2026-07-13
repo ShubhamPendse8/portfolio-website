@@ -1,0 +1,54 @@
+{
+  "title": "Visol India",
+  "slug": "visol-india",
+  "client": "Visol India",
+  "year": "2024",
+  "categories": ["social-media", "branding"],
+  "disciplines": ["Social Media Design", "Campaign Creatives", "Carousel Design"],
+  "summary": "Brand-focused social media creatives designed to improve visual communication, brand consistency and digital presence.",
+  "thumbnail": "/assets/visol/1.jpg",
+  "thumbnail_alt": "Visol India social media creative — brand communication",
+  "hero_image": "/assets/visol/1.jpg",
+  "hero_image_alt": "Visol India hero creative",
+  "featured": true,
+  "published": true,
+  "show_on_home": true,
+  "order": 1,
+  "role": "Graphic Designer",
+  "tools": ["Adobe Illustrator", "Adobe Photoshop"],
+  "services": ["Social Media Creatives", "Campaign Design", "Carousel Design"],
+  "outcome": "The final creatives helped establish a cleaner and more consistent social media presence while keeping brand communication clear and visually engaging.",
+  "seo": {
+    "title": "Visol India — Social Media Creatives | Shubham Pendse",
+    "description": "Brand-focused social media creatives for Visol India — designed for consistent communication and digital presence."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Overview",
+      "body": "The project required creating social media designs that looked professional, communicated clearly, and remained visually consistent across multiple posts and campaign formats. The work covered brand communication, campaign creatives, carousel posts and standalone digital visuals."
+    },
+    {
+      "type": "rich_text",
+      "heading": "The Challenge",
+      "body": "The brand needed a system, not one-off posts. Every creative had to feel like part of the same voice — same rhythm, same restraint, same clarity — even across launches, festive moments and everyday content."
+    },
+    {
+      "type": "rich_text",
+      "heading": "Approach",
+      "body": "I started by understanding the brand tone, audience, message and purpose behind each creative. From there I built a consistent visual direction that could stretch across posts and carousels without losing character. Each creative was shaped to communicate quickly, stay clear, and feel engaging inside a busy social feed. Final polish focused on spacing, hierarchy and readability for actual social platform behaviour."
+    },
+    {
+      "type": "gallery",
+      "heading": "Creative Gallery",
+      "images": [
+        { "src": "/assets/visol/1.jpg", "alt": "Visol India social media creative focused on brand communication" },
+        { "src": "/assets/visol/2.png", "alt": "Visol India campaign creative for digital social media presence" },
+        { "src": "/assets/visol/3.png", "alt": "Visol India carousel-style social media design" },
+        { "src": "/assets/visol/4.png", "alt": "Visol India brand-focused social media visual" },
+        { "src": "/assets/visol/5.png", "alt": "Visol India promotional social media creative" },
+        { "src": "/assets/visol/6.png", "alt": "Visol India digital creative with consistent visual styling" }
+      ]
+    }
+  ]
+}

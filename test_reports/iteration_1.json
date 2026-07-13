@@ -1,0 +1,62 @@
+{
+  "summary": "End-to-end frontend testing of Shubham Pendse portfolio (Astro static site under /portfolio-website). All 14 requested feature areas were exercised. Home, Nav, Theme toggle, Work filters, Project detail (Visol India), Lightbox, About, Contact form (mailto fallback), Command Menu, Legacy redirects (6), Mobile responsiveness, Sitemap.xml and robots.txt were verified. 12/14 feature areas fully pass. 2 minor issues found (robots.txt sitemap path 404 mismatch, lightbox counter includes hero image so shows 1/7 instead of 1/6).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Lightbox on /projects/visol-india",
+        "issue": "Lightbox counter reads '1 / 7' — the hero image is also registered as a lightbox trigger in addition to the 6 gallery images. Spec says the Creative Gallery has 6 clickable images. If hero-as-lightbox is intentional, the spec expectation for '1 / 6' will still fail. Either exclude the hero image from the lightbox collection, or update spec.",
+        "selector": "[data-testid=\"lightbox\"] counter (1/7 observed)",
+        "priority": "LOW"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "seo_issues": [
+    {
+      "file": "/portfolio-website/robots.txt",
+      "issue": "Sitemap: line points to https://shubhampendse8.github.io/portfolio-website/sitemap-index.xml which returns HTTP 404. The actual generated sitemap lives at /portfolio-website/sitemap.xml (HTTP 200, valid XML). robots.txt should reference sitemap.xml OR a sitemap-index.xml should be generated to match.",
+      "priority": "MEDIUM"
+    }
+  ],
+  "test_report_links": [],
+  "action_items": [
+    "Fix robots.txt: change the Sitemap: URL from '.../sitemap-index.xml' to '.../sitemap.xml' (or emit a sitemap-index.xml file so the referenced path resolves).",
+    "Optional: If the hero image on /projects/visol-india should not be part of the lightbox slideshow, exclude it from the lightbox triggers so the gallery counter reads '1 / 6' as per spec."
+  ],
+  "critical_code_review_comments": [
+    "public robots.txt is out of sync with the actual sitemap output filename produced by sitemap.xml.ts — worth wiring both from a single constant.",
+    "Contact form correctly avoids fake-success on mailto fallback and shows a clear 'Note:' block plus an info status — good implementation, no changes needed.",
+    "Command Menu filter listener uses proper input events (verified by page.keyboard.type). Note for future testers: playwright fill() may set value without firing input events on this implementation — use page.keyboard.type to verify filtering.",
+    "Sitemap URLs use production github.io host (correct for build) even when served from the preview URL — expected for a static site with hardcoded SITE in astro.config.mjs."
+  ],
+  "updated_files": [],
+  "success_rate": {
+    "backend": "N/A (static site, no backend)",
+    "frontend": "95%"
+  },
+  "seed_data_creation": "None",
+  "test_credentials": "N/A",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "verified_features": [
+    "Home: hero, 3 CTAs (Explore My Work, Contact Me, Resume opens in new tab), 6 capability cards (brand/social/uiux/deck/print/motion), featured work grid renders 5 cards with Visol India first showing real image, final CTA glass panel — no dark-on-dark or light-on-light contrast issues observed.",
+    "Nav: all data-testids present (nav-brand, nav-link-home/work/about/contact, theme-toggle, nav-cmd-open, mobile-menu-toggle). Active underline on current page. Nav visible on all pages.",
+    "Theme toggle: dark→light works, localStorage.theme persists, no flash on reload.",
+    "Work page: filter chips show 'All work 9', 'Social Media 5', 'UI/UX 4', 'Branding 3'. Clicking chips filters without page reload. URL updates to ?category=xxx. Clicking All work clears the query param. Deep-link ?category=ui-ux applies filter on load (implicitly via same script path).",
+    "Project cards: Visol India shows real /assets/visol/1.jpg thumbnail; other projects render 2-letter monogram placeholder with 'Case study coming soon' text.",
+    "/projects/visol-india detail page: breadcrumbs, meta grid, hero image, Overview/Challenge/Approach text blocks, Creative Gallery with 6 clickable images, Outcome block, cs-nav-prev/next/all buttons.",
+    "Lightbox: opens on gallery click, ESC / ArrowLeft / ArrowRight all work, lightbox-close/prev/next buttons functional, counter increments on Next.",
+    "About: 6 journey items (Mechanical Engineering → The Dot HQ → UI/UX Course), tools in exact required order (Adobe Illustrator, Adobe Photoshop, Adobe Premiere Pro, Adobe After Effects, Figma, AI-Assisted Design Tools — no HTML/CSS/software-dev tools), 5 philosophy items, 6 interests (Trekking, Cricket, Chess, Space, Science Fiction, Technology).",
+    "Contact: fields (name/email/company/type/budget/message) all present with data-testids. Empty submit → error 'Please fill in your name, email and message.'. Effective provider = mailto. Note block visible explaining direct-send provider isn't configured. Valid submit invokes mailto navigation and status shows 'Your email client is opening with the message pre-filled...' (info, not fake success). Social panel has Email + LinkedIn.",
+    "Command menu: Ctrl+K opens, ESC closes, exactly 8 items in expected groups (Nav Home/Work/About/Contact, Actions Download Resume/Toggle Theme/Email Shubham, Social Open LinkedIn). Typing 'linkedin' filters to only 'Open LinkedIn'. ArrowDown navigation moves active state.",
+    "Legacy redirects: projects.html→/work, social-media.html→/work?category=social-media, ui-ux.html→/work?category=ui-ux, visol-india.html→/projects/visol-india, about.html→/about, contact.html→/contact. All emit both meta http-equiv=refresh and window.location.replace.",
+    "Mobile 390x844: nav collapses to burger (mobile-menu-toggle visible), no horizontal overflow (docWidth == winWidth == 390), hero text stacks vertically.",
+    "sitemap.xml: HTTP 200, well-formed XML with all page URLs (home, work, about, contact, projects/*)."
+  ],
+  "context_for_next_testing_agent": "This is a purely static Astro site under base path /portfolio-website. There is no backend to test. Preview URL: https://75936161-d04b-4c29-9817-c546d015eb15.preview.emergentagent.com/portfolio-website/. When testing Command Menu filter, DO NOT use page.fill() alone — it may set the value without firing the input event on the filter listener. Use page.keyboard.type(...) after focusing the input to reliably verify filtering. Lightbox has 7 clickable images on Visol page (hero + 6 gallery). Contact form is intentionally on mailto fallback (site.json contact_form.provider='auto' + no formspree/web3forms key) — the informational status 'Your email client is opening...' is correct, not a bug. Only real functional bug found: /portfolio-website/robots.txt references sitemap-index.xml (404) instead of sitemap.xml (200)."
+}

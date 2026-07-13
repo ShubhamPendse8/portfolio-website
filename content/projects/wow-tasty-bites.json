@@ -1,0 +1,37 @@
+{
+  "title": "WOW Tasty Bites",
+  "slug": "wow-tasty-bites",
+  "client": "WOW Tasty Bites",
+  "year": "2023",
+  "categories": ["social-media", "branding"],
+  "disciplines": ["Social Media Design", "Food Campaign"],
+  "summary": "Food-focused campaign visuals balancing appetite appeal, brand tone and clear messaging.",
+  "thumbnail": "",
+  "thumbnail_alt": "WOW Tasty Bites food campaign creative",
+  "hero_image": "",
+  "hero_image_alt": "",
+  "featured": true,
+  "published": true,
+  "show_on_home": true,
+  "order": 4,
+  "role": "Graphic Designer",
+  "tools": ["Adobe Illustrator", "Adobe Photoshop"],
+  "services": ["Social Media Creatives", "Food & Beverage Campaigns"],
+  "outcome": "Creatives that made the products feel fresh and confident while keeping brand tone consistent across the feed.",
+  "seo": {
+    "title": "WOW Tasty Bites — Food Social Campaign | Shubham Pendse",
+    "description": "Food-focused campaign creatives for WOW Tasty Bites, balancing appetite appeal and brand tone."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Overview",
+      "body": "The brand needed campaign creatives that felt appetising without becoming loud. Every post had to earn attention in a busy food category while staying grounded in the brand voice."
+    },
+    {
+      "type": "rich_text",
+      "heading": "Approach",
+      "body": "I focused on strong product framing, warm restrained colour and clean typography — enough energy to stop the scroll, enough discipline to stay on-brand."
+    }
+  ]
+}

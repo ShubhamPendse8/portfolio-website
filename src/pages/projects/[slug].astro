@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CaseStudySection from '../../components/CaseStudySection.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getAllProjects, getProjectBySlug, getProjectNeighbors, categoryLabels, type Project } from '../../lib/content';
+
+export async function getStaticPaths() {
+  return getAllProjects().map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+const { project } = Astro.props as { project: Project };
+const { prev, next } = getProjectNeighbors(project.slug);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const link = (p: string) => `${base}${p}`;
+const resolve = (p: string) => (p && !p.startsWith('http') ? link(p) : p);
+
+const primaryCat = project.categories?.[0];
+const catLabel = primaryCat ? categoryLabels[primaryCat] || primaryCat : '';
+const heroImg = project.hero_image || project.thumbnail;
+
+const metaRows: { label: string; value: string }[] = [
+  project.client && { label: 'Client', value: project.client },
+  project.year && { label: 'Year', value: project.year },
+  project.role && { label: 'Role', value: project.role },
+  catLabel && { label: 'Category', value: catLabel },
+  project.services?.length && { label: 'Services', value: project.services.join(', ') },
+  project.tools?.length && { label: 'Tools', value: project.tools.join(', ') },
+].filter(Boolean) as { label: string; value: string }[];
+---
+<BaseLayout
+  title={project.seo?.title || `${project.title} — Case Study`}
+  description={project.seo?.description || project.summary}
+  ogImage={heroImg}
+>
+  <article class="cs-page">
+    <!-- Hero -->
+    <header class="cs-hero container">
+      <div class="cs-hero__crumbs reveal">
+        <a href={link('/work')}>Work</a>
+        <span aria-hidden="true">/</span>
+        {catLabel && (<><a href={link(`/work?category=${primaryCat}`)}>{catLabel}</a><span aria-hidden="true">/</span></>)}
+        <span class="cs-hero__crumbs-current">{project.title}</span>
+      </div>
+
+      <h1 class="cs-hero__title reveal">{project.title}</h1>
+      {project.summary && <p class="cs-hero__summary lead reveal">{project.summary}</p>}
+
+      <div class="cs-hero__meta reveal">
+        {metaRows.map((m) => (
+          <div class="cs-hero__meta-item">
+            <span class="cs-hero__meta-label">{m.label}</span>
+            <span class="cs-hero__meta-value">{m.value}</span>
+          </div>
+        ))}
+      </div>
+
+      {heroImg && (
+        <div class="cs-hero__image reveal">
+          <img
+            src={resolve(heroImg)}
+            alt={project.hero_image_alt || project.thumbnail_alt || project.title}
+            data-lightbox
+            loading="eager"
+            decoding="async"
+            width="1600"
+            height="1000"
+          />
+        </div>
+      )}
+    </header>
+
+    <!-- Body: sections -->
+    <div class="cs-body container">
+      {project.sections?.map((s: any) => <CaseStudySection section={s} />)}
+
+      {project.outcome && (
+        <div class="cs-outcome reveal">
+          <span class="eyebrow">Outcome</span>
+          <p>{project.outcome}</p>
+        </div>
+      )}
+    </div>
+
+    <!-- Nav prev/next -->
+    <nav class="cs-nav container" aria-label="Project navigation">
+      <a href={prev ? link(`/projects/${prev.slug}`) : link('/work')} class="cs-nav__link cs-nav__link--prev" data-testid="cs-nav-prev">
+        <span class="mono">← Previous</span>
+        <span class="cs-nav__title">{prev?.title || 'All Work'}</span>
+      </a>
+      <a href={link('/work')} class="cs-nav__all" data-testid="cs-nav-all">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>
+        <span>All projects</span>
+      </a>
+      <a href={next ? link(`/projects/${next.slug}`) : link('/work')} class="cs-nav__link cs-nav__link--next" data-testid="cs-nav-next">
+        <span class="mono">Next →</span>
+        <span class="cs-nav__title">{next?.title || 'All Work'}</span>
+      </a>
+    </nav>
+  </article>
+
+  <Lightbox />
+</BaseLayout>
+
+<style>
+  .cs-page { padding-top: 20px; }
+  .cs-hero { padding: 20px var(--gutter) clamp(30px, 5vw, 50px); }
+  .cs-hero__crumbs {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    margin-bottom: 26px;
+  }
+  .cs-hero__crumbs a { color: var(--text-muted); }
+  .cs-hero__crumbs a:hover { color: var(--accent); }
+  .cs-hero__crumbs-current { color: var(--accent); }
+
+  .cs-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 6.4vw, 5.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    margin-bottom: 24px;
+    font-weight: 350;
+  }
+  .cs-hero__summary { max-width: 780px; }
+
+  .cs-hero__meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    padding: 28px 0;
+    margin: 32px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .cs-hero__meta-item { display: flex; flex-direction: column; gap: 6px; }
+  .cs-hero__meta-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .cs-hero__meta-value { color: var(--text); font-size: 0.98rem; }
+
+  .cs-hero__image { margin-top: 20px; }
+  .cs-hero__image img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    cursor: zoom-in;
+  }
+
+  .cs-body { padding-bottom: clamp(60px, 8vw, 100px); }
+
+  .cs-outcome {
+    margin-top: clamp(60px, 8vw, 90px);
+    padding: clamp(32px, 5vw, 56px);
+    border: 1px solid var(--accent);
+    background: linear-gradient(135deg, var(--accent-soft), transparent 60%), var(--surface);
+    border-radius: var(--radius-lg);
+  }
+  .cs-outcome p {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    margin-top: 16px;
+    font-weight: 350;
+  }
+
+  .cs-nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    padding: clamp(40px, 6vw, 60px) var(--gutter);
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+    align-items: center;
+  }
+  .cs-nav__link {
+    padding: 24px 26px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .cs-nav__link:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .cs-nav__link--next { text-align: right; }
+  .cs-nav__link .mono {
+    color: var(--text-dim);
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .cs-nav__link:hover .mono { color: var(--accent); }
+  .cs-nav__title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .cs-nav__all {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 20px;
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+  .cs-nav__all:hover { color: var(--accent); border-color: var(--accent); }
+
+  @media (max-width: 780px) {
+    .cs-nav { grid-template-columns: 1fr; }
+    .cs-nav__link--next { text-align: left; }
+  }
+</style>

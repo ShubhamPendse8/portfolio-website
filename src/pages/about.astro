@@ -1,0 +1,289 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { about, site } from '../lib/content';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const link = (p: string) => `${base}${p}`;
+---
+<BaseLayout title="About" description="About Shubham Pendse — a multidisciplinary designer with 6+ years across graphic design, UI/UX, branding, presentations, print and motion.">
+  <section class="about-hero">
+    <div class="container about-hero__inner">
+      <div class="about-hero__text reveal">
+        <span class="eyebrow">{about.hero.eyebrow}</span>
+        <h1 class="about-hero__title">{about.hero.heading}</h1>
+        <p class="lead about-hero__body">{about.hero.body}</p>
+        <div class="about-hero__ctas">
+          <a class="btn btn--primary" href={link(site.resume)} target="_blank" rel="noopener" data-testid="about-cta-resume">
+            Download resume <span class="arrow">→</span>
+          </a>
+          <a class="btn btn--ghost" href={link('/contact')} data-testid="about-cta-contact">Get in touch</a>
+        </div>
+      </div>
+      <div class="about-hero__portrait reveal">
+        <div class="about-hero__portrait-frame">
+          <img src={link(site.avatar)} alt={`Portrait of ${site.name}`} width="600" height="750" />
+          <div class="about-hero__portrait-tag glass">
+            <span class="mono">Mumbai · IN</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Journey Timeline -->
+  <section class="section" id="journey">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Journey</span>
+        <h2 class="section-title">From <em>structure</em> to <em>story</em>.</h2>
+      </div>
+
+      <ol class="timeline">
+        {about.journey.map((step: any, i: number) => (
+          <li class="timeline__item reveal" style={`--stagger:${i * 90}ms`}>
+            <div class="timeline__dot" aria-hidden="true"></div>
+            <div class="timeline__year mono">{step.year}</div>
+            <div class="timeline__body">
+              <h3 class="timeline__title">{step.title}</h3>
+              <p>{step.description}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Experience summary -->
+  <section class="section-tight">
+    <div class="container exp">
+      <div class="exp__label reveal"><span class="eyebrow">Experience</span></div>
+      <p class="exp__body lead reveal">{about.experience_summary}</p>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section class="section" id="tools">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Tools I use</span>
+        <h2 class="section-title">A working <em>toolkit</em>.</h2>
+      </div>
+      <ol class="tools">
+        {about.tools.map((t: string, i: number) => (
+          <li class="tool reveal" style={`--stagger:${i * 60}ms`}>
+            <span class="tool__num mono">{String(i + 1).padStart(2, '0')}</span>
+            <span class="tool__name">{t}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section class="section" id="philosophy">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Philosophy</span>
+        <h2 class="section-title">What I <em>believe</em> about design.</h2>
+      </div>
+      <div class="phil-grid">
+        {about.philosophy.map((p: any, i: number) => (
+          <article class="phil reveal" style={`--stagger:${i * 70}ms`}>
+            <span class="phil__num mono">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="phil__title">{p.title}</h3>
+            <p>{p.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Interests -->
+  <section class="section-tight" id="interests">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Beyond design</span>
+        <h2 class="section-title">Curiosity, quietly <em>compounding</em>.</h2>
+      </div>
+      <div class="interests reveal">
+        {about.interests.map((it: string, i: number) => (
+          <span class="interest">
+            <span class="interest__num mono">{String(i + 1).padStart(2, '0')}</span>
+            {it}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-hero { padding-top: 30px; }
+  .about-hero__inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: clamp(30px, 5vw, 80px);
+    align-items: center;
+    min-height: 66vh;
+  }
+  .about-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5.4vw, 4.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin: 20px 0 22px;
+    font-weight: 350;
+  }
+  .about-hero__title em { color: var(--accent); font-style: italic; font-weight: 350; }
+  .about-hero__body { max-width: 620px; }
+  .about-hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+  .about-hero__portrait { display: grid; place-items: center; }
+  .about-hero__portrait-frame {
+    position: relative;
+    max-width: 420px;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+  .about-hero__portrait-frame img { width: 100%; border-radius: var(--radius); background: var(--surface-2); }
+  .about-hero__portrait-tag {
+    position: absolute; bottom: 32px; left: 32px;
+    padding: 8px 14px; border-radius: 999px;
+    color: var(--text-muted); font-size: 0.78rem;
+  }
+  @media (max-width: 900px) {
+    .about-hero__inner { grid-template-columns: 1fr; min-height: auto; }
+    .about-hero__portrait { max-width: 360px; margin: 0 auto; }
+  }
+
+  /* Timeline */
+  .timeline {
+    list-style: none;
+    position: relative;
+    padding-left: 40px;
+    counter-reset: t;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(180deg, var(--accent) 0%, var(--border) 100%);
+  }
+  .timeline__item {
+    position: relative;
+    padding: 16px 0 36px;
+    transition-delay: var(--stagger);
+  }
+  .timeline__dot {
+    position: absolute;
+    left: -34px; top: 22px;
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 6px var(--bg);
+  }
+  .timeline__year {
+    color: var(--accent);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .timeline__title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: -0.015em;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .timeline__body p { max-width: 660px; }
+
+  /* Experience */
+  .exp {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+  }
+  .exp__body { max-width: 780px; }
+  @media (max-width: 780px) { .exp { grid-template-columns: 1fr; gap: 20px; } }
+
+  /* Tools */
+  .tools {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    counter-reset: tools;
+  }
+  .tool {
+    display: flex; align-items: center; gap: 16px;
+    padding: 22px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+    transition-delay: var(--stagger);
+  }
+  .tool:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .tool__num { color: var(--accent); font-size: 0.78rem; letter-spacing: 0.1em; }
+  .tool__name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+  }
+  @media (max-width: 780px) { .tools { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .tools { grid-template-columns: 1fr; } }
+
+  /* Philosophy */
+  .phil-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .phil {
+    padding: 30px 26px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    position: relative;
+    transition-delay: var(--stagger);
+    transition: border-color var(--dur) var(--ease);
+  }
+  .phil:hover { border-color: var(--border-strong); }
+  .phil__num {
+    color: var(--accent);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+  }
+  .phil__title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+    margin: 12px 0 10px;
+  }
+  @media (max-width: 900px) { .phil-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .phil-grid { grid-template-columns: 1fr; } }
+
+  /* Interests */
+  .interests { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .interest {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+  .interest:hover { color: var(--accent); border-color: var(--accent); }
+  .interest__num { color: var(--accent); font-size: 0.7rem; letter-spacing: 0.08em; }
+</style>
