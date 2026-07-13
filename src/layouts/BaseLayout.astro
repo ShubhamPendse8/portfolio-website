@@ -1,0 +1,111 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CommandMenu from '../components/CommandMenu.astro';
+import { site } from '../lib/content';
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  path?: string;
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description,
+  ogImage,
+  path = Astro.url.pathname,
+  bodyClass = '',
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pageTitle = title ? `${title} — ${site.name}` : site.seo.title;
+const pageDesc = description || site.seo.description;
+const socialImg = ogImage || site.seo.og_image;
+const canonicalURL = new URL(path, Astro.site ?? 'https://shubhampendse8.github.io').toString();
+
+const resolveAsset = (p: string) => {
+  if (!p) return '';
+  if (/^https?:\/\//.test(p)) return p;
+  return `${base}${p.startsWith('/') ? p : '/' + p}`;
+};
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Prevent white / wrong-theme flash -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:image" content={resolveAsset(socialImg)} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    <meta name="twitter:image" content={resolveAsset(socialImg)} />
+
+    <!-- Favicons -->
+    <link rel="icon" href={resolveAsset('/assets/icons/favicon-32.png')} sizes="32x32" />
+    <link rel="icon" href={resolveAsset('/assets/icons/favicon-192.png')} sizes="192x192" />
+    <link rel="apple-touch-icon" href={resolveAsset('/assets/icons/apple-touch-icon.png')} />
+    <link rel="manifest" href={resolveAsset('/site.webmanifest')} />
+
+    <!-- Fonts: Fraunces (display) + Instrument Sans (body) — distinctive editorial pairing -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body class={bodyClass}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <CommandMenu />
+
+    <script>
+      // Scroll reveal
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

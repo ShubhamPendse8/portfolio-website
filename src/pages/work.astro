@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getAllProjects, getCategories } from '../lib/content';
+
+const projects = getAllProjects();
+const categories = getCategories();
+const totalCount = projects.length;
+---
+<BaseLayout title="Work" description="Selected work by Shubham Pendse across social media, UI/UX, branding, presentations, print and motion." path="/work">
+  <section class="work-hero">
+    <div class="container">
+      <span class="eyebrow reveal">Work</span>
+      <h1 class="work-hero__title reveal">
+        Projects that <em>speak clearly</em><br/>and stay on brand.
+      </h1>
+      <p class="work-hero__sub lead reveal">
+        A curated collection across visual design, digital experiences, branding, presentations, print and motion. Filter by discipline or scroll to see everything.
+      </p>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <section class="filters" aria-label="Filter projects by category">
+    <div class="container">
+      <div class="filters__bar glass" role="tablist" data-testid="project-filters">
+        <button
+          class="chip is-active"
+          type="button"
+          data-filter="all"
+          role="tab"
+          aria-selected="true"
+          data-testid="filter-all"
+        >
+          All work <span class="chip__count">{totalCount}</span>
+        </button>
+        {categories.map((c) => (
+          <button
+            class="chip"
+            type="button"
+            data-filter={c.id}
+            role="tab"
+            aria-selected="false"
+            data-testid={`filter-${c.id}`}
+          >
+            {c.label} <span class="chip__count">{c.count}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Grid -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="pgrid" data-project-grid>
+        {projects.map((p, i) => (
+          <div
+            class="pgrid__cell reveal"
+            data-cats={p.categories.join(',')}
+            style={`--stagger:${(i % 6) * 60}ms`}
+          >
+            <ProjectCard project={p} variant="standard" index={i} />
+          </div>
+        ))}
+      </div>
+      <div class="pgrid__empty" data-project-empty hidden>
+        <span class="eyebrow">Nothing here yet</span>
+        <p class="lead">No projects in this category yet — check back soon or explore all work.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .work-hero { padding-top: 20px; padding-bottom: clamp(20px, 3vw, 36px); }
+  .work-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4.8vw, 4rem);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    margin: 18px 0 16px;
+    font-weight: 350;
+    text-wrap: balance;
+  }
+  .work-hero__title em { color: var(--accent); font-style: italic; font-weight: 350; }
+  .work-hero__sub { max-width: 680px; }
+
+  .filters { position: sticky; top: calc(var(--nav-height) + 20px); z-index: 20; padding: 10px 0; }
+  .filters__bar {
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 999px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .filters__bar::-webkit-scrollbar { display: none; }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color var(--dur) var(--ease), background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+  .chip:hover { color: var(--text); background: var(--surface); }
+  .chip.is-active {
+    color: #0a0403;
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .chip__count {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.14);
+    color: inherit;
+  }
+  .chip:not(.is-active) .chip__count { background: var(--surface-2); color: var(--text-dim); }
+
+  .pgrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .pgrid__cell { transition-delay: var(--stagger, 0ms); }
+  .pgrid__cell.is-hidden { display: none; }
+  @media (max-width: 900px) { .pgrid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
+  @media (max-width: 560px) { .pgrid { grid-template-columns: 1fr; gap: 18px; } }
+
+  @media (max-width: 640px) {
+    .work-hero { padding-top: 20px; padding-bottom: 30px; }
+    .work-hero__title { margin: 16px 0 14px; }
+    .filters { top: calc(var(--nav-height) + 12px); padding: 10px 0; }
+    .filters__bar { padding: 6px; }
+    .chip { padding: 8px 12px; font-size: 0.82rem; }
+  }
+
+  .pgrid__empty {
+    text-align: center;
+    padding: 80px 20px;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-lg);
+  }
+</style>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const initial = params.get('category') || 'all';
+
+  const buttons = document.querySelectorAll('[data-filter]');
+  const cells = document.querySelectorAll('[data-cats]');
+  const empty = document.querySelector('[data-project-empty]');
+
+  const applyFilter = (id) => {
+    let visible = 0;
+    cells.forEach((el) => {
+      const cats = (el.dataset.cats || '').split(',').filter(Boolean);
+      const show = id === 'all' || cats.includes(id);
+      el.classList.toggle('is-hidden', !show);
+      if (show) visible++;
+    });
+    buttons.forEach((b) => {
+      const active = b.dataset.filter === id;
+      b.classList.toggle('is-active', active);
+      b.setAttribute('aria-selected', String(active));
+    });
+    if (empty) empty.hidden = visible !== 0;
+    const url = new URL(window.location.href);
+    if (id === 'all') url.searchParams.delete('category');
+    else url.searchParams.set('category', id);
+    window.history.replaceState({}, '', url);
+  };
+
+  buttons.forEach((b) => {
+    b.addEventListener('click', () => applyFilter(b.dataset.filter || 'all'));
+    b.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        applyFilter(b.dataset.filter || 'all');
+      }
+    });
+  });
+
+  if (initial !== 'all') applyFilter(initial);
+</script>

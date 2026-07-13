@@ -1,0 +1,78 @@
+{
+  "hero": {
+    "eyebrow": "About",
+    "heading": "A designer who thinks in structure and sees in stories.",
+    "body": "I'm Shubham — a designer who found his way from Mechanical Engineering into Multimedia and Design. What started as curiosity slowly became a career built around visuals, systems, brands and digital experiences. I like creating work that looks good, communicates clearly, and feels useful to the people it's made for."
+  },
+  "journey": [
+    {
+      "year": "Beginning",
+      "title": "Mechanical Engineering",
+      "description": "My first path taught me how to think in systems, understand structure, and break a problem down before trying to solve it."
+    },
+    {
+      "year": "Transition",
+      "title": "Multimedia & Design",
+      "description": "Curiosity about visual communication pulled me toward creative work. I switched into Multimedia and Design and started building a real design practice."
+    },
+    {
+      "year": "Early Years",
+      "title": "Agency & Studio Experience",
+      "description": "Hands-on years working across graphic design, social media creatives, marketing assets and video — with real clients, real deadlines and real feedback."
+    },
+    {
+      "year": "Recent",
+      "title": "Bricks Media",
+      "description": "Branding, campaigns and digital assets built for consistent brand communication across multiple business categories."
+    },
+    {
+      "year": "Now",
+      "title": "The Dot HQ",
+      "description": "Working on branding, social media creatives, marketing assets, digital campaigns and visual communication built for real audiences."
+    },
+    {
+      "year": "Jun 2024",
+      "title": "UI/UX Course Completed",
+      "description": "Deepened my digital product thinking with a structured UI/UX course, extending my practice into interfaces, user flows and experience design."
+    }
+  ],
+  "experience_summary": "Six-plus years of creative experience across graphic design, social media, branding, presentations, marketing assets, video, motion graphics and basic UI work — collaborating closely with marketing and business teams to ship real work at real pace.",
+  "tools": [
+    "Adobe Illustrator",
+    "Adobe Photoshop",
+    "Adobe Premiere Pro",
+    "Adobe After Effects",
+    "Figma",
+    "AI-Assisted Design Tools"
+  ],
+  "philosophy": [
+    {
+      "title": "Clarity first",
+      "body": "Design should make information easier to understand — not harder to decode. If the message is muddy, no amount of polish saves it."
+    },
+    {
+      "title": "Design with purpose",
+      "body": "Every decision should support a goal. Colour, type, layout and motion are tools, not decoration."
+    },
+    {
+      "title": "Visual strength, quietly",
+      "body": "Strong hierarchy and confident spacing carry more weight than loud effects. I aim for work that reads well before it impresses."
+    },
+    {
+      "title": "Made for the audience",
+      "body": "The best design fits the people it's for. I think about who's reading, scrolling or clicking before I open a canvas."
+    },
+    {
+      "title": "Practical problem-solving",
+      "body": "Design lives in the real world. I care about production, deadlines, formats and how a file behaves after it leaves my screen."
+    }
+  ],
+  "interests": [
+    "Trekking",
+    "Cricket",
+    "Chess",
+    "Space",
+    "Science Fiction",
+    "Technology"
+  ]
+}

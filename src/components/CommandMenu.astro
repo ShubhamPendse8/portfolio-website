@@ -1,0 +1,207 @@
+---
+import { site } from '../lib/content';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const link = (p: string) => `${base}${p}`;
+
+const items = [
+  { label: 'Go to Home', href: link('/'), group: 'Navigation' },
+  { label: 'Go to Work', href: link('/work'), group: 'Navigation' },
+  { label: 'Go to About', href: link('/about'), group: 'Navigation' },
+  { label: 'Go to Contact', href: link('/contact'), group: 'Navigation' },
+  { label: 'Download Resume', href: link(site.resume), group: 'Actions', external: true },
+  { label: 'Toggle Theme', href: '#theme', group: 'Actions', action: 'toggle-theme' },
+  { label: 'Email Shubham', href: 'mailto:' + site.email, group: 'Actions' },
+  ...(site.linkedin ? [{ label: 'Open LinkedIn', href: site.linkedin, group: 'Social', external: true }] : []),
+];
+---
+<div class="cmd" data-cmd hidden role="dialog" aria-modal="true" aria-labelledby="cmd-title" data-testid="cmd-menu">
+  <div class="cmd__backdrop" data-cmd-close></div>
+  <div class="cmd__panel glass-strong">
+    <div class="cmd__header">
+      <span id="cmd-title" class="cmd__title">Quick menu</span>
+      <span class="cmd__kbd"><kbd>ESC</kbd></span>
+    </div>
+    <div class="cmd__search">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6">
+        <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+      </svg>
+      <input
+        type="text"
+        placeholder="Type to filter…"
+        data-cmd-input
+        aria-label="Filter menu items"
+        data-testid="cmd-input"
+      />
+    </div>
+    <ul class="cmd__list" data-cmd-list role="listbox">
+      {items.map((it, i) => (
+        <li>
+          <a
+            href={it.href}
+            data-cmd-item
+            data-action={it.action || ''}
+            data-external={it.external ? '1' : ''}
+            data-label={it.label.toLowerCase()}
+            role="option"
+            data-testid={`cmd-item-${i}`}
+          >
+            <span class="cmd__item-group">{it.group}</span>
+            <span class="cmd__item-label">{it.label}</span>
+            <span class="cmd__item-arrow" aria-hidden="true">↵</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
+
+<style>
+  .cmd {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: start center;
+    padding-top: clamp(60px, 12vh, 140px);
+  }
+  .cmd[hidden] { display: none; }
+  .cmd__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(5,5,5,0.6);
+    backdrop-filter: blur(4px);
+  }
+  .cmd__panel {
+    position: relative;
+    width: min(560px, 92vw);
+    border-radius: var(--radius-lg);
+    padding: 14px;
+    box-shadow: var(--shadow);
+    animation: cmdIn 220ms var(--ease);
+  }
+  @keyframes cmdIn {
+    from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+  }
+  .cmd__header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 4px 8px 10px;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .cmd__header kbd {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .cmd__search {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+  }
+  .cmd__search input {
+    background: transparent; border: 0; color: var(--text);
+    font-family: inherit; font-size: 0.98rem; outline: 0; width: 100%;
+  }
+  .cmd__list {
+    list-style: none;
+    margin-top: 10px;
+    max-height: 40vh;
+    overflow: auto;
+    padding: 4px;
+  }
+  .cmd__list a {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 10px;
+    color: var(--text);
+    transition: background var(--dur-fast) var(--ease);
+  }
+  .cmd__list a:hover, .cmd__list a.is-active {
+    background: var(--accent-soft);
+    color: var(--text);
+  }
+  .cmd__item-group { color: var(--text-dim); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .cmd__item-label { font-size: 0.98rem; font-weight: 500; }
+  .cmd__item-arrow { color: var(--accent); font-size: 0.9rem; opacity: 0; transition: opacity var(--dur) var(--ease); }
+  .cmd__list a:hover .cmd__item-arrow, .cmd__list a.is-active .cmd__item-arrow { opacity: 1; }
+  li[hidden] { display: none; }
+</style>
+
+<script>
+  const cmd = document.querySelector('[data-cmd]');
+  const input = document.querySelector('[data-cmd-input]');
+  const items = Array.from(document.querySelectorAll('[data-cmd-item]'));
+  let active = 0;
+
+  const open = () => {
+    if (!cmd) return;
+    cmd.removeAttribute('hidden');
+    setTimeout(() => input?.focus(), 30);
+    active = 0;
+    updateActive();
+  };
+  const close = () => cmd?.setAttribute('hidden', '');
+  const updateActive = () => {
+    const visible = items.filter((el) => !el.parentElement?.hidden);
+    visible.forEach((el, i) => el.classList.toggle('is-active', i === active));
+  };
+
+  document.querySelectorAll('[data-cmd-open]').forEach((b) => b.addEventListener('click', open));
+  document.querySelector('[data-cmd-close]')?.addEventListener('click', close);
+
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      cmd?.hasAttribute('hidden') ? open() : close();
+    } else if (e.key === 'Escape') {
+      close();
+    } else if (!cmd?.hasAttribute('hidden')) {
+      const visible = items.filter((el) => !el.parentElement?.hidden);
+      if (e.key === 'ArrowDown') { e.preventDefault(); active = (active + 1) % visible.length; updateActive(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); active = (active - 1 + visible.length) % visible.length; updateActive(); }
+      else if (e.key === 'Enter') {
+        e.preventDefault();
+        visible[active]?.click();
+      }
+    }
+  });
+
+  input?.addEventListener('input', () => {
+    const q = input.value.toLowerCase().trim();
+    items.forEach((el) => {
+      const label = el.getAttribute('data-label') || '';
+      el.parentElement.hidden = q && !label.includes(q);
+    });
+    active = 0;
+    updateActive();
+  });
+
+  items.forEach((el) => {
+    el.addEventListener('click', (e) => {
+      const action = el.getAttribute('data-action');
+      if (action === 'toggle-theme') {
+        e.preventDefault();
+        const root = document.documentElement;
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (err) {}
+        close();
+        return;
+      }
+      if (el.getAttribute('data-external') === '1') el.setAttribute('target', '_blank');
+      close();
+    });
+  });
+</script>

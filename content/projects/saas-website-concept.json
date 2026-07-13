@@ -1,0 +1,32 @@
+{
+  "title": "SaaS Website Design",
+  "slug": "saas-website-concept",
+  "client": "Concept Project",
+  "year": "2024",
+  "categories": ["ui-ux"],
+  "disciplines": ["UI Design", "SaaS Website", "Figma"],
+  "summary": "A product-led website concept focused on feature clarity, user confidence and a polished visual journey.",
+  "thumbnail": "",
+  "thumbnail_alt": "SaaS website UI concept placeholder",
+  "hero_image": "",
+  "hero_image_alt": "",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 13,
+  "role": "UI/UX Designer",
+  "tools": ["Figma"],
+  "services": ["SaaS Website Design", "Feature Storytelling"],
+  "outcome": "A structure that walks visitors from problem to product to proof without losing rhythm.",
+  "seo": {
+    "title": "SaaS Website Concept — UI/UX | Shubham Pendse",
+    "description": "A product-led SaaS website concept focused on feature clarity and confident user journey."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Overview",
+      "body": "A SaaS website concept exploring how a modern product marketing site can balance narrative, feature depth and social proof. Full case-study visuals are being prepared."
+    }
+  ]
+}

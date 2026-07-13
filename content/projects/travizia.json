@@ -1,0 +1,37 @@
+{
+  "title": "Travizia",
+  "slug": "travizia",
+  "client": "Travizia",
+  "year": "2024",
+  "categories": ["social-media"],
+  "disciplines": ["Social Media Design", "Travel Campaign"],
+  "summary": "Travel-themed social creatives designed to feel inviting, polished and easy to understand at a glance.",
+  "thumbnail": "",
+  "thumbnail_alt": "Travizia travel campaign creative",
+  "hero_image": "",
+  "hero_image_alt": "",
+  "featured": true,
+  "published": true,
+  "show_on_home": true,
+  "order": 3,
+  "role": "Graphic Designer",
+  "tools": ["Adobe Illustrator", "Adobe Photoshop"],
+  "services": ["Social Media Creatives", "Travel Campaigns"],
+  "outcome": "A social presence that felt inviting and calm — helping the brand build recognition around trust and destination clarity.",
+  "seo": {
+    "title": "Travizia — Travel Social Media Creatives | Shubham Pendse",
+    "description": "Travel-focused social creatives for Travizia, designed to feel inviting, polished and clear."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Overview",
+      "body": "Travizia's social creatives had to sell the feeling of travel, not just the offer. The work covered destination posts, package highlights and campaign moments."
+    },
+    {
+      "type": "rich_text",
+      "heading": "Approach",
+      "body": "I built a system with generous imagery, quiet type and clear calls-to-action, so each post could stand alone and still feel like part of one brand voice."
+    }
+  ]
+}

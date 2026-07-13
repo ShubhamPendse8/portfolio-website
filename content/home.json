@@ -1,0 +1,57 @@
+{
+  "hero": {
+    "eyebrow": "Multidisciplinary designer, based in Mumbai",
+    "heading": "Design that clears the noise and carries the message.",
+    "subheading": "I create visual identities, digital experiences and communication systems that turn complex ideas into clear and memorable design.",
+    "primary_cta": { "label": "Explore My Work", "url": "/work" },
+    "secondary_cta": { "label": "Contact Me", "url": "/contact" },
+    "resume_cta": { "label": "Resume", "url": "/assets/resume/shubham-pendse-resume.pdf" },
+    "avatar_caption": {
+      "left": "01 · Shubham Pendse",
+      "right": "Designer"
+    }
+  },
+  "capabilities": [
+    {
+      "title": "Brand & Visual Design",
+      "description": "Identity systems, logo directions and brand assets built to stay consistent across every touchpoint.",
+      "glyph": "brand"
+    },
+    {
+      "title": "Social Media Campaigns",
+      "description": "Scroll-friendly creatives, carousels and campaign visuals shaped for attention and clarity.",
+      "glyph": "social"
+    },
+    {
+      "title": "UI/UX Design",
+      "description": "Website and product interfaces designed around usability, hierarchy and confident user flow.",
+      "glyph": "uiux"
+    },
+    {
+      "title": "Presentation Design",
+      "description": "Investor decks, pitch presentations and event slides that stay clean and confident under scrutiny.",
+      "glyph": "deck"
+    },
+    {
+      "title": "Print & Marketing Design",
+      "description": "Brochures, flyers, standees and print collateral engineered for real-world production.",
+      "glyph": "print"
+    },
+    {
+      "title": "Video & Motion Graphics",
+      "description": "Edits and short-form motion that give ideas rhythm, movement and a strong visual close.",
+      "glyph": "motion"
+    }
+  ],
+  "about_preview": {
+    "heading": "Engineer's structure. Designer's eye.",
+    "body": "I came into design from Mechanical Engineering, and that background still shapes how I work — I break a problem down, understand the structure, then design around it. Over six years of creative practice across agencies and in-house teams, and a UI/UX course completed in June 2024, have pushed me deeper into digital product thinking. The result is work that balances creativity, structure, curiosity and practical problem-solving.",
+    "cta": { "label": "More about me", "url": "/about" }
+  },
+  "final_cta": {
+    "heading": "Have a project worth building well?",
+    "body": "Whether you're a founder, a marketing team or an agency, I'd love to hear what you're working on.",
+    "primary": { "label": "Start a project", "url": "/contact" },
+    "secondary": { "label": "See selected work", "url": "/work" }
+  }
+}

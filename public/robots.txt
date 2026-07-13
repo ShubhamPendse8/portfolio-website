@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shubhampendse8.github.io/portfolio-website/sitemap.xml

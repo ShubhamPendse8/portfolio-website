@@ -1,0 +1,33 @@
+{
+  "name": "Shubham Pendse",
+  "title": "Graphic Designer & UI/UX Designer",
+  "email": "shubhampendse8@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/shubham-pendse-2a635b194/",
+  "fiverr": "",
+  "instagram": "",
+  "behance": "",
+  "location": "Mumbai, India",
+  "availability": "Open to freelance & full-time opportunities",
+  "resume": "/assets/resume/shubham-pendse-resume.pdf",
+  "avatar": "/assets/images/avatar-ghibli-fullbeard.png",
+  "footer_text": "Designed and built in Mumbai. All work © Shubham Pendse.",
+  "seo": {
+    "title": "Shubham Pendse — Graphic Designer & UI/UX Designer",
+    "description": "Portfolio of Shubham Pendse — a multidisciplinary designer working across graphic design, UI/UX, branding, presentations, print, and motion graphics. Based in Mumbai.",
+    "og_image": "/assets/banners/social.jpg"
+  },
+  "contact_form": {
+    "provider": "auto",
+    "formspree_endpoint": "",
+    "web3forms_key": ""
+  },
+  "expertise_ticker": [
+    "Graphic Design",
+    "UI/UX",
+    "Social Media",
+    "Branding",
+    "Presentations",
+    "Print",
+    "Video & Motion"
+  ]
+}

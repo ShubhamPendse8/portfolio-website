@@ -1,0 +1,25 @@
+{
+  "hero": {
+    "eyebrow": "Let's talk",
+    "heading": "Bring your idea. I'll bring the design thinking.",
+    "body": "Whether it's branding, social media creatives, a website, a pitch deck or a full campaign — I'd love to hear about what you're building and see if we're a fit."
+  },
+  "project_types": [
+    "Brand & Identity",
+    "Social Media Campaign",
+    "UI/UX Design",
+    "Presentation Design",
+    "Print & Marketing",
+    "Video & Motion",
+    "Other"
+  ],
+  "budget_ranges": [
+    "Under ₹25,000",
+    "₹25,000 – ₹75,000",
+    "₹75,000 – ₹2,00,000",
+    "₹2,00,000+",
+    "Let's discuss"
+  ],
+  "success_message": "Message received. Let's create something worth showing off.",
+  "error_message": "Something went wrong sending your message. Please email me directly at shubhampendse8@gmail.com."
+}

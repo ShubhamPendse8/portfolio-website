@@ -1,0 +1,32 @@
+{
+  "title": "Landing Page Design",
+  "slug": "landing-page-concept",
+  "client": "Concept Project",
+  "year": "2024",
+  "categories": ["ui-ux"],
+  "disciplines": ["UI Design", "Landing Page", "Figma"],
+  "summary": "A conversion-focused landing page concept with clear messaging, strong hierarchy and purposeful sections.",
+  "thumbnail": "",
+  "thumbnail_alt": "Landing page UI concept placeholder",
+  "hero_image": "",
+  "hero_image_alt": "",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 12,
+  "role": "UI/UX Designer",
+  "tools": ["Figma"],
+  "services": ["Landing Page Design", "Conversion Layout"],
+  "outcome": "A layout where message, proof and action all sit in the right order for a first-time visitor.",
+  "seo": {
+    "title": "Landing Page Concept — UI/UX | Shubham Pendse",
+    "description": "A conversion-focused landing page concept exploring clear messaging, strong hierarchy and purposeful sections."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Overview",
+      "body": "A landing page concept exploring how message, proof, features and call-to-action can be structured to convert a first-time visitor without feeling like a shouted pitch. Full case-study visuals are being prepared."
+    }
+  ]
+}

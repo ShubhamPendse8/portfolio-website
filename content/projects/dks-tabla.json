@@ -1,0 +1,37 @@
+{
+  "title": "DK's Tabla",
+  "slug": "dks-tabla",
+  "client": "DK's Tabla",
+  "year": "2024",
+  "categories": ["social-media", "branding"],
+  "disciplines": ["Social Media Design", "Cultural Branding"],
+  "summary": "Creative post designs built around classical music, performance moments and memorable visual communication.",
+  "thumbnail": "",
+  "thumbnail_alt": "DK's Tabla social media creative",
+  "hero_image": "",
+  "hero_image_alt": "",
+  "featured": true,
+  "published": true,
+  "show_on_home": true,
+  "order": 2,
+  "role": "Graphic Designer",
+  "tools": ["Adobe Illustrator", "Adobe Photoshop"],
+  "services": ["Social Media Creatives", "Cultural Branding"],
+  "outcome": "A memorable social presence that carried the spirit of tabla and classical performance without leaning on cliché visuals.",
+  "seo": {
+    "title": "DK's Tabla — Social Media Creatives | Shubham Pendse",
+    "description": "Social media creatives for DK's Tabla shaped around classical music, cultural expression and brand presence."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Overview",
+      "body": "DK's Tabla needed a set of social creatives that felt cultural and rooted, without becoming decorative. The work covered performance posts, teaching updates and brand-tone visuals."
+    },
+    {
+      "type": "rich_text",
+      "heading": "Approach",
+      "body": "I leaned into confident typography, restrained colour and clean spatial rhythm — letting the subject carry the emotion. Every post was built to feel like part of the same body of work."
+    }
+  ]
+}

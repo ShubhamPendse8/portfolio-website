@@ -1,0 +1,37 @@
+{
+  "title": "Isha Tours",
+  "slug": "isha-tours",
+  "client": "Isha Tours",
+  "year": "2023",
+  "categories": ["social-media"],
+  "disciplines": ["Social Media Design", "Tour & Travel"],
+  "summary": "Tour and travel creatives shaped around destination appeal, trust and simple communication.",
+  "thumbnail": "",
+  "thumbnail_alt": "Isha Tours travel social media creative",
+  "hero_image": "",
+  "hero_image_alt": "",
+  "featured": true,
+  "published": true,
+  "show_on_home": true,
+  "order": 5,
+  "role": "Graphic Designer",
+  "tools": ["Adobe Illustrator", "Adobe Photoshop"],
+  "services": ["Social Media Creatives", "Travel Campaigns"],
+  "outcome": "A confident, trustworthy travel presence — creatives that made the offer easy to understand while feeling inviting.",
+  "seo": {
+    "title": "Isha Tours — Travel Social Media | Shubham Pendse",
+    "description": "Travel social creatives for Isha Tours, focused on destination appeal and clear, simple communication."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Overview",
+      "body": "Isha Tours needed a series of destination-driven creatives that could work for both trip packages and general brand posts, without feeling like just another travel ad."
+    },
+    {
+      "type": "rich_text",
+      "heading": "Approach",
+      "body": "I leaned on generous imagery, tight information hierarchy and a warm, restrained visual system so every post felt trustworthy and easy to read."
+    }
+  ]
+}

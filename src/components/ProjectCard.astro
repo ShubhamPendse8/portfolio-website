@@ -1,0 +1,161 @@
+---
+import type { Project } from '../lib/content';
+import { categoryLabels } from '../lib/content';
+
+export interface Props {
+  project: Project;
+  variant?: 'featured' | 'standard' | 'compact';
+  index?: number;
+}
+const { project, variant = 'standard', index = 0 } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const link = (p: string) => `${base}${p}`;
+
+const primaryCategory = project.categories?.[0] || '';
+const catLabel = categoryLabels[primaryCategory] || primaryCategory;
+const href = link(`/projects/${project.slug}`);
+const thumb = project.thumbnail || project.hero_image || '';
+const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) : '';
+---
+<a
+  href={href}
+  class:list={['pcard', `pcard--${variant}`]}
+  data-testid={`project-card-${project.slug}`}
+  aria-label={`View project: ${project.title}`}
+  style={`--stagger:${index * 60}ms`}
+>
+  <div class="pcard__media">
+    {resolvedThumb ? (
+      <img
+        src={resolvedThumb}
+        alt={project.thumbnail_alt || project.title}
+        loading="lazy"
+        decoding="async"
+        width="800"
+        height="600"
+      />
+    ) : (
+      <div class="pcard__placeholder" aria-hidden="true">
+        <span class="pcard__placeholder-mono">
+          {project.title.split(' ').map((w) => w[0]).slice(0, 2).join('')}
+        </span>
+        <span class="pcard__placeholder-label">Case study coming soon</span>
+      </div>
+    )}
+    <span class="pcard__hover-arrow" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M7 17 L17 7" /><path d="M9 7h8v8" />
+      </svg>
+    </span>
+  </div>
+  <div class="pcard__body">
+    <div class="pcard__meta">
+      {catLabel && <span class="pcard__cat">{catLabel}</span>}
+      {project.year && <span class="pcard__dot" aria-hidden="true">·</span>}
+      {project.year && <span class="pcard__year">{project.year}</span>}
+    </div>
+    <h3 class="pcard__title">{project.title}</h3>
+    {variant !== 'compact' && <p class="pcard__summary">{project.summary}</p>}
+    {variant === 'featured' && project.disciplines && project.disciplines.length > 0 && (
+      <div class="pcard__tags">
+        {project.disciplines.slice(0, 3).map((d) => <span class="pcard__tag">{d}</span>)}
+      </div>
+    )}
+  </div>
+</a>
+
+<style>
+  .pcard {
+    display: block;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    position: relative;
+    isolation: isolate;
+  }
+  .pcard:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow);
+  }
+  .pcard:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+  .pcard__media {
+    aspect-ratio: 4 / 3;
+    background: var(--surface-2);
+    position: relative;
+    overflow: hidden;
+  }
+  .pcard__media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 900ms var(--ease-out);
+  }
+  .pcard:hover .pcard__media img { transform: scale(1.04); }
+  .pcard__placeholder {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px;
+    background:
+      linear-gradient(135deg, var(--accent-soft), transparent 65%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 14px),
+      var(--surface-2);
+    color: var(--text-muted);
+  }
+  .pcard__placeholder-mono {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+  }
+  .pcard__placeholder-label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); }
+
+  .pcard__hover-arrow {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 36px; height: 36px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #0a0403;
+    opacity: 0; transform: translate(6px, -6px);
+    transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .pcard:hover .pcard__hover-arrow { opacity: 1; transform: translate(0, 0); }
+
+  .pcard__body { padding: 22px 24px 26px; }
+  .pcard__meta { display: flex; gap: 8px; align-items: center; color: var(--text-dim); font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+  .pcard__cat { color: var(--accent); }
+  .pcard__dot { color: var(--text-dim); }
+  .pcard__title { font-family: var(--font-display); font-size: 1.35rem; letter-spacing: -0.015em; font-weight: 500; }
+  .pcard__summary { color: var(--text-muted); margin-top: 10px; font-size: 0.94rem; line-height: 1.6; }
+  .pcard__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .pcard__tag {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+  }
+
+  /* Featured variant */
+  .pcard--featured .pcard__media { aspect-ratio: 16 / 10; }
+  .pcard--featured .pcard__title { font-size: 1.8rem; }
+  .pcard--featured .pcard__body { padding: 28px 30px 32px; }
+
+  /* Compact variant */
+  .pcard--compact .pcard__media { aspect-ratio: 1 / 1; }
+  .pcard--compact .pcard__title { font-size: 1.15rem; }
+  .pcard--compact .pcard__body { padding: 18px 20px 22px; }
+
+  @media (max-width: 540px) {
+    .pcard--featured .pcard__title { font-size: 1.4rem; }
+    .pcard__body { padding: 18px 18px 22px; }
+  }
+</style>
