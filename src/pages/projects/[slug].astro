@@ -2,8 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
 import Lightbox from '../../components/Lightbox.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
-import { getAllProjects, getProjectBySlug, getProjectNeighbors, categoryLabels, type Project } from '../../lib/content';
+import { getAllProjects, getProjectBySlug, getProjectNeighbors, categoryLabels, site, type Project } from '../../lib/content';
 
 export async function getStaticPaths() {
   return getAllProjects().map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
@@ -12,8 +11,10 @@ export async function getStaticPaths() {
 const { project } = Astro.props as { project: Project };
 const { prev, next } = getProjectNeighbors(project.slug);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const origin = (Astro.site ?? new URL('https://shubhampendse8.github.io')).origin;
 const link = (p: string) => `${base}${p}`;
 const resolve = (p: string) => (p && !p.startsWith('http') ? link(p) : p);
+const absolute = (p: string) => (p && !/^https?:\/\//.test(p) ? `${origin}${resolve(p)}` : p);
 
 const primaryCat = project.categories?.[0];
 const catLabel = primaryCat ? categoryLabels[primaryCat] || primaryCat : '';
@@ -27,11 +28,36 @@ const metaRows: { label: string; value: string }[] = [
   project.services?.length && { label: 'Services', value: project.services.join(', ') },
   project.tools?.length && { label: 'Tools', value: project.tools.join(', ') },
 ].filter(Boolean) as { label: string; value: string }[];
+
+const workUrl = `${origin}${base}/`;
+const creativeWorkJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: project.title,
+  headline: project.title,
+  description: project.summary,
+  url: `${origin}${base}/projects/${project.slug}`,
+  image: heroImg ? absolute(heroImg) : undefined,
+  creator: { '@type': 'Person', name: site.name, url: workUrl },
+  dateCreated: project.year || undefined,
+  keywords: project.disciplines?.join(', ') || undefined,
+  about: project.services?.join(', ') || undefined,
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: workUrl },
+    { '@type': 'ListItem', position: 2, name: 'Work', item: `${origin}${base}/work` },
+    { '@type': 'ListItem', position: 3, name: project.title, item: `${origin}${base}/projects/${project.slug}` },
+  ],
+};
 ---
 <BaseLayout
   title={project.seo?.title || `${project.title} — Case Study`}
   description={project.seo?.description || project.summary}
   ogImage={heroImg}
+  jsonLd={[creativeWorkJsonLd, breadcrumbJsonLd]}
 >
   <article class="cs-page">
     <!-- Hero -->

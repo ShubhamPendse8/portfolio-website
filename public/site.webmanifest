@@ -1,23 +1,24 @@
 {
-  "name": "Shubham Pendse \u2014 Portfolio",
+  "name": "Shubham Pendse — Portfolio",
   "short_name": "Shubham",
-  "start_url": "/",
+  "start_url": "/portfolio-website/",
+  "scope": "/portfolio-website/",
   "display": "standalone",
-  "background_color": "#111111",
-  "theme_color": "#111111",
+  "background_color": "#050505",
+  "theme_color": "#FF6A1A",
   "icons": [
     {
-      "src": "assets/icons/favicon-32.png",
+      "src": "/portfolio-website/assets/icons/favicon-32.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "assets/icons/favicon-192.png",
+      "src": "/portfolio-website/assets/icons/favicon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "assets/icons/apple-touch-icon.png",
+      "src": "/portfolio-website/assets/icons/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png"
     }

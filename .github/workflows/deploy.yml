@@ -1,8 +1,8 @@
 name: Deploy Astro site to GitHub Pages
 
 # Deploy only happens when changes are merged into `main` (the production branch).
-# Pushes to `portfolio-v2-emergent` (or any other feature/redesign branch) do NOT
-# overwrite the live site. Trigger a manual deploy from any branch via
+# Pushes to feature/redesign branches do NOT overwrite the live site.
+# Trigger a manual deploy from any branch via
 # "Actions → Deploy Astro site to GitHub Pages → Run workflow".
 on:
   push:
@@ -25,15 +25,27 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'yarn'
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
+      - name: Validate content
+        run: yarn validate
+
+      - name: Astro type check
+        run: yarn typecheck
+        continue-on-error: false
+
       - name: Build (Astro static site with /portfolio-website/ base)
+        # `yarn build` also runs `prebuild` (validate) again as an extra safety net.
         run: yarn build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

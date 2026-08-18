@@ -2,7 +2,7 @@
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import CommandMenu from '../components/CommandMenu.astro';
-import { site } from '../lib/content';
+import { site, activeSocials } from '../lib/content';
 import '../styles/global.css';
 
 export interface Props {
@@ -11,6 +11,7 @@ export interface Props {
   ogImage?: string;
   path?: string;
   bodyClass?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
@@ -19,19 +20,48 @@ const {
   ogImage,
   path = Astro.url.pathname,
   bodyClass = '',
+  jsonLd,
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const origin = (Astro.site ?? new URL('https://shubhampendse8.github.io')).origin;
 const pageTitle = title ? `${title} — ${site.name}` : site.seo.title;
 const pageDesc = description || site.seo.description;
-const socialImg = ogImage || site.seo.og_image;
-const canonicalURL = new URL(path, Astro.site ?? 'https://shubhampendse8.github.io').toString();
+const socialImgRaw = ogImage || site.seo.og_image || '';
 
 const resolveAsset = (p: string) => {
   if (!p) return '';
   if (/^https?:\/\//.test(p)) return p;
   return `${base}${p.startsWith('/') ? p : '/' + p}`;
 };
+/** Fully-qualified absolute URL for social sharing / canonical. */
+const absoluteURL = (p: string) => {
+  if (!p) return '';
+  if (/^https?:\/\//.test(p)) return p;
+  return `${origin}${resolveAsset(p)}`;
+};
+
+const canonicalURL = `${origin}${base}${path.startsWith(base) ? path.slice(base.length) : path}`.replace(/\/+$/, '') || `${origin}${base}/`;
+const socialImgAbs = absoluteURL(socialImgRaw);
+
+// Person JSON-LD for the homepage
+const socials = activeSocials().map((s) => s.href).filter((h) => /^https?:\/\//.test(h));
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: site.title,
+  email: site.email,
+  url: `${origin}${base}/`,
+  address: { '@type': 'PostalAddress', addressLocality: site.location },
+  image: socialImgAbs || undefined,
+  sameAs: socials,
+};
+
+const jsonLdBlocks = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+
+// Optional analytics
+const analytics = site.analytics ?? { provider: 'none' } as any;
 ---
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
@@ -58,14 +88,21 @@ const resolveAsset = (p: string) => {
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDesc} />
-    <meta property="og:image" content={resolveAsset(socialImg)} />
+    {socialImgAbs && <meta property="og:image" content={socialImgAbs} />}
     <meta property="og:url" content={canonicalURL} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDesc} />
-    <meta name="twitter:image" content={resolveAsset(socialImg)} />
+    {socialImgAbs && <meta name="twitter:image" content={socialImgAbs} />}
+
+    <!-- Person JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+    {jsonLdBlocks.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
 
     <!-- Favicons -->
     <link rel="icon" href={resolveAsset('/assets/icons/favicon-32.png')} sizes="32x32" />
@@ -81,6 +118,17 @@ const resolveAsset = (p: string) => {
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500&display=swap"
     />
 
+    {analytics.provider === 'plausible' && analytics.domain && (
+      <script is:inline defer data-domain={analytics.domain} src={analytics.script_url || 'https://plausible.io/js/script.js'}></script>
+    )}
+    {analytics.provider === 'umami' && analytics.site_id && analytics.script_url && (
+      <script is:inline async defer data-website-id={analytics.site_id} src={analytics.script_url}></script>
+    )}
+    {analytics.provider === 'ga4' && analytics.site_id && (
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${analytics.site_id}`}></script>
+      <script is:inline set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${analytics.site_id}',{anonymize_ip:true});`} />
+    )}
+
     <meta name="generator" content={Astro.generator} />
   </head>
   <body class={bodyClass}>
@@ -93,6 +141,7 @@ const resolveAsset = (p: string) => {
     <CommandMenu />
 
     <script>
+      // @ts-nocheck
       // Scroll reveal
       const io = new IntersectionObserver(
         (entries) => {
@@ -106,6 +155,22 @@ const resolveAsset = (p: string) => {
         { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
       );
       document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+      // Lightweight analytics event dispatch (only fires if an analytics provider is loaded).
+      const track = (name, props) => {
+        try {
+          if (window.plausible) window.plausible(name, { props: props || {} });
+          else if (window.umami) window.umami.track(name, props || {});
+          else if (window.gtag) window.gtag('event', name, props || {});
+        } catch (e) {}
+      };
+      document.addEventListener('click', (e) => {
+        const el = e.target.closest && e.target.closest('[data-analytics]');
+        if (!el) return;
+        const name = el.getAttribute('data-analytics');
+        track(name, {});
+      });
+      window.__portfolioTrack = track;
     </script>
   </body>
 </html>

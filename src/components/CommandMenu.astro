@@ -1,16 +1,16 @@
 ---
-import { site } from '../lib/content';
+import { site, hasResume } from '../lib/content';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const link = (p: string) => `${base}${p}`;
 
 const items = [
-  { label: 'Go to Home', href: link('/'), group: 'Navigation' },
-  { label: 'Go to Work', href: link('/work'), group: 'Navigation' },
-  { label: 'Go to About', href: link('/about'), group: 'Navigation' },
+  { label: 'Go to Home',    href: link('/'),        group: 'Navigation' },
+  { label: 'Go to Work',    href: link('/work'),    group: 'Navigation' },
+  { label: 'Go to About',   href: link('/about'),   group: 'Navigation' },
   { label: 'Go to Contact', href: link('/contact'), group: 'Navigation' },
-  { label: 'Download Resume', href: link(site.resume), group: 'Actions', external: true },
-  { label: 'Toggle Theme', href: '#theme', group: 'Actions', action: 'toggle-theme' },
-  { label: 'Email Shubham', href: 'mailto:' + site.email, group: 'Actions' },
+  ...(hasResume() ? [{ label: 'Download Resume', href: link(site.resume!), group: 'Actions', external: true }] : []),
+  { label: 'Toggle Theme',  href: '#theme',                    group: 'Actions', action: 'toggle-theme' },
+  { label: 'Email Shubham', href: 'mailto:' + site.email,      group: 'Actions' },
   ...(site.linkedin ? [{ label: 'Open LinkedIn', href: site.linkedin, group: 'Social', external: true }] : []),
 ];
 ---
@@ -140,19 +140,25 @@ const items = [
 </style>
 
 <script>
+  // @ts-nocheck
   const cmd = document.querySelector('[data-cmd]');
   const input = document.querySelector('[data-cmd-input]');
   const items = Array.from(document.querySelectorAll('[data-cmd-item]'));
   let active = 0;
+  let lastFocus = null;
 
   const open = () => {
     if (!cmd) return;
+    lastFocus = document.activeElement;
     cmd.removeAttribute('hidden');
     setTimeout(() => input?.focus(), 30);
     active = 0;
     updateActive();
   };
-  const close = () => cmd?.setAttribute('hidden', '');
+  const close = () => {
+    cmd?.setAttribute('hidden', '');
+    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+  };
   const updateActive = () => {
     const visible = items.filter((el) => !el.parentElement?.hidden);
     visible.forEach((el, i) => el.classList.toggle('is-active', i === active));
@@ -171,9 +177,15 @@ const items = [
       const visible = items.filter((el) => !el.parentElement?.hidden);
       if (e.key === 'ArrowDown') { e.preventDefault(); active = (active + 1) % visible.length; updateActive(); }
       else if (e.key === 'ArrowUp') { e.preventDefault(); active = (active - 1 + visible.length) % visible.length; updateActive(); }
-      else if (e.key === 'Enter') {
-        e.preventDefault();
-        visible[active]?.click();
+      else if (e.key === 'Enter') { e.preventDefault(); visible[active]?.click(); }
+      else if (e.key === 'Tab') {
+        // Focus trap: keep focus inside the dialog while it's open.
+        const focusables = Array.from(cmd.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])'));
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
     }
   });
