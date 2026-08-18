@@ -1,0 +1,68 @@
+{
+  "title": "Digital Mentor Course Brochure",
+  "slug": "digital-mentor-course-brochure",
+  "client": "Digital Mentor Academy",
+  "year": "2023",
+  "categories": ["print"],
+  "disciplines": ["Brochure & Editorial Design", "Education Marketing", "Information Design"],
+  "summary": "A 12-page course brochure organising a detailed digital-marketing curriculum, benefits, certifications and career outcomes into a structured sales document.",
+  "thumbnail": "/uploads/print-editorial/digital-mentor-thumbnail.webp",
+  "thumbnail_alt": "Digital Mentor Academy digital marketing course brochure cover",
+  "hero_image": "/uploads/print-editorial/digital-mentor-thumbnail.webp",
+  "hero_image_alt": "Digital Mentor Academy course brochure design",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 33,
+  "role": "Graphic Designer",
+  "tools": ["CorelDRAW"],
+  "services": ["Brochure Design", "Curriculum Layout", "Print Preparation"],
+  "industry": "Education & Professional Training",
+  "duration": "",
+  "team": "",
+  "deliverables": ["12-page Course Brochure"],
+  "outcome": "A consistent brochure system that makes a large course offering easier for prospective students and professionals to scan and compare.",
+  "seo": {
+    "title": "Digital Mentor Course Brochure Design | Shubham Pendse",
+    "description": "A 12-page digital marketing course brochure designed for Digital Mentor Academy."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "The brochure had to communicate a large amount of course information without feeling like a syllabus pasted onto a page. I organised audience segments, learning highlights, modules, tools, certifications, placement assistance, reviews and career outcomes into a consistent sequence that supports both quick scanning and deeper reading."
+    },
+    {
+      "type": "project_snapshot",
+      "heading": "Project snapshot",
+      "client": "Digital Mentor Academy",
+      "industry": "Education & Professional Training",
+      "year": "2023",
+      "role": "Graphic Designer",
+      "services": ["Brochure Design", "Curriculum Layout", "Print Preparation"],
+      "deliverables": ["12-page Course Brochure"],
+      "tools": ["CorelDRAW"]
+    },
+    {
+      "type": "gallery",
+      "heading": "Selected brochure pages",
+      "fit": "contain",
+      "ratio": "portrait",
+      "images": [
+        { "src": "/uploads/print-editorial/digital-mentor-brochure-01.webp", "alt": "Digital Mentor digital marketing brochure cover" },
+        { "src": "/uploads/print-editorial/digital-mentor-brochure-02.webp", "alt": "Digital Mentor brochure audience page" },
+        { "src": "/uploads/print-editorial/digital-mentor-brochure-03.webp", "alt": "Digital Mentor course highlights page" },
+        { "src": "/uploads/print-editorial/digital-mentor-brochure-04.webp", "alt": "Digital Mentor course module page" },
+        { "src": "/uploads/print-editorial/digital-mentor-brochure-06.webp", "alt": "Digital Mentor marketing tools page" },
+        { "src": "/uploads/print-editorial/digital-mentor-brochure-08.webp", "alt": "Digital Mentor certification page" },
+        { "src": "/uploads/print-editorial/digital-mentor-brochure-10.webp", "alt": "Digital Mentor placement assistance page" },
+        { "src": "/uploads/print-editorial/digital-mentor-brochure-12.webp", "alt": "Digital Mentor career outcomes and contact page" }
+      ]
+    },
+    {
+      "type": "reflection",
+      "heading": "Scope note",
+      "body": "Selected pages are presented as visual design samples; the original brochure file is not available for download."
+    }
+  ]
+}

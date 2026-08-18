@@ -1,0 +1,85 @@
+{
+  "title": "Clean N Green Brand Refresh",
+  "slug": "clean-green-brand-refresh",
+  "client": "Clean N Green",
+  "year": "2024-2025",
+  "categories": ["print", "branding"],
+  "disciplines": ["Brand Identity & Packaging", "Print Collateral", "Freelance Rebrand"],
+  "summary": "A returning-client brand engagement spanning the original collateral and a later freelance refresh across identity, packaging stickers and printed applications.",
+  "thumbnail": "/uploads/print-editorial/clean-green-thumbnail.webp",
+  "thumbnail_alt": "Clean N Green natural household cleaning product brochure cover",
+  "hero_image": "/uploads/print-editorial/clean-green-thumbnail.webp",
+  "hero_image_alt": "Clean N Green brand and product brochure design",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 31,
+  "role": "Brand & Graphic Designer",
+  "tools": ["CorelDRAW"],
+  "services": ["Brand Identity Refresh", "Packaging Sticker Design", "Brochure Design", "Stationery Design"],
+  "industry": "Household Cleaning Products",
+  "duration": "Multi-phase engagement",
+  "team": "",
+  "deliverables": ["Logo System", "Packaging Stickers", "Product Brochure", "Visiting Cards", "Brand Mockups"],
+  "outcome": "A connected visual system designed to keep the product range recognisable across packaging, sales material and everyday brand touchpoints.",
+  "seo": {
+    "title": "Clean N Green Brand and Packaging Design | Shubham Pendse",
+    "description": "A multi-phase identity, packaging sticker and print collateral project for Clean N Green, including a 2025 freelance brand refresh."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "My relationship with Clean N Green began while I was working at a previous organisation, where I designed the brand's original logo and supporting collateral, including its brochure, packaging stickers and visiting cards. After I moved on, the client contacted me directly in 2025 to refresh the complete visual system as a freelance engagement. That return brief expanded the work from individual assets into a coordinated identity across logo, packaging and printed applications."
+    },
+    {
+      "type": "project_snapshot",
+      "heading": "Project snapshot",
+      "client": "Clean N Green",
+      "industry": "Household Cleaning Products",
+      "year": "2024-2025",
+      "duration": "Multi-phase engagement",
+      "role": "Brand & Graphic Designer",
+      "services": ["Brand Identity Refresh", "Packaging Sticker Design", "Brochure Design", "Stationery Design"],
+      "deliverables": ["Logo System", "Packaging Stickers", "Product Brochure", "Visiting Cards", "Brand Mockups"],
+      "tools": ["CorelDRAW"]
+    },
+    {
+      "type": "process",
+      "heading": "A relationship that grew with the brand",
+      "steps": [
+        {
+          "title": "Building the original foundation",
+          "body": "The first phase established the logo and practical collateral needed to introduce the product range across packaging and sales communication."
+        },
+        {
+          "title": "Returning as a freelance partner",
+          "body": "After I left my previous organisation, the client approached me directly in 2025 because they wanted continuity from the designer who already understood the brand."
+        },
+        {
+          "title": "Refreshing the complete system",
+          "body": "The new engagement covered the identity, packaging stickers, visiting cards and supporting brand applications so the growing range could feel more consistent."
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "heading": "Original product brochure",
+      "fit": "contain",
+      "ratio": "portrait",
+      "images": [
+        { "src": "/uploads/print-editorial/clean-green-brochure-01.webp", "alt": "Clean N Green product brochure cover" },
+        { "src": "/uploads/print-editorial/clean-green-brochure-02.webp", "alt": "Clean N Green natural product benefits page" },
+        { "src": "/uploads/print-editorial/clean-green-brochure-03.webp", "alt": "Clean N Green floor cleaner, toilet cleaner and dishwashing gel page" },
+        { "src": "/uploads/print-editorial/clean-green-brochure-04.webp", "alt": "Clean N Green laundry, kitchen and glass cleaner page" },
+        { "src": "/uploads/print-editorial/clean-green-brochure-05.webp", "alt": "Clean N Green soap and specialised cleaning products page" },
+        { "src": "/uploads/print-editorial/clean-green-brochure-06.webp", "alt": "Clean N Green brochure contact page" }
+      ]
+    },
+    {
+      "type": "reflection",
+      "heading": "A system designed to expand",
+      "body": "The brochure shown here documents the earlier visual system and establishes the starting point for the 2025 refresh. The project structure can expand naturally with the updated logo, packaging stickers, visiting cards and product mockups as the complete rebrand is documented."
+    }
+  ]
+}
