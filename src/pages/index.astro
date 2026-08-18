@@ -565,6 +565,10 @@ const glyphSVG: Record<string, string> = {
   @media (max-width: 780px) { .about-prev { grid-template-columns: 1fr; gap: 18px; } }
 
   /* Final CTA */
+  @media (min-width: 641px) {
+    .section--cta { padding-bottom: clamp(28px, 3vw, 40px); }
+  }
+
   .finalcta {
     position: relative;
     padding: clamp(32px, 5vw, 60px);
