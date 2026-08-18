@@ -98,6 +98,7 @@
 </style>
 
 <script>
+  // @ts-nocheck
   const root = document.querySelector('[data-lightbox-root]');
   const imgEl = root?.querySelector('[data-lbx-img]');
   const capEl = root?.querySelector('[data-lbx-caption]');
@@ -105,8 +106,19 @@
   const stage = root?.querySelector('[data-lbx-stage]');
   let images = [];
   let index = 0;
+  let lastFocus = null;
 
   const collect = () => Array.from(document.querySelectorAll('img[data-lightbox]'));
+
+  // Make lightbox images keyboard-activatable
+  const makeImagesKeyboard = () => {
+    collect().forEach((img) => {
+      if (!img.hasAttribute('tabindex')) img.setAttribute('tabindex', '0');
+      if (!img.hasAttribute('role')) img.setAttribute('role', 'button');
+      img.setAttribute('aria-haspopup', 'dialog');
+    });
+  };
+  makeImagesKeyboard();
 
   const show = (i) => {
     if (!images.length || !imgEl) return;
@@ -118,23 +130,45 @@
     if (countEl) countEl.textContent = (index + 1) + ' / ' + images.length;
   };
 
+  const trapFocus = (e) => {
+    if (!root || root.hasAttribute('hidden')) return;
+    const focusables = Array.from(root.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])'));
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  };
+
   const open = (el) => {
     images = collect();
     const idx = images.indexOf(el);
     if (idx === -1) return;
+    lastFocus = document.activeElement;
     root?.removeAttribute('hidden');
     document.body.style.overflow = 'hidden';
     show(idx);
+    setTimeout(() => root?.querySelector('[data-lbx-close]')?.focus(), 40);
   };
   const close = () => {
     root?.setAttribute('hidden', '');
     document.body.style.overflow = '';
+    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
   };
 
   document.addEventListener('click', (e) => {
     const t = e.target;
     const img = t.closest && t.closest('img[data-lightbox]');
     if (img) { e.preventDefault(); open(img); }
+  });
+  // Keyboard activation (Enter / Space) on the image itself
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const t = document.activeElement;
+    if (t && t.matches && t.matches('img[data-lightbox]')) {
+      e.preventDefault();
+      open(t);
+    }
   });
 
   root?.querySelector('[data-lbx-close]')?.addEventListener('click', close);
@@ -149,6 +183,7 @@
     if (e.key === 'Escape') close();
     else if (e.key === 'ArrowLeft') show(index - 1);
     else if (e.key === 'ArrowRight') show(index + 1);
+    else if (e.key === 'Tab') trapFocus(e);
   });
 
   // Touch swipe

@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { home, site, getFeaturedProjects } from '../lib/content';
+import { home, site, getFeaturedProjects, hasResume } from '../lib/content';
 
-const featured = getFeaturedProjects().slice(0, 6);
+const featured = getFeaturedProjects().slice(0, 5);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const link = (p: string) => `${base}${p}`;
+const showResume = hasResume();
 
 const glyphSVG: Record<string, string> = {
   brand:   '<path d="M4 6h16M4 12h10M4 18h16"/><circle cx="19" cy="12" r="2.4"/>',
@@ -29,25 +30,31 @@ const glyphSVG: Record<string, string> = {
         <p class="hero__sub lead">{home.hero.subheading}</p>
 
         <div class="hero__ctas">
-          <a class="btn btn--primary" href={link(home.hero.primary_cta.url)} data-testid="hero-cta-work">
+          <a class="btn btn--primary" href={link(home.hero.primary_cta.url)} data-testid="hero-cta-work" data-analytics="hero-cta-work">
             {home.hero.primary_cta.label} <span class="arrow">→</span>
           </a>
-          <a class="btn btn--ghost" href={link(home.hero.secondary_cta.url)} data-testid="hero-cta-contact">
+          <a class="btn btn--ghost" href={link(home.hero.secondary_cta.url)} data-testid="hero-cta-contact" data-analytics="contact-cta-click">
             {home.hero.secondary_cta.label}
           </a>
-          <a class="hero__resume" href={link(home.hero.resume_cta.url)} target="_blank" rel="noopener" data-testid="hero-cta-resume">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v12m0 0-4-4m4 4 4-4M4 20h16"/></svg>
-            {home.hero.resume_cta.label}
-          </a>
+          {showResume && (
+            <a class="hero__resume" href={link(site.resume!)} target="_blank" rel="noopener" data-testid="hero-cta-resume" data-analytics="resume-click">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 4v12m0 0-4-4m4 4 4-4M4 20h16"/></svg>
+              Download Resume
+            </a>
+          )}
         </div>
 
         <div class="hero__meta">
-          <span class="hero__meta-item">
-            <span class="hero__meta-dot" aria-hidden="true"></span>
-            {site.availability}
-          </span>
-          <span class="hero__meta-sep">·</span>
+          {site.availability && (
+            <span class="hero__meta-item">
+              <span class="hero__meta-dot" aria-hidden="true"></span>
+              {site.availability}
+            </span>
+          )}
+          {site.availability && <span class="hero__meta-sep" aria-hidden="true">·</span>}
           <span>{site.location}</span>
+          {site.years_experience && <span class="hero__meta-sep" aria-hidden="true">·</span>}
+          {site.years_experience && <span>{site.years_experience} experience</span>}
         </div>
       </div>
 
@@ -59,7 +66,7 @@ const glyphSVG: Record<string, string> = {
           <div class="hero__handle hero__handle--bl" aria-hidden="true"></div>
           <div class="hero__handle hero__handle--br" aria-hidden="true"></div>
           <img
-            src={link(site.avatar)}
+            src={link(site.avatar || '')}
             alt="Portrait illustration of Shubham Pendse"
             class="hero__avatar"
             width="720"
@@ -89,39 +96,13 @@ const glyphSVG: Record<string, string> = {
     </div>
   </section>
 
-  <!-- CAPABILITIES -->
-  <section class="section" id="capabilities">
-    <div class="container">
-      <div class="section__head reveal">
-        <span class="eyebrow">What I do</span>
-        <h2 class="section-title">Six disciplines. <em>One eye.</em></h2>
-        <p class="lead" style="max-width: 640px; margin-top: 18px;">
-          Design that has to work as a system, not a single asset. Whether it's a brand's voice or a product's interface — the fundamentals are the same.
-        </p>
-      </div>
-
-      <div class="cap-grid">
-        {home.capabilities.map((c: any, i: number) => (
-          <article class="cap reveal" style={`--stagger:${i * 80}ms`} data-testid={`capability-${c.glyph}`}>
-            <div class="cap__glyph" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" set:html={glyphSVG[c.glyph] || ''} />
-            </div>
-            <div class="cap__num">{String(i + 1).padStart(2, '0')}</div>
-            <h3 class="cap__title">{c.title}</h3>
-            <p class="cap__body">{c.description}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- SELECTED WORK -->
+  <!-- SELECTED WORK (moved above Capabilities) -->
   <section class="section section--work" id="work">
     <div class="container">
       <div class="work__head reveal">
         <div>
           <span class="eyebrow">Selected work</span>
-          <h2 class="section-title">Recent projects <br/><em>and case studies.</em></h2>
+          <h2 class="section-title">Recent projects <em>and case studies.</em></h2>
         </div>
         <a class="btn btn--ghost" href={link('/work')} data-testid="home-view-all-work">
           View all work <span class="arrow">→</span>
@@ -165,6 +146,77 @@ const glyphSVG: Record<string, string> = {
       </div>
     </div>
   </section>
+
+  <!-- CAPABILITIES -->
+  <section class="section" id="capabilities">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">What I do</span>
+        <h2 class="section-title">Six disciplines. <em>One eye.</em></h2>
+        <p class="lead" style="max-width: 640px; margin-top: 18px;">
+          Design that has to work as a system, not a single asset. Whether it's a brand's voice or a product's interface — the fundamentals are the same.
+        </p>
+      </div>
+
+      <div class="cap-grid">
+        {home.capabilities.map((c: any, i: number) => (
+          <article class="cap reveal" style={`--stagger:${i * 80}ms`} data-testid={`capability-${c.glyph}`}>
+            <div class="cap__glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" set:html={glyphSVG[c.glyph] || ''} />
+            </div>
+            <div class="cap__num">{String(i + 1).padStart(2, '0')}</div>
+            <h3 class="cap__title">{c.title}</h3>
+            <p class="cap__body">{c.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE SNAPSHOT -->
+  {home.experience_snapshot && home.experience_snapshot.stats && home.experience_snapshot.stats.length > 0 && (
+    <section class="section-tight" id="experience-snapshot">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow">Snapshot</span>
+          <h2 class="section-title">{home.experience_snapshot.heading}</h2>
+          {home.experience_snapshot.body && <p class="lead" style="max-width: 640px; margin-top: 14px;">{home.experience_snapshot.body}</p>}
+        </div>
+        <dl class="snap-grid reveal">
+          {home.experience_snapshot.stats.map((s: any) => (
+            <div class="snap">
+              <dt class="snap__label">{s.label}</dt>
+              <dd class="snap__value">{s.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )}
+
+  <!-- WORKING PROCESS -->
+  {home.working_process && home.working_process.steps && home.working_process.steps.length > 0 && (
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow">Approach</span>
+          <h2 class="section-title">{home.working_process.heading}</h2>
+        </div>
+        <ol class="process-grid">
+          {home.working_process.steps.map((step: any, i: number) => (
+            <li class="process reveal" style={`--stagger:${i * 90}ms`}>
+              <div class="process__index">
+                <span class="process__num">{String(i + 1).padStart(2, '0')}</span>
+                <span class="process__line" aria-hidden="true"></span>
+              </div>
+              <h3 class="process__title">{step.title}</h3>
+              <p class="process__body">{step.body}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
 
   <!-- ABOUT PREVIEW -->
   <section class="section section--about-preview">
@@ -577,4 +629,88 @@ const glyphSVG: Record<string, string> = {
   @media (max-width: 520px) {
     .hero__ctas .btn { flex: 1 1 auto; justify-content: center; }
   }
+
+  /* Experience snapshot */
+  .snap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+  }
+  .snap {
+    padding: 20px 22px 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .snap:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .snap__label {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .snap__value {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    letter-spacing: -0.01em;
+    color: var(--text);
+    line-height: 1.25;
+  }
+  @media (max-width: 640px) {
+    .snap-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .snap { padding: 16px 18px 18px; }
+  }
+  @media (max-width: 400px) {
+    .snap-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Working process */
+  .process-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    padding: 0;
+    margin: 0;
+  }
+  .process {
+    padding: 24px 22px 26px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    position: relative;
+    transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+    transition-delay: var(--stagger);
+  }
+  .process:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .process__index {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px;
+  }
+  .process__num {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+  }
+  .process__line { flex: 1; height: 1px; background: var(--border); }
+  .process__title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .process__body { color: var(--text-muted); font-size: 0.94rem; line-height: 1.65; margin: 0; }
+  @media (max-width: 900px) { .process-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .process-grid { grid-template-columns: 1fr; } }
 </style>

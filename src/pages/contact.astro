@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { contact, site } from '../lib/content';
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 // Contact provider is determined at build time from content/site.json
 const provider = (site.contact_form.provider || 'auto').toLowerCase();
@@ -136,14 +135,14 @@ const socialLinks = [
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px;" aria-hidden="true" />
 
           <div class="cform__submit">
-            <button type="submit" class="btn btn--primary" data-testid="contact-submit">
+            <button type="submit" class="btn btn--primary" data-testid="contact-submit" data-analytics="contact-cta-submit">
               <span data-btn-label>Send message</span>
               <span class="arrow">→</span>
             </button>
             <span class="cform__note text-dim">Or email me directly at <a href={`mailto:${site.email}`}>{site.email}</a></span>
           </div>
 
-          <div class="cform__status" data-form-status role="status" aria-live="polite" hidden></div>
+          <div class="cform__status" data-form-status role="status" aria-live="polite" aria-atomic="true" hidden></div>
         </form>
       </div>
     </div>
@@ -299,6 +298,7 @@ const socialLinks = [
 </style>
 
 <script>
+  // @ts-nocheck
   const form = document.querySelector('[data-testid="contact-form"]');
   if (form) {
     const status = form.querySelector('[data-form-status]');

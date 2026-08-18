@@ -15,10 +15,13 @@ Rebuilt as an editorial dark-glass portfolio with Astro + Pages CMS.
 ## Local development
 
 ```bash
-yarn install
-yarn dev           # http://localhost:3000
-yarn build         # builds to ./dist
-yarn preview       # preview the production build
+npm ci
+npm run dev           # http://localhost:3000
+npm run validate      # checks editable JSON content
+npm run typecheck     # checks Astro and TypeScript
+npm run build         # builds to ./dist
+npm run check:build   # checks generated links and accessibility basics
+npm run preview       # previews the production build
 ```
 
 ## Content editing (recommended path — no code required)
@@ -62,7 +65,7 @@ Set `provider: auto` and the site picks whichever is configured. Set it explicit
 
 ## Deployment
 
-The included GitHub Action (`.github/workflows/deploy.yml`) automatically builds and deploys to GitHub Pages on every push to `portfolio-v2-emergent` (rename in the workflow if you promote a different branch).
+The included GitHub Action (`.github/workflows/deploy.yml`) validates, type-checks, builds and deploys to GitHub Pages whenever changes are merged into `main`. Feature branches and pull requests do not change the live website.
 
 The site is configured for the project-page URL:
 
@@ -103,6 +106,8 @@ Then in **GitHub → Settings → Pages** → Custom Domain, add your domain and
 │   ├── lib/content.ts        # Content loader
 │   └── styles/global.css     # Design tokens + globals
 ├── legacy/                   # Original v1 HTML/CSS/JS files (preserved for reference)
+├── scripts/                  # Content and generated-site checks
+├── package-lock.json         # Reproducible npm dependency versions
 └── .github/workflows/deploy.yml
 ```
 

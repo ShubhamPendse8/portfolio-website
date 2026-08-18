@@ -1,9 +1,9 @@
 import { getAllProjects } from '../lib/content';
 
-export const GET = ({ site }) => {
+export const GET = ({ site }: { site?: URL }) => {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const origin = (site && site.origin) || 'https://shubhampendse8.github.io';
-  const build = (p) => origin + base + p;
+  const build = (p: string) => origin + base + p;
 
   const staticRoutes = ['/', '/work', '/about', '/contact'];
   const projectRoutes = getAllProjects().map((p) => `/projects/${p.slug}`);

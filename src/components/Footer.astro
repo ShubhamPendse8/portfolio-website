@@ -1,16 +1,10 @@
 ---
-import { site } from '../lib/content';
+import { site, hasResume, activeSocials } from '../lib/content';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const link = (p: string) => `${base}${p}`;
 const year = new Date().getFullYear();
-
-const socials = [
-  site.email && { label: 'Email', href: `mailto:${site.email}` },
-  site.linkedin && { label: 'LinkedIn', href: site.linkedin },
-  site.fiverr && { label: 'Fiverr', href: site.fiverr },
-  site.instagram && { label: 'Instagram', href: site.instagram },
-  site.behance && { label: 'Behance', href: site.behance },
-].filter(Boolean) as { label: string; href: string }[];
+const socials = activeSocials();
+const showResume = hasResume();
 ---
 <footer class="footer" data-testid="site-footer">
   <div class="container footer__inner">
@@ -51,8 +45,8 @@ const socials = [
         <p class="footer__label">Studio</p>
         <ul class="footer__plain">
           <li>{site.location}</li>
-          <li>{site.availability}</li>
-          <li><a href={link(site.resume)} target="_blank" rel="noopener">Download resume</a></li>
+          {site.availability && <li>{site.availability}</li>}
+          {showResume && <li><a href={link(site.resume!)} target="_blank" rel="noopener" data-analytics="resume-click">Download resume</a></li>}
         </ul>
       </div>
     </div>
