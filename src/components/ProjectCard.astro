@@ -74,7 +74,9 @@ const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) :
 
 <style>
   .pcard {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     color: var(--text);
     background: var(--surface);
     border: 1px solid var(--border);
@@ -137,7 +139,7 @@ const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) :
   }
   .pcard:hover .pcard__hover-arrow { opacity: 1; transform: translate(0, 0); }
 
-  .pcard__body { padding: 22px 24px 26px; }
+  .pcard__body { padding: 22px 24px 26px; flex: 1; }
   .pcard__meta { display: flex; gap: 8px; align-items: center; color: var(--text-dim); font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
   .pcard__cat { color: var(--accent); }
   .pcard__dot { color: var(--text-dim); }
@@ -156,6 +158,8 @@ const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) :
   }
   .pcard__cta span { transition: transform var(--dur) var(--ease); }
   .pcard:hover .pcard__cta span { transform: translateX(4px); }
+  .pcard--standard .pcard__body { display: flex; flex-direction: column; }
+  .pcard--standard .pcard__cta { margin-top: auto; padding-top: 18px; }
   .pcard__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
   .pcard__tag {
     font-size: 0.72rem;
