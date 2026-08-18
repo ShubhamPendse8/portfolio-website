@@ -1,0 +1,48 @@
+{
+  "title": "Charudutt Katare Website",
+  "slug": "charudutt-katare-website",
+  "client": "Charudutt Katare",
+  "year": "2024",
+  "categories": ["ui-ux"],
+  "disciplines": ["Personal Brand Website", "Podcast", "Content-led UI"],
+  "summary": "A personal-brand website concept combining an expert profile, podcast content, subscription and contact into one focused experience.",
+  "thumbnail": "/uploads/ui-design/charudutt-katare-thumbnail.webp",
+  "thumbnail_alt": "Charudutt Katare personal-brand and podcast website UI concept",
+  "hero_image": "/uploads/ui-design/charudutt-katare-thumbnail.webp",
+  "hero_image_alt": "Charudutt Katare personal brand website hero",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 25,
+  "role": "UI Designer",
+  "tools": [],
+  "services": ["Personal Brand Website UI", "Content Hierarchy"],
+  "industry": "Personal Brand & Media",
+  "duration": "",
+  "team": "",
+  "deliverables": ["Desktop Website UI Concept"],
+  "outcome": "",
+  "seo": {
+    "title": "Charudutt Katare Website UI | Shubham Pendse",
+    "description": "A personal-brand and podcast website UI concept by Shubham Pendse."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "This desktop concept creates a central home for an author, speaker and podcast host. The interface connects profile information, featured media, audience subscription and direct contact without splitting the personal brand into disconnected experiences."
+    },
+    {
+      "type": "image_full",
+      "heading": "Full website UI",
+      "image": "/uploads/ui-design/charudutt-katare-full.webp",
+      "alt": "Full-length Charudutt Katare personal-brand website UI concept",
+      "caption": "Desktop visual design concept. Select the image to inspect it at full size."
+    },
+    {
+      "type": "reflection",
+      "heading": "Scope note",
+      "body": "This is presented as a visual UI concept for a content-led personal brand. No formal user research or performance outcomes are claimed."
+    }
+  ]
+}

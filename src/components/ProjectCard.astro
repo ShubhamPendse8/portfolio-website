@@ -13,6 +13,7 @@ const link = (p: string) => `${base}${p}`;
 
 const primaryCategory = project.categories?.[0] || '';
 const catLabel = categoryLabels[primaryCategory] || primaryCategory;
+const cardLabel = project.disciplines?.[0] || catLabel;
 const href = link(`/projects/${project.slug}`);
 const thumb = project.thumbnail || project.hero_image || '';
 const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) : '';
@@ -52,12 +53,17 @@ const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) :
   </div>
   <div class="pcard__body">
     <div class="pcard__meta">
-      {catLabel && <span class="pcard__cat">{catLabel}</span>}
+      {cardLabel && <span class="pcard__cat">{cardLabel}</span>}
       {project.year && <span class="pcard__dot" aria-hidden="true">·</span>}
       {project.year && <span class="pcard__year">{project.year}</span>}
     </div>
     <h3 class="pcard__title">{project.title}</h3>
     {variant !== 'compact' && <p class="pcard__summary">{project.summary}</p>}
+    {variant !== 'compact' && (
+      <span class="pcard__cta" aria-hidden="true">
+        View full project <span>→</span>
+      </span>
+    )}
     {variant === 'featured' && project.disciplines && project.disciplines.length > 0 && (
       <div class="pcard__tags">
         {project.disciplines.slice(0, 3).map((d) => <span class="pcard__tag">{d}</span>)}
@@ -137,6 +143,19 @@ const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) :
   .pcard__dot { color: var(--text-dim); }
   .pcard__title { font-family: var(--font-display); font-size: 1.35rem; letter-spacing: -0.015em; font-weight: 500; }
   .pcard__summary { color: var(--text-muted); margin-top: 10px; font-size: 0.94rem; line-height: 1.6; }
+  .pcard__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .pcard__cta span { transition: transform var(--dur) var(--ease); }
+  .pcard:hover .pcard__cta span { transform: translateX(4px); }
   .pcard__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
   .pcard__tag {
     font-size: 0.72rem;

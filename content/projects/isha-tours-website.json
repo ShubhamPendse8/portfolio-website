@@ -1,0 +1,48 @@
+{
+  "title": "Isha Tours Website UI",
+  "slug": "isha-tours-website",
+  "client": "Isha Tours",
+  "year": "2024",
+  "categories": ["ui-ux"],
+  "disciplines": ["Website UI Design", "Travel & Tourism", "Enquiry Journey"],
+  "summary": "A travel-agency website concept bringing destinations, social proof and trip enquiries into one image-rich browsing experience.",
+  "thumbnail": "/uploads/ui-design/isha-tours-website-thumbnail.webp",
+  "thumbnail_alt": "Isha Tours travel and tourism website UI concept",
+  "hero_image": "/uploads/ui-design/isha-tours-website-thumbnail.webp",
+  "hero_image_alt": "Isha Tours website hero featuring an aurora travel destination",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 23,
+  "role": "UI Designer",
+  "tools": [],
+  "services": ["Website UI Design", "Travel Offer Presentation"],
+  "industry": "Travel & Tourism",
+  "duration": "",
+  "team": "",
+  "deliverables": ["Desktop Website UI Concept"],
+  "outcome": "",
+  "seo": {
+    "title": "Isha Tours Website UI Design | Shubham Pendse",
+    "description": "An image-rich travel-agency website UI concept featuring destinations, credibility content and enquiries."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "This visual concept extends the Isha Tours brand into a complete desktop website. Destination cards, customer proof, imagery, testimonials and an enquiry form work together to support travel discovery and lead generation."
+    },
+    {
+      "type": "image_full",
+      "heading": "Full website UI",
+      "image": "/uploads/ui-design/isha-tours-website-full.webp",
+      "alt": "Full-length Isha Tours travel website UI concept",
+      "caption": "Desktop visual design concept. Select the image to inspect it at full size."
+    },
+    {
+      "type": "reflection",
+      "heading": "Scope note",
+      "body": "This project focused on desktop visual UI and presenting travel content clearly. It is separate from the Isha Tours social-media project and is not presented as a researched UX case study."
+    }
+  ]
+}

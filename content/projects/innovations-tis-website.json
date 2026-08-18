@@ -1,0 +1,48 @@
+{
+  "title": "Innovations TIS Website",
+  "slug": "innovations-tis-website",
+  "client": "Innovations TIS",
+  "year": "2024",
+  "categories": ["ui-ux"],
+  "disciplines": ["Website UI Design", "Interior Design", "Service Website"],
+  "summary": "A visually led website concept for an interior-design studio, balancing project imagery, services and a clear enquiry path.",
+  "thumbnail": "/uploads/ui-design/innovations-tis-thumbnail.webp",
+  "thumbnail_alt": "Innovations TIS interior-design studio website UI concept",
+  "hero_image": "/uploads/ui-design/innovations-tis-thumbnail.webp",
+  "hero_image_alt": "Innovations TIS website hero with contemporary interior imagery",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 21,
+  "role": "UI Designer",
+  "tools": [],
+  "services": ["Website UI Design", "Visual Hierarchy"],
+  "industry": "Interior Design",
+  "duration": "",
+  "team": "",
+  "deliverables": ["Desktop Website UI Concept"],
+  "outcome": "",
+  "seo": {
+    "title": "Innovations TIS Website UI Design | Shubham Pendse",
+    "description": "A visually led interior-design studio website UI concept by Shubham Pendse."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "The concept gives interior imagery the leading role while keeping studio information, services, process, reviews and enquiry details within one continuous desktop experience."
+    },
+    {
+      "type": "image_full",
+      "heading": "Full website UI",
+      "image": "/uploads/ui-design/innovations-tis-full.webp",
+      "alt": "Full-length Innovations TIS interior-design studio website UI concept",
+      "caption": "Desktop visual design concept. Select the image to inspect it at full size."
+    },
+    {
+      "type": "reflection",
+      "heading": "Scope note",
+      "body": "This project focused on visual direction, layout and service presentation. It is shown as UI design rather than a researched UX case study."
+    }
+  ]
+}
