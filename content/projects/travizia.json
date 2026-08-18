@@ -26,7 +26,41 @@
     {
       "type": "rich_text",
       "heading": "Overview",
-      "body": "Travizia's social creatives had to sell the feeling of travel, not just the offer. The work covered destination posts, package highlights and campaign moments."
+      "body": "Travizia's social creatives had to sell the feeling of travel, not just the offer. The work covered destination posts, package highlights and campaign moments.",
+      "images": [
+        {
+          "src": "/uploads/travizia-time-to-travel.webp",
+          "alt": "Travizia world-travel campaign creative with multiple destinations"
+        },
+        {
+          "src": "/uploads/travizia-kabini.webp",
+          "alt": "Travizia Kabini forest tour creative featuring a leopard"
+        },
+        {
+          "src": "/uploads/travizia-europe.webp",
+          "alt": "Travizia Europe tour creative featuring major landmarks"
+        },
+        {
+          "src": "/uploads/travizia-croatia.webp",
+          "alt": "Travizia Croatia travel creative with an airplane and coastal destination"
+        },
+        {
+          "src": "/uploads/travizia-egypt.webp",
+          "alt": "Travizia Egypt campaign creative featuring the pyramids"
+        },
+        {
+          "src": "/uploads/travizia-mothers-day.webp",
+          "alt": "Travizia Mother's Day special-tour gift creative"
+        },
+        {
+          "src": "/uploads/travizia-goa.webp",
+          "alt": "Travizia Goa beach holiday campaign creative"
+        },
+        {
+          "src": "/uploads/travizia-sightseeing-tips.webp",
+          "alt": "Travizia local sightseeing tips social media creative"
+        }
+      ]
     },
     {
       "type": "rich_text",
