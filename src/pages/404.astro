@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<BaseLayout title="Page not found" description="Sorry, the page you're looking for doesn't exist.">
+  <section class="section container" style="text-align:center; padding-top: 40px;">
+    <span class="eyebrow" style="margin-bottom: 20px;">404</span>
+    <h1 style="font-family: var(--font-display); font-size: clamp(3rem, 8vw, 6rem); font-weight: 400; letter-spacing: -0.03em; line-height: 1; margin: 12px 0 20px;">
+      This page took <em style="color: var(--accent); font-style: italic;">a detour</em>.
+    </h1>
+    <p class="lead" style="max-width: 520px; margin: 0 auto 32px;">
+      The link you followed may be old or the page might have moved. Try the homepage or browse selected work.
+    </p>
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+      <a class="btn btn--primary" href={base + '/'}>Back to home <span class="arrow">→</span></a>
+      <a class="btn btn--ghost" href={base + '/work'}>Selected work</a>
+      <a class="btn btn--ghost" href={base + '/contact'}>Contact</a>
+    </div>
+  </section>
+</BaseLayout>

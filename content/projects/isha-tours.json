@@ -3,7 +3,9 @@
   "slug": "isha-tours",
   "client": "Isha Tours",
   "year": "2023",
-  "categories": "social-media",
+  "categories": [
+    "social-media"
+  ],
   "disciplines": [
     "Social Media Design",
     "Tour & Travel"
@@ -35,16 +37,20 @@
       "body": "Isha Tours needed a series of destination-driven creatives that could work for both trip packages and general brand posts, without feeling like just another travel ad.",
       "images": [
         {
-          "src": "/uploads/Travizia- Croatia.png"
+          "src": "/uploads/Travizia- Croatia.png",
+          "alt": "Croatia travel campaign creative"
         },
         {
-          "src": "/uploads/Travizia- Kabini.png"
+          "src": "/uploads/Travizia- Kabini.png",
+          "alt": "Kabini travel campaign creative"
         },
         {
-          "src": "/uploads/Travizia- Europe.png"
+          "src": "/uploads/Travizia- Europe.png",
+          "alt": "Europe travel campaign creative"
         },
         {
-          "src": "/uploads/Travizia- Automation.png"
+          "src": "/uploads/Travizia- Automation.png",
+          "alt": "Travel automation campaign creative"
         }
       ]
     },

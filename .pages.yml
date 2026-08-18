@@ -14,18 +14,19 @@ content:
     path: content/site.json
     format: json
     fields:
-      - { name: name,           label: Your Name,          type: string, required: true }
-      - { name: title,          label: Professional Title, type: string, required: true }
-      - { name: email,          label: Email,              type: string, required: true }
-      - { name: linkedin,       label: LinkedIn URL,       type: string }
-      - { name: fiverr,         label: Fiverr URL,         type: string }
-      - { name: instagram,      label: Instagram URL,      type: string }
-      - { name: behance,        label: Behance URL,        type: string }
-      - { name: location,       label: Location,           type: string }
-      - { name: availability,   label: Availability Status, type: string, description: "e.g. Open to freelance & full-time opportunities" }
-      - { name: resume,         label: Resume PDF,         type: image, description: "Upload the PDF (image field accepts PDFs)" }
-      - { name: avatar,         label: Avatar / Portrait,  type: image }
-      - { name: footer_text,    label: Footer Text,        type: string }
+      - { name: name,             label: Your Name,          type: string, required: true }
+      - { name: title,            label: Professional Title, type: string, required: true }
+      - { name: email,            label: Email,              type: string, required: true }
+      - { name: linkedin,         label: LinkedIn URL,       type: string }
+      - { name: fiverr,           label: Fiverr URL,         type: string }
+      - { name: instagram,        label: Instagram URL,      type: string, description: "Leave empty to hide from the site." }
+      - { name: behance,          label: Behance URL,        type: string }
+      - { name: location,         label: Location,           type: string }
+      - { name: availability,     label: Availability Status, type: string, description: "e.g. Open to freelance & full-time opportunities" }
+      - { name: years_experience, label: Years of experience, type: string, description: "e.g. 6+ years" }
+      - { name: resume,           label: Resume PDF,         type: image, description: "Upload the PDF (image field accepts PDFs). Leave empty to hide all Download Resume actions site-wide." }
+      - { name: avatar,           label: Avatar / Portrait,  type: image }
+      - { name: footer_text,      label: Footer Text,        type: string }
       - name: seo
         label: SEO / Social Sharing
         type: object
@@ -50,6 +51,19 @@ content:
         label: Expertise Ticker Items
         type: string
         list: true
+      - name: analytics
+        label: Analytics (optional, privacy-friendly)
+        type: object
+        description: "Leave provider as 'none' to disable. Configure only if you want basic page view + event tracking."
+        fields:
+          - name: provider
+            label: Provider
+            type: select
+            options: { values: [none, plausible, umami, ga4] }
+            default: none
+          - { name: domain,     label: Domain (Plausible),          type: string }
+          - { name: site_id,    label: Site / Measurement ID,       type: string, description: "Umami website ID or GA4 measurement ID" }
+          - { name: script_url, label: Script URL (self-hosted Plausible/Umami), type: string }
 
   # -------- HOME PAGE --------
   - name: home
@@ -62,7 +76,7 @@ content:
         label: Hero Section
         type: object
         fields:
-          - { name: eyebrow,     label: Eyebrow Line,           type: string }
+          - { name: eyebrow,     label: Eyebrow Line,           type: string, description: "Small line above the heading. Ideal: 'Graphic Designer & UI/UX Designer — Mumbai, India'" }
           - { name: heading,     label: Hero Heading,           type: text }
           - { name: subheading,  label: Hero Subheading,        type: text }
           - name: primary_cta
@@ -77,12 +91,6 @@ content:
             fields:
               - { name: label, label: Button Label, type: string }
               - { name: url,   label: Button URL,   type: string }
-          - name: resume_cta
-            label: Resume Button
-            type: object
-            fields:
-              - { name: label, label: Button Label, type: string }
-              - { name: url,   label: Button URL,   type: string }
           - name: avatar_caption
             label: Avatar Caption (small tag under portrait)
             type: object
@@ -90,7 +98,7 @@ content:
               - { name: left,  label: Left Text,  type: string, description: "e.g. 01 · Your Name" }
               - { name: right, label: Right Text, type: string, description: "e.g. Designer" }
       - name: capabilities
-        label: Capabilities
+        label: Capabilities (reorderable)
         type: object
         list: true
         fields:
@@ -100,6 +108,33 @@ content:
             label: Icon Glyph
             type: select
             options: { values: [brand, social, uiux, deck, print, motion] }
+      - name: experience_snapshot
+        label: Experience Snapshot
+        type: object
+        description: "A compact stats block shown after Capabilities. Leave stats empty to hide."
+        fields:
+          - { name: heading, label: Heading, type: string }
+          - { name: body,    label: Body,    type: text }
+          - name: stats
+            label: Stats (label / value pairs)
+            type: object
+            list: true
+            fields:
+              - { name: label, label: Label, type: string }
+              - { name: value, label: Value, type: string }
+      - name: working_process
+        label: Working Process
+        type: object
+        description: "Four-step how-I-work section. Leave steps empty to hide."
+        fields:
+          - { name: heading, label: Heading, type: string }
+          - name: steps
+            label: Steps
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Step Title, type: string }
+              - { name: body,  label: Step Body,  type: text }
       - name: about_preview
         label: About Preview
         type: object
@@ -210,7 +245,7 @@ content:
         sort: order
     fields:
       - { name: title, label: Project Title, type: string, required: true }
-      - { name: slug,  label: URL Slug, type: string, required: true, pattern: '^[a-z0-9-]+$', description: "lowercase, hyphens only, no spaces" }
+      - { name: slug,  label: URL Slug, type: string, required: true, pattern: '^[a-z0-9-]+$', description: "lowercase, hyphens only, no spaces. Must be unique across all projects." }
       - { name: client, label: Client / Brand, type: string }
       - { name: year,   label: Year,           type: string }
       - name: categories
@@ -230,9 +265,19 @@ content:
         type: string
         list: true
       - { name: summary, label: Short Summary, type: text }
-      - { name: thumbnail, label: Thumbnail Image, type: image }
-      - { name: thumbnail_alt, label: Thumbnail Alt Text, type: string }
-      - { name: hero_image, label: Hero Image, type: image }
+      - name: thumbnail
+        label: Thumbnail Image
+        type: image
+        description: |
+          Recommended: 1600 × 1200 px · aspect ratio 4:3
+          Use WebP or optimized JPG. Keep important content inside the central safe area,
+          avoid important text/logos near the edges. Leave empty to keep the designed placeholder.
+      - { name: thumbnail_alt, label: Thumbnail Alt Text, type: string, description: "Describe the image for screen readers and SEO." }
+      - name: hero_image
+        label: Hero Image
+        type: image
+        description: |
+          Large image at the top of the case study. Recommended 1600 × 1200 or wider.
       - { name: hero_image_alt, label: Hero Image Alt Text, type: string }
       - { name: featured,     label: Featured Project?,  type: boolean, default: false }
       - { name: published,    label: Published?,         type: boolean, default: true }
@@ -247,7 +292,14 @@ content:
         label: Services Provided
         type: string
         list: true
-      - { name: outcome, label: Outcome / Impact, type: text }
+      - { name: industry, label: Industry (optional),      type: string }
+      - { name: duration, label: Project Duration (optional), type: string, description: "e.g. 4 weeks, ongoing" }
+      - { name: team,     label: Team / Collaborators (optional), type: string }
+      - name: deliverables
+        label: Deliverables (optional)
+        type: string
+        list: true
+      - { name: outcome,  label: Outcome / Impact,       type: text, description: "Honest qualitative outcome — do not invent metrics." }
       - name: seo
         label: Project SEO
         type: object
@@ -258,21 +310,28 @@ content:
         label: Case Study Sections
         type: object
         list: true
-        description: "Reorderable, addable, removable blocks. Each project can use any combination."
+        description: "Reorderable, addable, removable blocks. Each project can use any combination. Only fields relevant to the chosen block type will render."
         fields:
           - name: type
             label: Block Type
             type: select
             options:
               values:
-                - { value: rich_text,    label: Text Block }
-                - { value: image_full,   label: Full-Width Image }
-                - { value: text_image,   label: Text + Image }
-                - { value: image_pair,   label: Two-Image Row }
-                - { value: gallery,      label: Image Gallery }
-                - { value: before_after, label: Before / After }
-                - { value: video,        label: Video }
-                - { value: outcome,      label: Outcome Block }
+                - { value: rich_text,            label: Text Block }
+                - { value: image_full,           label: Full-Width Image }
+                - { value: text_image,           label: Text + Image }
+                - { value: image_pair,           label: Two-Image Row }
+                - { value: gallery,              label: Image Gallery }
+                - { value: before_after,         label: Before / After }
+                - { value: video,                label: Video }
+                - { value: outcome,              label: Outcome Block }
+                - { value: project_snapshot,     label: Project Snapshot }
+                - { value: audience_constraints, label: Audience & Constraints }
+                - { value: process,              label: Process Steps }
+                - { value: concepts,             label: Concepts & Iterations }
+                - { value: design_rationale,     label: Design Decisions }
+                - { value: reflection,           label: Reflection / Lessons }
+                - { value: cta,                  label: Section CTA }
           - { name: heading, label: Heading, type: string }
           - { name: body,    label: Body Text, type: text }
           - { name: image,   label: Single Image, type: image }
@@ -283,7 +342,7 @@ content:
             type: select
             options: { values: [right, left] }
           - name: images
-            label: Multiple Images (Gallery / Two-Image Row)
+            label: Multiple Images (Gallery / Two-Image Row / Concepts)
             type: object
             list: true
             fields:
@@ -304,3 +363,55 @@ content:
           - { name: url,    label: Video URL (YouTube / Vimeo embed URL), type: string }
           - { name: file,   label: Video File (upload MP4), type: image, description: "Or upload a video file directly" }
           - { name: poster, label: Video Poster Image, type: image }
+          # Project Snapshot fields
+          - { name: client,       label: Snapshot — Client,       type: string }
+          - { name: industry,     label: Snapshot — Industry,     type: string }
+          - { name: year,         label: Snapshot — Year,         type: string }
+          - { name: duration,     label: Snapshot — Duration,     type: string }
+          - { name: role,         label: Snapshot — My Role,      type: string }
+          - { name: team,         label: Snapshot — Team,         type: string }
+          - name: services
+            label: Snapshot — Services
+            type: string
+            list: true
+          - name: deliverables
+            label: Snapshot — Deliverables
+            type: string
+            list: true
+          - name: tools
+            label: Snapshot — Tools
+            type: string
+            list: true
+          # Audience & Constraints
+          - { name: brief,       label: Brief (Audience & Constraints block),      type: text }
+          - { name: audience,    label: Audience (Audience & Constraints block),   type: text }
+          - { name: constraints, label: Constraints (Audience & Constraints block), type: text }
+          # Process
+          - name: steps
+            label: Process Steps
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Step Title, type: string }
+              - { name: body,  label: Step Body,  type: text }
+          # Design rationale
+          - name: items
+            label: Design Decisions (rationale items)
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: body,  label: Body,  type: text }
+          # CTA
+          - name: primary
+            label: Primary CTA
+            type: object
+            fields:
+              - { name: label, label: Label, type: string }
+              - { name: url,   label: URL,   type: string }
+          - name: secondary
+            label: Secondary CTA
+            type: object
+            fields:
+              - { name: label, label: Label, type: string }
+              - { name: url,   label: URL,   type: string }

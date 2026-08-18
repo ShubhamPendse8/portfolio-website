@@ -1,5 +1,9 @@
 name: Deploy Astro site to GitHub Pages
 
+# Deploy only happens when changes are merged into `main` (the production branch).
+# Pushes to feature/redesign branches do NOT overwrite the live site.
+# Trigger a manual deploy from any branch via
+# "Actions → Deploy Astro site to GitHub Pages → Run workflow".
 on:
   push:
     branches:
@@ -27,12 +31,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Validate content
+        run: npm run validate
+
+      - name: Astro type check
+        run: npm run typecheck
 
       - name: Build Astro site
         run: npm run build
+
+      - name: Check generated links and accessibility basics
+        run: npm run check:build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

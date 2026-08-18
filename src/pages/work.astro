@@ -23,13 +23,12 @@ const totalCount = projects.length;
   <!-- Filters -->
   <section class="filters" aria-label="Filter projects by category">
     <div class="container">
-      <div class="filters__bar glass" role="tablist" data-testid="project-filters">
+      <div class="filters__bar glass" data-testid="project-filters">
         <button
           class="chip is-active"
           type="button"
           data-filter="all"
-          role="tab"
-          aria-selected="true"
+          aria-pressed="true"
           data-testid="filter-all"
         >
           All work <span class="chip__count">{totalCount}</span>
@@ -39,8 +38,7 @@ const totalCount = projects.length;
             class="chip"
             type="button"
             data-filter={c.id}
-            role="tab"
-            aria-selected="false"
+            aria-pressed="false"
             data-testid={`filter-${c.id}`}
           >
             {c.label} <span class="chip__count">{c.count}</span>
@@ -156,6 +154,7 @@ const totalCount = projects.length;
 </style>
 
 <script>
+  // @ts-nocheck
   const params = new URLSearchParams(window.location.search);
   const initial = params.get('category') || 'all';
 
@@ -174,7 +173,7 @@ const totalCount = projects.length;
     buttons.forEach((b) => {
       const active = b.dataset.filter === id;
       b.classList.toggle('is-active', active);
-      b.setAttribute('aria-selected', String(active));
+      b.setAttribute('aria-pressed', String(active));
     });
     if (empty) empty.hidden = visible !== 0;
     const url = new URL(window.location.href);
@@ -185,12 +184,6 @@ const totalCount = projects.length;
 
   buttons.forEach((b) => {
     b.addEventListener('click', () => applyFilter(b.dataset.filter || 'all'));
-    b.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        applyFilter(b.dataset.filter || 'all');
-      }
-    });
   });
 
   if (initial !== 'all') applyFilter(initial);

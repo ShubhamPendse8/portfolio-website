@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { about, site } from '../lib/content';
+import { about, site, hasResume } from '../lib/content';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const link = (p: string) => `${base}${p}`;
+const showResume = hasResume();
 ---
 <BaseLayout title="About" description="About Shubham Pendse — a multidisciplinary designer with 6+ years across graphic design, UI/UX, branding, presentations, print and motion.">
   <section class="about-hero">
@@ -12,15 +13,17 @@ const link = (p: string) => `${base}${p}`;
         <h1 class="about-hero__title">{about.hero.heading}</h1>
         <p class="lead about-hero__body">{about.hero.body}</p>
         <div class="about-hero__ctas">
-          <a class="btn btn--primary" href={link(site.resume)} target="_blank" rel="noopener" data-testid="about-cta-resume">
-            Download resume <span class="arrow">→</span>
-          </a>
+          {showResume && (
+            <a class="btn btn--primary" href={link(site.resume!)} target="_blank" rel="noopener" data-testid="about-cta-resume" data-analytics="resume-click">
+              Download resume <span class="arrow">→</span>
+            </a>
+          )}
           <a class="btn btn--ghost" href={link('/contact')} data-testid="about-cta-contact">Get in touch</a>
         </div>
       </div>
       <div class="about-hero__portrait reveal">
         <div class="about-hero__portrait-frame">
-          <img src={link(site.avatar)} alt={`Portrait of ${site.name}`} width="600" height="750" />
+          <img src={link(site.avatar || '')} alt={`Portrait of ${site.name}`} width="600" height="750" />
           <div class="about-hero__portrait-tag glass">
             <span class="mono">Mumbai · IN</span>
           </div>

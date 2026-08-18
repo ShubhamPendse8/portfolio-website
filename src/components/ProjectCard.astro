@@ -21,6 +21,8 @@ const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) :
   href={href}
   class:list={['pcard', `pcard--${variant}`]}
   data-testid={`project-card-${project.slug}`}
+  data-analytics="project-open"
+  data-analytics-slug={project.slug}
   aria-label={`View project: ${project.title}`}
   style={`--stagger:${index * 60}ms`}
 >

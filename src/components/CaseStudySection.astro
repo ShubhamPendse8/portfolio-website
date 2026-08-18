@@ -9,6 +9,23 @@ const resolve = (p: string) => (p && !p.startsWith('http') ? `${base}${p.startsW
   <div class="cs cs--text">
     {section.heading && <h2 class="cs__heading">{section.heading}</h2>}
     <p class="cs__body">{section.body}</p>
+    {section.images && section.images.length > 0 && (
+      <div class="cs__gallery-grid cs__gallery-grid--after-text">
+        {section.images.map((img) => (
+          <figure class="cs__gallery-item">
+            <img
+              src={resolve(img.src)}
+              alt={img.alt || ''}
+              data-lightbox
+              loading="lazy"
+              decoding="async"
+              width="1200"
+              height="1200"
+            />
+          </figure>
+        ))}
+      </div>
+    )}
   </div>
 )}
 
@@ -108,6 +125,108 @@ const resolve = (p: string) => (p && !p.startsWith('http') ? `${base}${p.startsW
   </div>
 )}
 
+{section.type === 'project_snapshot' && (
+  <aside class="cs cs--snapshot" aria-labelledby="cs-snapshot-heading">
+    <h2 id="cs-snapshot-heading" class="cs__heading">{section.heading || 'Project Snapshot'}</h2>
+    <dl class="cs-snapshot">
+      {section.client   && <div><dt>Client</dt><dd>{section.client}</dd></div>}
+      {section.industry && <div><dt>Industry</dt><dd>{section.industry}</dd></div>}
+      {section.year     && <div><dt>Year</dt><dd>{section.year}</dd></div>}
+      {section.duration && <div><dt>Duration</dt><dd>{section.duration}</dd></div>}
+      {section.role     && <div><dt>Role</dt><dd>{section.role}</dd></div>}
+      {section.team     && <div><dt>Team</dt><dd>{section.team}</dd></div>}
+      {section.services && section.services.length > 0 && <div><dt>Services</dt><dd>{section.services.join(', ')}</dd></div>}
+      {section.deliverables && section.deliverables.length > 0 && <div><dt>Deliverables</dt><dd>{section.deliverables.join(', ')}</dd></div>}
+      {section.tools && section.tools.length > 0 && <div><dt>Tools</dt><dd>{section.tools.join(', ')}</dd></div>}
+    </dl>
+  </aside>
+)}
+
+{section.type === 'audience_constraints' && (
+  <div class="cs cs--ac">
+    {section.heading && <h2 class="cs__heading">{section.heading}</h2>}
+    <div class="cs-ac">
+      {section.brief       && <div class="cs-ac__block"><span class="eyebrow">Brief</span><p>{section.brief}</p></div>}
+      {section.audience    && <div class="cs-ac__block"><span class="eyebrow">Audience</span><p>{section.audience}</p></div>}
+      {section.constraints && <div class="cs-ac__block"><span class="eyebrow">Constraints</span><p>{section.constraints}</p></div>}
+    </div>
+  </div>
+)}
+
+{section.type === 'process' && section.steps && section.steps.length > 0 && (
+  <div class="cs cs--process">
+    <h2 class="cs__heading">{section.heading || 'Process'}</h2>
+    <ol class="cs-process">
+      {section.steps.map((s, i) => (
+        <li>
+          <span class="cs-process__num">{String(i + 1).padStart(2, '0')}</span>
+          <div>
+            <h3 class="cs-process__title">{s.title}</h3>
+            {s.body && <p>{s.body}</p>}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+)}
+
+{section.type === 'concepts' && (
+  <div class="cs cs--concepts">
+    <h2 class="cs__heading">{section.heading || 'Concepts & Iterations'}</h2>
+    {section.body && <p class="cs__body">{section.body}</p>}
+    {section.images && section.images.length > 0 && (
+      <div class="cs__gallery-grid" style="margin-top: 20px;">
+        {section.images.map((img) => (
+          <figure class="cs__gallery-item">
+            <img src={resolve(img.src)} alt={img.alt || ''} data-lightbox loading="lazy" />
+          </figure>
+        ))}
+      </div>
+    )}
+  </div>
+)}
+
+{section.type === 'design_rationale' && (
+  <div class="cs cs--rationale">
+    <h2 class="cs__heading">{section.heading || 'Design Decisions'}</h2>
+    {section.body && <p class="cs__body">{section.body}</p>}
+    {section.items && section.items.length > 0 && (
+      <ul class="cs-rationale">
+        {section.items.map((it) => (
+          <li>
+            <h3 class="cs-rationale__title">{it.title}</h3>
+            <p>{it.body}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+)}
+
+{section.type === 'reflection' && (
+  <div class="cs cs--reflection">
+    <span class="eyebrow">{section.heading || 'Reflection'}</span>
+    <p class="cs__body" style="margin-top: 12px;">{section.body}</p>
+  </div>
+)}
+
+{section.type === 'cta' && (
+  <div class="cs cs--cta">
+    {section.heading && <h2 class="cs__heading">{section.heading}</h2>}
+    {section.body && <p class="cs__body">{section.body}</p>}
+    <div class="cs-cta__buttons">
+      {section.primary && (
+        <a class="btn btn--primary" href={section.primary.url}>
+          {section.primary.label} <span class="arrow">→</span>
+        </a>
+      )}
+      {section.secondary && (
+        <a class="btn btn--ghost" href={section.secondary.url}>{section.secondary.label}</a>
+      )}
+    </div>
+  </div>
+)}
+
 <style>
   .cs { margin: clamp(36px, 5vw, 64px) 0; }
   .cs__heading {
@@ -182,6 +301,7 @@ const resolve = (p: string) => (p && !p.startsWith('http') ? `${base}${p.startsW
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
   }
+  .cs__gallery-grid--after-text { margin-top: 24px; }
   .cs__gallery-item {
     overflow: hidden;
     border-radius: var(--radius);
@@ -232,4 +352,35 @@ const resolve = (p: string) => (p && !p.startsWith('http') ? `${base}${p.startsW
     margin-top: 18px;
     font-weight: 350;
   }
+
+  /* Project Snapshot */
+  .cs--snapshot { padding: clamp(20px, 3vw, 32px); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+  .cs-snapshot { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px 24px; margin: 12px 0 0; }
+  .cs-snapshot > div { display: flex; flex-direction: column; gap: 4px; }
+  .cs-snapshot dt { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); margin: 0; }
+  .cs-snapshot dd { margin: 0; color: var(--text); font-size: 0.96rem; }
+
+  /* Audience & Constraints */
+  .cs-ac { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .cs-ac__block { padding: 22px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; gap: 8px; }
+  .cs-ac__block .eyebrow { margin: 0; }
+  .cs-ac__block p { margin: 0; color: var(--text-muted); }
+
+  /* Process (case study) */
+  .cs-process { list-style: none; padding: 0; margin: 12px 0 0; counter-reset: cs-proc; display: grid; gap: 16px; }
+  .cs-process li { display: grid; grid-template-columns: 60px 1fr; gap: 16px; align-items: start; padding: 20px 22px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+  .cs-process__num { font-family: var(--font-mono); color: var(--accent); font-size: 0.9rem; letter-spacing: 0.1em; margin-top: 4px; }
+  .cs-process__title { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: -0.015em; font-weight: 500; margin-bottom: 6px; }
+
+  /* Design rationale */
+  .cs-rationale { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 12px; }
+  .cs-rationale li { padding: 18px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+  .cs-rationale__title { font-family: var(--font-display); font-size: 1.15rem; letter-spacing: -0.015em; font-weight: 500; margin-bottom: 6px; }
+
+  /* Reflection */
+  .cs--reflection { padding: clamp(24px, 3.5vw, 40px); background: linear-gradient(135deg, rgba(255,155,87,0.06), transparent 60%), var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); border-left: 3px solid var(--accent); }
+
+  /* CTA block */
+  .cs--cta { padding: clamp(24px, 4vw, 44px); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); text-align: center; }
+  .cs-cta__buttons { display: inline-flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; justify-content: center; }
 </style>

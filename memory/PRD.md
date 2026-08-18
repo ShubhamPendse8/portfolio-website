@@ -61,3 +61,90 @@ Redesign the existing personal portfolio into a premium, production-ready "Dark 
 - Custom domain swap: change both constants in `astro.config.mjs` + add `public/CNAME`
 - Node 20 required (GitHub Actions uses 20)
 - Build output: `./dist/` — deploy artifact for GitHub Pages
+
+---
+
+## Iteration 4 — Portfolio hardening (v2.1)
+
+### Files changed
+- content/site.json — added years_experience, analytics (disabled by default)
+- content/home.json — added experience_snapshot, working_process; removed resume_cta (now sourced from site.resume); reworded hero eyebrow with role + city
+- src/pages/index.astro — reordered: Hero → Featured Work → Capabilities → Experience Snapshot → Working Process → About Preview → Final CTA; hide-resume-if-empty; analytics data attributes
+- src/pages/about.astro — hide-resume-if-empty
+- src/pages/projects/[slug].astro — CreativeWork + BreadcrumbList JSON-LD; absolute OG URLs
+- src/pages/404.astro — new on-brand editorial 404
+- src/components/CaseStudySection.astro — new blocks: project_snapshot, audience_constraints, process, concepts, design_rationale, reflection, cta
+- src/components/Lightbox.astro — focus trap, focus return, keyboard activation (Enter/Space)
+- src/components/CommandMenu.astro — focus trap, focus return, conditional Resume item
+- src/components/Footer.astro — activeSocials() + hasResume(); empty socials hide automatically
+- src/components/ProjectCard.astro — data-analytics="project-open"
+- src/layouts/BaseLayout.astro — absolute canonical + OG/Twitter URLs, Person JSON-LD site-wide, optional analytics inject (Plausible / Umami / GA4), site-wide data-analytics click dispatcher, jsonLd prop for per-page structured data
+- src/lib/content.ts — expanded types (new snapshot fields, new block variants), hasResume(), activeSocials(), defensive array normalization
+- public/site.webmanifest — fixed base URL (/portfolio-website/)
+- .pages.yml — new CMS sections + new project fields + new block types + thumbnail guidance
+- .github/workflows/deploy.yml — runs validate + typecheck before build
+- scripts/validate-content.mjs — new Zod content validator; runs as prebuild
+- package.json — added zod, @astrojs/check, validate/typecheck/prebuild scripts; v2.1.0
+
+### Content migrated
+- No destructive changes. All existing projects still valid.
+- Isha Tours preserved from the latest `main`: category normalized to `["social-media"]`; four existing images inside the rich-text block are retained and rendered as a lightbox gallery.
+- Projects without thumbnails still show placeholders; a future thumbnail upload replaces it automatically.
+
+### CMS improvements
+- New editable sections on Home (Experience Snapshot + Working Process)
+- Optional per-project fields: Industry, Duration, Team, Deliverables
+- 7 new case-study block types (each renders only its own fields)
+- Thumbnail helper text: 1600×1200, 4:3, WebP/JPG, safe area
+- Analytics config with none/plausible/umami/ga4
+- Instagram, Formspree, Web3Forms truly optional
+
+### Validation added
+- npm run validate — Zod-based with per-file per-field error messages
+- Runs automatically as prebuild and in CI
+- Enforces: unique slugs, required title/slug/summary/categories on published, allowed category values, video block requires url or file
+- Invalid content fails CI → last successful deployment stays live
+
+### Accessibility improvements
+- Lightbox focus trap + focus return + keyboard activation (Enter/Space) on images with role=button + aria-haspopup="dialog"
+- Command menu focus trap + focus return
+- Contact form status region uses role=status aria-live=polite aria-atomic=true
+- Empty alt supported per-image in CMS
+
+### SEO improvements
+- Absolute canonical + OG/Twitter URLs
+- Person JSON-LD site-wide
+- CreativeWork + BreadcrumbList JSON-LD on project pages
+- Custom 404
+- Corrected web-manifest start_url + scope
+- Sitemap and robots.txt aligned
+
+### Performance improvements
+- Explicit width/height on hero + card images (reduces CLS)
+- Hero avatar eager; below-the-fold lazy
+- No new runtime frameworks; scripts stay plain JS
+- Fonts display=swap + preconnect
+
+### Optional analytics
+- Off by default; enable via Site Settings → Analytics
+- Providers: Plausible / Umami / GA4 (GA4 anonymize_ip)
+- data-analytics markers on hero CTAs, project cards, resume links, contact submit
+- Site-wide dispatcher forwards to whichever provider is loaded
+
+### Remaining items I need from you
+- Real UI/UX project screenshots (upload via Pages CMS)
+- New project write-ups (no-code)
+- Optional Formspree endpoint or Web3Forms key
+- Optional analytics ID
+- Optional Fiverr / Instagram / Behance / availability updates
+
+### Testing status
+- ✅ npm run validate — all content valid
+- ✅ npm run typecheck — 0 errors
+- ✅ npm run build — 20 pages generated
+- ✅ npm run check:build — generated links and accessibility basics checked
+- ✅ Home reorder verified
+- ✅ No horizontal overflow at 360/390/430
+- ✅ 404 renders
+- ✅ Case study JSON-LD emitted
+- ✅ Resume actions hide site-wide when site.resume is empty
