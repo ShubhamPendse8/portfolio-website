@@ -32,6 +32,20 @@
       "type": "rich_text",
       "heading": "Approach",
       "body": "I leaned into confident typography, restrained colour and clean spatial rhythm — letting the subject carry the emotion. Every post was built to feel like part of the same body of work."
+    },
+    {
+      "type": "gallery",
+      "heading": "Selected Social Media Creatives",
+      "fit": "cover",
+      "ratio": "square",
+      "images": [
+        { "src": "/uploads/dks-tabla/dks-tabla-01.webp", "alt": "DK's Tabla admission campaign announcing weekday and weekend tabla batches" },
+        { "src": "/uploads/dks-tabla/dks-tabla-02.webp", "alt": "DK's Tabla Maharashtra Day creative featuring Chhatrapati Shivaji Maharaj and the Gateway of India" },
+        { "src": "/uploads/dks-tabla/dks-tabla-03.webp", "alt": "DK's Tabla class campaign combining tabla practice and performance photography" },
+        { "src": "/uploads/dks-tabla/dks-tabla-04.webp", "alt": "DK's Tabla Marathi educational post introducing taal concepts" },
+        { "src": "/uploads/dks-tabla/dks-tabla-05.webp", "alt": "DK's Tabla carousel cover about famous compositions in Dadra Taal" },
+        { "src": "/uploads/dks-tabla/dks-tabla-06.webp", "alt": "DK's Tabla Gharana Chronicles editorial post about the Delhi Gharana" }
+      ]
     }
   ]
 }

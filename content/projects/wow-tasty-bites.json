@@ -32,6 +32,18 @@
       "type": "rich_text",
       "heading": "Approach",
       "body": "I focused on strong product framing, warm restrained colour and clean typography — enough energy to stop the scroll, enough discipline to stay on-brand."
+    },
+    {
+      "type": "gallery",
+      "heading": "Selected Social Media Creatives",
+      "fit": "cover",
+      "ratio": "square",
+      "images": [
+        { "src": "/uploads/wow-tasty-bites/wow-tasty-bites-01.webp", "alt": "WOW Tasty Bites spinach corn burger social media promotion" },
+        { "src": "/uploads/wow-tasty-bites/wow-tasty-bites-02.webp", "alt": "WOW Tasty Bites chilli garlic potato shots evening snack promotion" },
+        { "src": "/uploads/wow-tasty-bites/wow-tasty-bites-03.webp", "alt": "WOW Tasty Bites fast-food assortment promotion for its Thane location" },
+        { "src": "/uploads/wow-tasty-bites/wow-tasty-bites-04.webp", "alt": "WOW Tasty Bites burger campaign with the message all you need is food" }
+      ]
     }
   ]
 }
