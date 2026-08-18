@@ -1,0 +1,80 @@
+{
+  "title": "Travizia Travel Calendar",
+  "slug": "travizia-travel-calendar",
+  "client": "Travizia Tours & Travels",
+  "year": "2024",
+  "categories": ["print"],
+  "disciplines": ["Calendar Design", "Editorial Layout", "Travel Marketing"],
+  "summary": "A 13-page desk calendar that turns a year of dates into a consistent visual journey through destinations across India.",
+  "thumbnail": "/uploads/print-editorial/travizia-calendar-thumbnail.webp",
+  "thumbnail_alt": "Travizia 2024 travel calendar cover featuring London",
+  "hero_image": "/uploads/print-editorial/travizia-calendar-thumbnail.webp",
+  "hero_image_alt": "Travizia Tours and Travels 2024 calendar design",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 32,
+  "role": "Graphic Designer",
+  "tools": ["CorelDRAW"],
+  "services": ["Calendar Design", "Editorial Layout", "Print Preparation"],
+  "industry": "Travel & Tourism",
+  "duration": "",
+  "team": "",
+  "deliverables": ["13-page 9 x 6 inch Desk Calendar"],
+  "outcome": "A repeatable monthly system that keeps dates practical, destinations prominent and the Travizia brand visible throughout the year.",
+  "seo": {
+    "title": "Travizia 2024 Travel Calendar Design | Shubham Pendse",
+    "description": "A 13-page travel-themed desk calendar designed for Travizia Tours & Travels."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "Travizia's 2024 calendar needed to function as both a useful desk object and a year-long brand touchpoint. Each month pairs a destination image with a compact date grid, contact information and service icons while keeping the overall system consistent enough to feel like one complete publication."
+    },
+    {
+      "type": "project_snapshot",
+      "heading": "Project snapshot",
+      "client": "Travizia Tours & Travels",
+      "industry": "Travel & Tourism",
+      "year": "2024",
+      "role": "Graphic Designer",
+      "services": ["Calendar Design", "Editorial Layout", "Print Preparation"],
+      "deliverables": ["13-page 9 x 6 inch Desk Calendar"],
+      "tools": ["CorelDRAW"]
+    },
+    {
+      "type": "design_rationale",
+      "heading": "Design system",
+      "items": [
+        {
+          "title": "Destination-led storytelling",
+          "body": "A new place leads each month, allowing the calendar to reinforce Travizia's travel positioning throughout the year."
+        },
+        {
+          "title": "Consistent monthly rhythm",
+          "body": "The repeated image, date and service structure creates familiarity while the destination photography keeps every page fresh."
+        },
+        {
+          "title": "Useful brand visibility",
+          "body": "Contact information remains easy to find without competing with the date grid or destination imagery."
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "heading": "Selected calendar pages",
+      "fit": "contain",
+      "ratio": "landscape",
+      "images": [
+        { "src": "/uploads/print-editorial/travizia-calendar-01.webp", "alt": "Travizia 2024 calendar cover" },
+        { "src": "/uploads/print-editorial/travizia-calendar-02.webp", "alt": "Travizia January 2024 Ram Mandir calendar page" },
+        { "src": "/uploads/print-editorial/travizia-calendar-03.webp", "alt": "Travizia February 2024 Golden Temple calendar page" },
+        { "src": "/uploads/print-editorial/travizia-calendar-05.webp", "alt": "Travizia April 2024 Kedarnath calendar page" },
+        { "src": "/uploads/print-editorial/travizia-calendar-07.webp", "alt": "Travizia June 2024 Dharamshala calendar page" },
+        { "src": "/uploads/print-editorial/travizia-calendar-10.webp", "alt": "Travizia September 2024 Velankanni calendar page" },
+        { "src": "/uploads/print-editorial/travizia-calendar-13.webp", "alt": "Travizia December 2024 Basilica of Bom Jesus calendar page" }
+      ]
+    }
+  ]
+}

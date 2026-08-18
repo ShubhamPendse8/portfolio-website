@@ -62,7 +62,7 @@ export type ProjectSection =
   | { type: 'image_full'; heading?: string; image: string; alt?: string; caption?: string }
   | { type: 'text_image'; heading?: string; body: string; image: string; alt?: string; image_position?: 'left' | 'right' }
   | { type: 'image_pair'; heading?: string; images: Array<{ src: string; alt?: string }> }
-  | { type: 'gallery'; heading?: string; images: Array<{ src: string; alt?: string }> }
+  | { type: 'gallery'; heading?: string; images: Array<{ src: string; alt?: string }>; fit?: 'cover' | 'contain'; ratio?: 'square' | 'portrait' | 'landscape' }
   | { type: 'before_after'; heading?: string; before: { src: string; alt?: string }; after: { src: string; alt?: string }; caption?: string }
   | { type: 'video'; heading?: string; url?: string; file?: string; poster?: string }
   | { type: 'outcome'; heading?: string; body: string }
@@ -147,7 +147,7 @@ export const categoryLabels: Record<string, string> = {
   'ui-ux': 'UI/UX',
   branding: 'Branding',
   presentations: 'Presentations',
-  print: 'Print',
+  print: 'Print & Editorial',
   motion: 'Motion',
 };
 

@@ -15,7 +15,7 @@
     { "title": "Social Media Campaigns",  "description": "Scroll-friendly creatives, carousels and campaign visuals shaped for attention and clarity.",             "glyph": "social" },
     { "title": "UI/UX Design",            "description": "Website and product interfaces designed around usability, hierarchy and confident user flow.",              "glyph": "uiux"   },
     { "title": "Presentation Design",     "description": "Investor decks, pitch presentations and event slides that stay clean and confident under scrutiny.",        "glyph": "deck"   },
-    { "title": "Print & Marketing Design","description": "Brochures, flyers, standees and print collateral engineered for real-world production.",                   "glyph": "print"  },
+    { "title": "Print & Editorial Design","description": "Brochures, whitepapers, calendars, banners and production-ready collateral built for print.",              "glyph": "print"  },
     { "title": "Video & Motion Graphics", "description": "Edits and short-form motion that give ideas rhythm, movement and a strong visual close.",                  "glyph": "motion" }
   ],
   "experience_snapshot": {

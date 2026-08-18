@@ -1,0 +1,113 @@
+{
+  "title": "Samay Cybersecurity Publications",
+  "slug": "samay-cybersecurity-publications",
+  "client": "Samay Infosolutions",
+  "year": "2023-2024",
+  "categories": ["print"],
+  "disciplines": ["Editorial & Publication Design", "B2B Cybersecurity", "Information Design"],
+  "summary": "A coordinated set of cybersecurity publications translating dense technical material into clear, credible and brand-consistent print communication.",
+  "thumbnail": "/uploads/print-editorial/samay-publications-thumbnail.webp",
+  "thumbnail_alt": "Samay Infosolutions cybersecurity whitepaper cover presented on a navy background",
+  "hero_image": "/uploads/print-editorial/samay-publications-thumbnail.webp",
+  "hero_image_alt": "Samay Infosolutions cybersecurity publication design",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 30,
+  "role": "Graphic Designer",
+  "tools": ["CorelDRAW"],
+  "services": ["Whitepaper Design", "Brochure Design", "Editorial Layout"],
+  "industry": "Cybersecurity & IT Services",
+  "duration": "",
+  "team": "",
+  "deliverables": ["20-page Whitepaper", "13-page CISO Checklist", "Three-panel Service Brochure"],
+  "outcome": "A consistent publication system that helps technical information remain structured, readable and recognisably Samay across long- and short-form formats.",
+  "seo": {
+    "title": "Samay Cybersecurity Publication Design | Shubham Pendse",
+    "description": "Whitepaper, CISO checklist and brochure design for Samay Infosolutions, created as a consistent B2B cybersecurity publication system."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "Samay Infosolutions needed technical cybersecurity content to feel authoritative without becoming visually exhausting. Across a whitepaper, a practical CISO checklist and an aiSOC service brochure, I developed layouts that could handle long-form reading, structured checklists, diagrams, statistics and product information while maintaining one recognisable visual language."
+    },
+    {
+      "type": "project_snapshot",
+      "heading": "Project snapshot",
+      "client": "Samay Infosolutions",
+      "industry": "Cybersecurity & IT Services",
+      "year": "2023-2024",
+      "role": "Graphic Designer",
+      "services": ["Whitepaper Design", "Brochure Design", "Editorial Layout"],
+      "deliverables": ["20-page Whitepaper", "13-page CISO Checklist", "Three-panel Service Brochure"],
+      "tools": ["CorelDRAW"]
+    },
+    {
+      "type": "design_rationale",
+      "heading": "Editorial direction",
+      "body": "The system was designed around clarity and trust rather than decorative complexity.",
+      "items": [
+        {
+          "title": "Technical content made scannable",
+          "body": "Headings, callouts, diagrams and controlled column widths break dense cybersecurity material into clear reading paths."
+        },
+        {
+          "title": "One brand across three formats",
+          "body": "The navy, cyan and white palette, angular graphic language and footer system remain consistent from the short brochure to the long-form whitepaper."
+        },
+        {
+          "title": "Designed for real documents",
+          "body": "The layouts accommodate checklists, tables, questions, charts and narrative copy without losing hierarchy or page-to-page rhythm."
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "heading": "AI-SOC service brochure",
+      "fit": "contain",
+      "ratio": "portrait",
+      "images": [
+        { "src": "/uploads/print-editorial/samay-aisoc-01.webp", "alt": "Samay aiSOC services brochure front panel" },
+        { "src": "/uploads/print-editorial/samay-aisoc-02.webp", "alt": "Samay aiSOC services brochure information panel" },
+        { "src": "/uploads/print-editorial/samay-aisoc-03.webp", "alt": "Samay aiSOC services brochure metrics and product panel" }
+      ]
+    },
+    {
+      "type": "gallery",
+      "heading": "Cybersecurity checklist for CISOs",
+      "fit": "contain",
+      "ratio": "portrait",
+      "images": [
+        { "src": "/uploads/print-editorial/samay-ciso-01.webp", "alt": "Cybersecurity Checklist for CISOs cover" },
+        { "src": "/uploads/print-editorial/samay-ciso-03.webp", "alt": "Cybersecurity Checklist for CISOs contents page" },
+        { "src": "/uploads/print-editorial/samay-ciso-04.webp", "alt": "CISO checklist security policies and network security page" },
+        { "src": "/uploads/print-editorial/samay-ciso-06.webp", "alt": "CISO checklist cloud and vendor risk page" },
+        { "src": "/uploads/print-editorial/samay-ciso-09.webp", "alt": "CISO checklist incident recovery and security training page" },
+        { "src": "/uploads/print-editorial/samay-ciso-12.webp", "alt": "CISO checklist about Samay Infosolutions page" }
+      ]
+    },
+    {
+      "type": "gallery",
+      "heading": "AI-based SOC whitepaper",
+      "fit": "contain",
+      "ratio": "portrait",
+      "images": [
+        { "src": "/uploads/print-editorial/samay-whitepaper-01.webp", "alt": "Modern SOC and AI-based cybersecurity whitepaper cover" },
+        { "src": "/uploads/print-editorial/samay-whitepaper-03.webp", "alt": "Samay cybersecurity whitepaper contents page" },
+        { "src": "/uploads/print-editorial/samay-whitepaper-04.webp", "alt": "Samay cybersecurity whitepaper introduction layout" },
+        { "src": "/uploads/print-editorial/samay-whitepaper-07.webp", "alt": "Samay whitepaper proactive cybersecurity infographic page" },
+        { "src": "/uploads/print-editorial/samay-whitepaper-08.webp", "alt": "Samay whitepaper AI-based SOC section page" },
+        { "src": "/uploads/print-editorial/samay-whitepaper-12.webp", "alt": "Samay whitepaper data analysis page" },
+        { "src": "/uploads/print-editorial/samay-whitepaper-13.webp", "alt": "Samay whitepaper cybersecurity value measurement page" },
+        { "src": "/uploads/print-editorial/samay-whitepaper-16.webp", "alt": "Samay whitepaper MSSP considerations page" },
+        { "src": "/uploads/print-editorial/samay-whitepaper-19.webp", "alt": "Samay whitepaper closing call-to-action page" }
+      ]
+    },
+    {
+      "type": "reflection",
+      "heading": "Scope note",
+      "body": "Selected pages are shown to demonstrate the publication system while keeping the complete client documents private and unavailable for download."
+    }
+  ]
+}

@@ -71,7 +71,11 @@ const resolve = (p: string) => (p && !p.startsWith('http') ? `${base}${p.startsW
 {section.type === 'gallery' && section.images && (
   <div class="cs cs--gallery">
     {section.heading && <h2 class="cs__heading">{section.heading}</h2>}
-    <div class="cs__gallery-grid">
+    <div class:list={[
+      'cs__gallery-grid',
+      section.fit === 'contain' && 'cs__gallery-grid--contain',
+      section.ratio && `cs__gallery-grid--${section.ratio}`,
+    ]}>
       {section.images.map((img: any) => (
         <figure class="cs__gallery-item">
           <img src={resolve(img.src)} alt={img.alt || ''} data-lightbox loading="lazy" />
@@ -308,6 +312,16 @@ const resolve = (p: string) => (p && !p.startsWith('http') ? `${base}${p.startsW
     border: 1px solid var(--border);
     background: var(--surface-2);
     aspect-ratio: 1 / 1;
+  }
+  .cs__gallery-grid--portrait .cs__gallery-item { aspect-ratio: 3 / 4; }
+  .cs__gallery-grid--landscape .cs__gallery-item { aspect-ratio: 3 / 2; }
+  .cs__gallery-grid--contain .cs__gallery-item {
+    padding: 8px;
+    background: color-mix(in srgb, var(--surface-2) 82%, white 18%);
+  }
+  .cs__gallery-grid--contain .cs__gallery-item img {
+    object-fit: contain;
+    border-radius: calc(var(--radius) - 5px);
   }
   .cs__gallery-item img {
     width: 100%;

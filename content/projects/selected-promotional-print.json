@@ -1,0 +1,74 @@
+{
+  "title": "Selected Promotional Print",
+  "slug": "selected-promotional-print",
+  "client": "Orrlee, Orgoheart & Rovastra",
+  "year": "2022-2023",
+  "categories": ["print"],
+  "disciplines": ["Promotional Print Design", "Large-format Advertising", "Retail Collateral"],
+  "summary": "A curated selection of folding brochure and large-format banner work created for product, retail and festive promotional campaigns.",
+  "thumbnail": "/uploads/print-editorial/selected-print-thumbnail.webp",
+  "thumbnail_alt": "Collage of Orrlee, Orgoheart and Rovastra promotional print designs",
+  "hero_image": "/uploads/print-editorial/selected-print-thumbnail.webp",
+  "hero_image_alt": "Selected brochure and large-format promotional print designs",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 34,
+  "role": "Graphic Designer",
+  "tools": ["CorelDRAW"],
+  "services": ["Folding Brochure Design", "Large-format Banner Design", "Print Preparation"],
+  "industry": "Retail, Home Products & FMCG",
+  "duration": "",
+  "team": "",
+  "deliverables": ["Two-sided Folding Brochure", "Outdoor Product Banner", "Retail Festive Banner Variants"],
+  "outcome": "A varied print selection demonstrating how hierarchy and brand character adapt across compact brochures and attention-led large-format formats.",
+  "seo": {
+    "title": "Promotional Print and Banner Design | Shubham Pendse",
+    "description": "Selected promotional print work including folding brochures and large-format retail and product banners."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "This selection brings together three print assignments with very different viewing conditions. Orrlee's folding brochure had to communicate across multiple narrow panels, while Orgoheart and Rovastra needed immediate product or retail impact at large scale. The common requirement was clear hierarchy that would survive real-world production and viewing distance."
+    },
+    {
+      "type": "project_snapshot",
+      "heading": "Project snapshot",
+      "client": "Orrlee, Orgoheart & Rovastra",
+      "industry": "Retail, Home Products & FMCG",
+      "year": "2022-2023",
+      "role": "Graphic Designer",
+      "services": ["Folding Brochure Design", "Large-format Banner Design", "Print Preparation"],
+      "deliverables": ["Two-sided Folding Brochure", "Outdoor Product Banner", "Retail Festive Banner Variants"],
+      "tools": ["CorelDRAW"]
+    },
+    {
+      "type": "gallery",
+      "heading": "Orrlee folding brochure",
+      "fit": "contain",
+      "ratio": "landscape",
+      "images": [
+        { "src": "/uploads/print-editorial/selected-print-orrlee-01.webp", "alt": "Orrlee folding brochure first side" },
+        { "src": "/uploads/print-editorial/selected-print-orrlee-02.webp", "alt": "Orrlee folding brochure reverse side" }
+      ]
+    },
+    {
+      "type": "image_full",
+      "heading": "Orgoheart product banner",
+      "image": "/uploads/print-editorial/selected-print-orgoheart-01.webp",
+      "alt": "Orgoheart cold-pressed virgin oil promotional banner",
+      "caption": "Large-format product communication designed for quick reading at distance."
+    },
+    {
+      "type": "gallery",
+      "heading": "Rovastra retail banner variants",
+      "fit": "contain",
+      "ratio": "portrait",
+      "images": [
+        { "src": "/uploads/print-editorial/selected-print-rovastra-01.webp", "alt": "Rovastra festive ethnic-wear banner in deep red" },
+        { "src": "/uploads/print-editorial/selected-print-rovastra-02.webp", "alt": "Rovastra festive ethnic-wear banner in cream" }
+      ]
+    }
+  ]
+}
