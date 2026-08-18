@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CaseStudySection from '../../components/CaseStudySection.astro';
-import Lightbox from '../../components/Lightbox.astro';
 import { getAllProjects, getProjectNeighbors, categoryLabels, site, type Project } from '../../lib/content';
 
 export async function getStaticPaths() {
@@ -124,7 +123,6 @@ const breadcrumbJsonLd = {
     </nav>
   </article>
 
-  <Lightbox />
 </BaseLayout>
 
 <style>
