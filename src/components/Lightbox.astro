@@ -2,13 +2,13 @@
 // A page-wide image lightbox activated by data-lightbox attribute on images.
 ---
 <div class="lbx" data-lightbox-root hidden role="dialog" aria-modal="true" aria-label="Image viewer" data-testid="lightbox">
-  <button class="lbx__close" data-lbx-close aria-label="Close image viewer" data-testid="lightbox-close">
+  <button type="button" class="lbx__close" data-lbx-close aria-label="Close image viewer" data-testid="lightbox-close">
     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
   </button>
-  <button class="lbx__nav lbx__nav--prev" data-lbx-prev aria-label="Previous image" data-testid="lightbox-prev">
+  <button type="button" class="lbx__nav lbx__nav--prev" data-lbx-prev aria-label="Previous image" data-testid="lightbox-prev">
     <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6"/></svg>
   </button>
-  <button class="lbx__nav lbx__nav--next" data-lbx-next aria-label="Next image" data-testid="lightbox-next">
+  <button type="button" class="lbx__nav lbx__nav--next" data-lbx-next aria-label="Next image" data-testid="lightbox-next">
     <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6"/></svg>
   </button>
   <div class="lbx__stage" data-lbx-stage>
@@ -34,6 +34,8 @@
   @keyframes lbxIn { from { opacity: 0; } to { opacity: 1; } }
   .lbx[hidden] { display: none; }
   .lbx__stage {
+    position: relative;
+    z-index: 1;
     display: grid;
     place-items: center;
     width: 100%; height: 100%;
@@ -58,8 +60,10 @@
     color: #fff;
     border-radius: 50%;
     cursor: pointer;
+    z-index: 3;
     transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
   }
+  .lbx__close svg { pointer-events: none; }
   .lbx__close:hover { background: var(--accent); color: #0a0403; transform: rotate(90deg); }
   .lbx__nav {
     position: absolute;
@@ -72,8 +76,10 @@
     color: #fff;
     border-radius: 50%;
     cursor: pointer;
+    z-index: 3;
     transition: background var(--dur) var(--ease);
   }
+  .lbx__nav svg { pointer-events: none; }
   .lbx__nav:hover { background: var(--accent); color: #0a0403; }
   .lbx__nav--prev { left: clamp(12px, 3vw, 30px); }
   .lbx__nav--next { right: clamp(12px, 3vw, 30px); }
@@ -158,6 +164,21 @@
 
   document.addEventListener('click', (e) => {
     const t = e.target;
+    if (t?.closest?.('[data-lbx-close]')) {
+      e.preventDefault();
+      close();
+      return;
+    }
+    if (t?.closest?.('[data-lbx-prev]')) {
+      e.preventDefault();
+      show(index - 1);
+      return;
+    }
+    if (t?.closest?.('[data-lbx-next]')) {
+      e.preventDefault();
+      show(index + 1);
+      return;
+    }
     const img = t.closest && t.closest('img[data-lightbox]');
     if (img) { e.preventDefault(); open(img); }
   });
@@ -171,9 +192,6 @@
     }
   });
 
-  root?.querySelector('[data-lbx-close]')?.addEventListener('click', close);
-  root?.querySelector('[data-lbx-prev]')?.addEventListener('click', () => show(index - 1));
-  root?.querySelector('[data-lbx-next]')?.addEventListener('click', () => show(index + 1));
   root?.addEventListener('click', (e) => {
     if (e.target === root || e.target === stage) close();
   });
