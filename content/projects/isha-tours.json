@@ -3,20 +3,26 @@
   "slug": "isha-tours",
   "client": "Isha Tours",
   "year": "2023",
-  "categories": ["social-media"],
-  "disciplines": ["Social Media Design", "Tour & Travel"],
+  "categories": "social-media",
+  "disciplines": [
+    "Social Media Design",
+    "Tour & Travel"
+  ],
   "summary": "Tour and travel creatives shaped around destination appeal, trust and simple communication.",
-  "thumbnail": "",
   "thumbnail_alt": "Isha Tours travel social media creative",
-  "hero_image": "",
-  "hero_image_alt": "",
   "featured": true,
   "published": true,
   "show_on_home": true,
   "order": 5,
   "role": "Graphic Designer",
-  "tools": ["Adobe Illustrator", "Adobe Photoshop"],
-  "services": ["Social Media Creatives", "Travel Campaigns"],
+  "tools": [
+    "Adobe Illustrator",
+    "Adobe Photoshop"
+  ],
+  "services": [
+    "Social Media Creatives",
+    "Travel Campaigns"
+  ],
   "outcome": "A confident, trustworthy travel presence — creatives that made the offer easy to understand while feeling inviting.",
   "seo": {
     "title": "Isha Tours — Travel Social Media | Shubham Pendse",
@@ -26,7 +32,21 @@
     {
       "type": "rich_text",
       "heading": "Overview",
-      "body": "Isha Tours needed a series of destination-driven creatives that could work for both trip packages and general brand posts, without feeling like just another travel ad."
+      "body": "Isha Tours needed a series of destination-driven creatives that could work for both trip packages and general brand posts, without feeling like just another travel ad.",
+      "images": [
+        {
+          "src": "/uploads/Travizia- Croatia.png"
+        },
+        {
+          "src": "/uploads/Travizia- Kabini.png"
+        },
+        {
+          "src": "/uploads/Travizia- Europe.png"
+        },
+        {
+          "src": "/uploads/Travizia- Automation.png"
+        }
+      ]
     },
     {
       "type": "rich_text",
