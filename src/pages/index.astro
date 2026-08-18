@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { home, site, getFeaturedProjects, hasResume } from '../lib/content';
 
-const featured = getFeaturedProjects().slice(0, 5);
+const featured = getFeaturedProjects().slice(0, 6);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const link = (p: string) => `${base}${p}`;
 const showResume = hasResume();
@@ -110,39 +110,11 @@ const glyphSVG: Record<string, string> = {
       </div>
 
       <div class="work__grid">
-        {featured.slice(0, 5).map((p, i) => (
+        {featured.map((p, i) => (
           <div class="work__cell" style={`--stagger:${i * 80}ms`}>
             <ProjectCard project={p} variant="standard" index={i} />
           </div>
         ))}
-        <div class="work__cell" style={`--stagger:${5 * 80}ms`}>
-          <div
-            class="pcard pcard--coming"
-            aria-disabled="true"
-            role="presentation"
-            data-testid="project-card-coming-soon"
-          >
-            <div class="pcard__media">
-              <div class="pcard__coming-visual" aria-hidden="true">
-                <svg viewBox="0 0 120 120" width="80" height="80" fill="none" stroke="currentColor" stroke-width="1.4">
-                  <circle cx="60" cy="60" r="46" stroke-dasharray="4 8" opacity="0.5"/>
-                  <circle cx="60" cy="60" r="26"/>
-                  <path d="M60 44v18l12 6"/>
-                </svg>
-                <span class="pcard__coming-badge">In the studio</span>
-              </div>
-            </div>
-            <div class="pcard__body">
-              <div class="pcard__meta">
-                <span class="pcard__cat">New Work</span>
-                <span class="pcard__dot" aria-hidden="true">·</span>
-                <span class="pcard__year">2026</span>
-              </div>
-              <h3 class="pcard__title">Coming Soon</h3>
-              <p class="pcard__summary">New case studies are in progress. Reach out if you'd like to see the full portfolio ahead of publication.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -495,65 +467,6 @@ const glyphSVG: Record<string, string> = {
     .work__head { flex-direction: column; align-items: flex-start; }
     .work__grid { grid-template-columns: 1fr; gap: 16px; }
   }
-
-  /* Coming Soon card — non-clickable, matches ProjectCard styling */
-  .pcard--coming {
-    display: block;
-    background: var(--surface);
-    border: 1px dashed var(--border-strong);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    cursor: default;
-    color: var(--text-muted);
-    height: 100%;
-  }
-  .pcard--coming .pcard__media {
-    aspect-ratio: 4 / 3;
-    background:
-      radial-gradient(60% 60% at 50% 45%, var(--accent-soft), transparent 70%),
-      repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 14px),
-      var(--surface-2);
-    position: relative;
-    display: grid;
-    place-items: center;
-  }
-  .pcard__coming-visual {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-    color: var(--accent);
-  }
-  .pcard__coming-visual svg {
-    width: 96px; height: 96px;
-    stroke-width: 1.6;
-    opacity: 1;
-  }
-  .pcard__coming-visual svg circle:first-of-type {
-    animation: comingRotate 22s linear infinite;
-    transform-origin: 60px 60px;
-  }
-  @keyframes comingRotate { to { transform: rotate(360deg); } }
-  @media (prefers-reduced-motion: reduce) {
-    .pcard__coming-visual svg circle:first-of-type { animation: none; }
-  }
-  .pcard__coming-badge {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-    padding: 6px 12px;
-    border: 1px solid var(--accent);
-    border-radius: 999px;
-    background: rgba(0,0,0,0.15);
-  }
-  :root[data-theme='light'] .pcard__coming-badge { background: rgba(255,255,255,0.5); }
-  .pcard--coming .pcard__body { padding: 22px 24px 26px; }
-  .pcard--coming .pcard__title { color: var(--text); font-family: var(--font-display); font-size: 1.35rem; letter-spacing: -0.015em; font-weight: 500; }
-  .pcard--coming .pcard__summary { color: var(--text-muted); margin-top: 10px; font-size: 0.94rem; }
-  .pcard--coming .pcard__meta { display: flex; gap: 8px; align-items: center; color: var(--text-dim); font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
-  .pcard--coming .pcard__cat { color: var(--accent); }
 
   /* About preview */
   .about-prev {

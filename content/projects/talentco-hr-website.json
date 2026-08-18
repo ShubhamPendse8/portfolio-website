@@ -1,0 +1,78 @@
+{
+  "title": "TalentCo HR Website",
+  "slug": "talentco-hr-website",
+  "client": "TalentCo HR Services",
+  "year": "2024",
+  "categories": ["ui-ux"],
+  "disciplines": ["Website UI Design", "Recruitment", "Information Hierarchy"],
+  "summary": "A recruitment website UI concept organised around two clear journeys: helping employers find talent and candidates discover opportunities.",
+  "thumbnail": "/uploads/ui-design/talentco-hr-thumbnail.webp",
+  "thumbnail_alt": "TalentCo HR recruitment website homepage UI concept",
+  "hero_image": "/uploads/ui-design/talentco-hr-thumbnail.webp",
+  "hero_image_alt": "TalentCo HR website interface showing employer and job-seeker entry points",
+  "featured": true,
+  "published": true,
+  "show_on_home": true,
+  "order": 6,
+  "role": "UI Designer",
+  "tools": [],
+  "services": ["Website UI Design", "Content Hierarchy"],
+  "industry": "Recruitment & HR Services",
+  "duration": "",
+  "team": "",
+  "deliverables": ["Desktop Website UI Concept"],
+  "outcome": "",
+  "seo": {
+    "title": "TalentCo HR Website UI Design | Shubham Pendse",
+    "description": "A recruitment website UI concept by Shubham Pendse, structured around employer and job-seeker journeys."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "This desktop website concept explores how an HR services brand can serve employers and job seekers from one clear starting point. The page combines recruitment pathways, current openings, service information, sector coverage and trust signals in a single visual system."
+    },
+    {
+      "type": "project_snapshot",
+      "heading": "Project snapshot",
+      "client": "TalentCo HR Services",
+      "industry": "Recruitment & HR Services",
+      "year": "2024",
+      "role": "UI Designer",
+      "services": ["Website UI Design", "Content Hierarchy"],
+      "deliverables": ["Desktop Website UI Concept"],
+      "tools": []
+    },
+    {
+      "type": "design_rationale",
+      "heading": "Interface direction",
+      "body": "The concept focuses on making a content-heavy recruitment website easier to scan.",
+      "items": [
+        {
+          "title": "Two audiences, two entry points",
+          "body": "Employer and candidate actions are separated early so each audience can identify its next step quickly."
+        },
+        {
+          "title": "Jobs remain visible",
+          "body": "Current openings sit near the beginning of the experience instead of being buried behind a secondary page."
+        },
+        {
+          "title": "Proof supports the service story",
+          "body": "Industry coverage, achievements, testimonials and client logos reinforce credibility as visitors move down the page."
+        }
+      ]
+    },
+    {
+      "type": "image_full",
+      "heading": "Full website UI",
+      "image": "/uploads/ui-design/talentco-hr-full.webp",
+      "alt": "Full-length TalentCo HR recruitment website UI concept",
+      "caption": "Desktop visual design concept. Select the image to inspect it at full size."
+    },
+    {
+      "type": "reflection",
+      "heading": "Scope note",
+      "body": "This project focused on desktop visual UI and information hierarchy. It is presented as a UI design concept and does not claim formal user research, usability testing or measured product outcomes."
+    }
+  ]
+}

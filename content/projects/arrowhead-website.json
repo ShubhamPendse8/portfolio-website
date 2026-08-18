@@ -1,0 +1,48 @@
+{
+  "title": "Arrowhead Website",
+  "slug": "arrowhead-website",
+  "client": "Arrowhead",
+  "year": "2024",
+  "categories": ["ui-ux"],
+  "disciplines": ["Corporate Website UI", "B2B Services", "Consulting"],
+  "summary": "A corporate consulting website concept that organises sectors, services, proof and contact information into a structured B2B experience.",
+  "thumbnail": "/uploads/ui-design/arrowhead-thumbnail.webp",
+  "thumbnail_alt": "Arrowhead Lean Six Sigma corporate consulting website UI concept",
+  "hero_image": "/uploads/ui-design/arrowhead-thumbnail.webp",
+  "hero_image_alt": "Arrowhead corporate consulting website interface",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 22,
+  "role": "UI Designer",
+  "tools": [],
+  "services": ["Corporate Website UI", "Service Hierarchy"],
+  "industry": "Business Consulting & Training",
+  "duration": "",
+  "team": "",
+  "deliverables": ["Desktop Website UI Concept"],
+  "outcome": "",
+  "seo": {
+    "title": "Arrowhead Corporate Website UI | Shubham Pendse",
+    "description": "A B2B consulting website UI concept organising sectors, services and credibility content."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "This desktop concept explores a credibility-first structure for a Lean Six Sigma consulting and training brand. It combines sector expertise, services, testimonials, articles and contact information within a consistent corporate visual language."
+    },
+    {
+      "type": "image_full",
+      "heading": "Full website UI",
+      "image": "/uploads/ui-design/arrowhead-full.webp",
+      "alt": "Full-length Arrowhead corporate consulting website UI concept",
+      "caption": "Desktop visual design concept. Select the image to inspect it at full size."
+    },
+    {
+      "type": "reflection",
+      "heading": "Scope note",
+      "body": "This project demonstrates visual hierarchy and a corporate service-page structure. It does not claim formal UX research or measured business outcomes."
+    }
+  ]
+}

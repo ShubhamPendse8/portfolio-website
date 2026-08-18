@@ -1,0 +1,48 @@
+{
+  "title": "Hair Destination Website",
+  "slug": "hair-destination-website",
+  "client": "Hair Destination",
+  "year": "2024",
+  "categories": ["ui-ux"],
+  "disciplines": ["Service Website UI", "Beauty & Healthcare", "Lead Generation"],
+  "summary": "A service-business website concept connecting treatment information, products, trust signals and appointment enquiries.",
+  "thumbnail": "/uploads/ui-design/hair-destination-thumbnail.webp",
+  "thumbnail_alt": "Hair Destination hair-replacement studio website UI concept",
+  "hero_image": "/uploads/ui-design/hair-destination-thumbnail.webp",
+  "hero_image_alt": "Hair Destination service website hero and consultation form",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 24,
+  "role": "UI Designer",
+  "tools": [],
+  "services": ["Website UI Design", "Service & Enquiry Layout"],
+  "industry": "Hair Replacement & Personal Care",
+  "duration": "",
+  "team": "",
+  "deliverables": ["Desktop Website UI Concept"],
+  "outcome": "",
+  "seo": {
+    "title": "Hair Destination Website UI | Shubham Pendse",
+    "description": "A hair-replacement service website UI concept combining services, products, proof and consultation enquiries."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "The concept is structured as a lead-generation website for a specialist hair-replacement studio. Visitors can move from the primary service message into consultation, treatment options, product information, reviews and supporting content."
+    },
+    {
+      "type": "image_full",
+      "heading": "Full website UI",
+      "image": "/uploads/ui-design/hair-destination-full.webp",
+      "alt": "Full-length Hair Destination service website UI concept",
+      "caption": "Desktop visual design concept. Select the image to inspect it at full size."
+    },
+    {
+      "type": "reflection",
+      "heading": "Scope note",
+      "body": "This project focused on visual layout, service hierarchy and conversion touchpoints. It does not claim formal research, usability testing or live conversion results."
+    }
+  ]
+}

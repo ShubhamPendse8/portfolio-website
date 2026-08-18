@@ -1,0 +1,94 @@
+{
+  "title": "Maple Inc Website",
+  "slug": "maple-inc-website",
+  "client": "Maple Inc",
+  "year": "2022",
+  "categories": ["ui-ux"],
+  "disciplines": ["Multi-page Website UI", "Product Catalogue", "Manufacturing"],
+  "summary": "A multi-page corporate product-catalogue concept for a home-textile manufacturer, covering company information, product ranges and enquiries.",
+  "thumbnail": "/uploads/ui-design/maple-inc-thumbnail.webp",
+  "thumbnail_alt": "Maple Inc bed-linen manufacturer website homepage concept",
+  "hero_image": "/uploads/ui-design/maple-inc-thumbnail.webp",
+  "hero_image_alt": "Maple Inc product-led corporate website UI",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 20,
+  "role": "UI Designer",
+  "tools": [],
+  "services": ["Website UI Design", "Product Catalogue Structure"],
+  "industry": "Home Textiles & Manufacturing",
+  "duration": "",
+  "team": "",
+  "deliverables": ["Seven Desktop Website Screens"],
+  "outcome": "",
+  "seo": {
+    "title": "Maple Inc Website UI Design | Shubham Pendse",
+    "description": "A seven-screen corporate product catalogue website UI concept for home-textile manufacturer Maple Inc."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "This concept treats the website as a small system rather than a single promotional page. It brings together brand introduction, manufacturing credibility, product categories and contact information across seven desktop screens."
+    },
+    {
+      "type": "project_snapshot",
+      "heading": "Project snapshot",
+      "client": "Maple Inc",
+      "industry": "Home Textiles & Manufacturing",
+      "year": "2022",
+      "role": "UI Designer",
+      "services": ["Website UI Design", "Product Catalogue Structure"],
+      "deliverables": ["Seven Desktop Website Screens"],
+      "tools": []
+    },
+    {
+      "type": "image_full",
+      "heading": "Homepage",
+      "image": "/uploads/ui-design/maple-inc-1.webp",
+      "alt": "Maple Inc website homepage UI"
+    },
+    {
+      "type": "image_full",
+      "heading": "Company introduction",
+      "image": "/uploads/ui-design/maple-inc-2.webp",
+      "alt": "Maple Inc company introduction page UI"
+    },
+    {
+      "type": "image_full",
+      "heading": "Product range",
+      "image": "/uploads/ui-design/maple-inc-3.webp",
+      "alt": "Maple Inc bed-linen product range page UI"
+    },
+    {
+      "type": "image_full",
+      "heading": "Product category",
+      "image": "/uploads/ui-design/maple-inc-4.webp",
+      "alt": "Maple Inc product category page UI"
+    },
+    {
+      "type": "image_full",
+      "heading": "Brand and infrastructure",
+      "image": "/uploads/ui-design/maple-inc-5.webp",
+      "alt": "Maple Inc brand and manufacturing infrastructure page UI"
+    },
+    {
+      "type": "image_full",
+      "heading": "Contact experience",
+      "image": "/uploads/ui-design/maple-inc-6.webp",
+      "alt": "Maple Inc contact page UI"
+    },
+    {
+      "type": "image_full",
+      "heading": "Footer system",
+      "image": "/uploads/ui-design/maple-inc-7.webp",
+      "alt": "Maple Inc website footer and navigation system"
+    },
+    {
+      "type": "reflection",
+      "heading": "Scope note",
+      "body": "This project is presented as a multi-page visual UI concept. It demonstrates page consistency and catalogue structure, without claiming formal user research or usability testing."
+    }
+  ]
+}
