@@ -291,11 +291,29 @@ const glyphSVG: Record<string, string> = {
   }
   .hero__meta-item { display: inline-flex; align-items: center; gap: 8px; }
   .hero__meta-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: #22c55e; box-shadow: 0 0 0 4px rgba(34,197,94,0.18);
-    animation: pulse 2.6s ease-out infinite;
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    min-height: 8px;
+    flex: 0 0 8px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34,197,94,0.10), 0 0 5px rgba(34,197,94,0.18);
+    animation: availabilityGlow 2.4s ease-in-out infinite;
   }
-  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+  @keyframes availabilityGlow {
+    0%, 100% {
+      transform: scale(0.96);
+      opacity: 0.78;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.08), 0 0 5px rgba(34,197,94,0.18);
+    }
+    50% {
+      transform: scale(1.06);
+      opacity: 1;
+      box-shadow: 0 0 0 5px rgba(34,197,94,0.14), 0 0 14px rgba(34,197,94,0.58);
+    }
+  }
   .hero__meta-sep { color: var(--text-dim); }
 
   /* Hero visual */
