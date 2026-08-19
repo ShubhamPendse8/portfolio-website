@@ -56,6 +56,7 @@ const totalCount = projects.length;
           <div
             class="pgrid__cell reveal"
             data-cats={p.categories.join(',')}
+            data-project-slug={p.slug}
             style={`--stagger:${(i % 6) * 60}ms`}
           >
             <ProjectCard project={p} variant="standard" index={i} />
@@ -159,10 +160,43 @@ const totalCount = projects.length;
   const initial = params.get('category') || 'all';
 
   const buttons = document.querySelectorAll('[data-filter]');
-  const cells = document.querySelectorAll('[data-cats]');
+  const grid = document.querySelector('[data-project-grid]');
+  const cells = Array.from(document.querySelectorAll('[data-cats]'));
   const empty = document.querySelector('[data-project-empty]');
+  const originalOrder = new Map(cells.map((el, index) => [el, index]));
+
+  // Keep the main All Work grid untouched, but lead the UI/UX filter with
+  // the two full case studies before the older visual UI concepts.
+  const categoryPriority = {
+    'ui-ux': [
+      'phoenix-ortho-hospital-website-redesign',
+      'online-yoga-app-ux-case-study',
+    ],
+  };
+
+  const arrangeForCategory = (id) => {
+    if (!grid) return;
+    const priority = categoryPriority[id] || [];
+    const priorityIndex = new Map(priority.map((slug, index) => [slug, index]));
+
+    [...cells]
+      .sort((a, b) => {
+        const aPriority = priorityIndex.has(a.dataset.projectSlug)
+          ? priorityIndex.get(a.dataset.projectSlug)
+          : Number.MAX_SAFE_INTEGER;
+        const bPriority = priorityIndex.has(b.dataset.projectSlug)
+          ? priorityIndex.get(b.dataset.projectSlug)
+          : Number.MAX_SAFE_INTEGER;
+
+        if (aPriority !== bPriority) return aPriority - bPriority;
+        return originalOrder.get(a) - originalOrder.get(b);
+      })
+      .forEach((el) => grid.appendChild(el));
+  };
 
   const applyFilter = (id) => {
+    arrangeForCategory(id);
+
     let visible = 0;
     cells.forEach((el) => {
       const cats = (el.dataset.cats || '').split(',').filter(Boolean);
