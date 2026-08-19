@@ -10,7 +10,7 @@
     "validate": "node scripts/validate-content.mjs",
     "typecheck": "astro check",
     "prebuild": "npm run validate",
-    "build": "astro build",
+    "build": "node scripts/build-site.mjs",
     "check:build": "node scripts/check-build.mjs",
     "preview": "astro preview --host 0.0.0.0 --port 3000",
     "astro": "astro"
