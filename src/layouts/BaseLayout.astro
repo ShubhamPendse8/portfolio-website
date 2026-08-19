@@ -49,6 +49,7 @@ const absoluteURL = (p: string) => {
 
 const canonicalURL = `${origin}${base}${path.startsWith(base) ? path.slice(base.length) : path}`.replace(/\/+$/, '') || `${origin}${base}/`;
 const socialImgAbs = absoluteURL(socialImgRaw);
+const personImageAbs = absoluteURL(site.avatar || '');
 
 // Person JSON-LD for the homepage
 const socials = activeSocials().map((s) => s.href).filter((h) => /^https?:\/\//.test(h));
@@ -60,7 +61,7 @@ const personJsonLd = {
   email: site.email,
   url: `${origin}${base}/`,
   address: { '@type': 'PostalAddress', addressLocality: site.location },
-  image: socialImgAbs || undefined,
+  image: personImageAbs || undefined,
   sameAs: socials,
 };
 
