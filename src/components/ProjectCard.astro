@@ -92,9 +92,9 @@ const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) :
   }
   .pcard:hover {
     transform: translateY(-5px);
-    border-color: color-mix(in srgb, var(--accent) 34%, var(--border-strong));
+    border-color: var(--border-strong);
     box-shadow: var(--shadow), 0 20px 70px -36px var(--accent-glow);
-    background: color-mix(in srgb, var(--surface) 94%, var(--accent) 6%);
+    background: linear-gradient(135deg, var(--accent-soft), transparent 56%), var(--surface);
   }
   .pcard:focus-visible {
     outline: 2px solid var(--accent);
@@ -225,8 +225,16 @@ const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) :
   .pcard--compact .pcard__body { padding: 18px 20px 22px; }
 
   @media (hover: none), (pointer: coarse) {
-    .pcard:hover { transform: none; }
-    .pcard__media-label { display: none; }
+    .pcard:hover {
+      transform: none;
+      border-color: var(--border);
+      box-shadow: none;
+      background: var(--surface);
+    }
+    .pcard:hover .pcard__media img { transform: none; }
+    .pcard:hover .pcard__media::after { opacity: 0; }
+    .pcard:hover .pcard__title { color: var(--text); }
+    .pcard__media-label, .pcard__hover-arrow { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     .pcard__media img, .pcard__media-label, .pcard__hover-arrow { transition: none; }
