@@ -531,7 +531,11 @@ const glyphSVG: Record<string, string> = {
     .hero { padding-top: 20px; }
   }
   @media (max-width: 640px) {
-    .hero__inner { min-height: auto; }
+    .hero__inner {
+      min-height: auto;
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
+    }
     .hero__text { padding: 12px 0 0; }
     .hero__heading { margin: 16px 0 18px; }
     .hero__ctas { margin-top: 26px; gap: 10px; }
