@@ -1,0 +1,5 @@
+gallery_bytes=597848
+embed_bytes=137728
+all_image_urls=196
+module_urls=180
+preferred_1400_urls=30
