@@ -154,7 +154,7 @@ const analytics = site.analytics ?? { provider: 'none' } as any;
         position: fixed;
         inset: 0 0 auto 0;
         height: 2px;
-        z-index: 130;
+        z-index: 90;
         pointer-events: none;
         background: transparent;
       }
@@ -206,7 +206,7 @@ const analytics = site.analytics ?? { provider: 'none' } as any;
       window.addEventListener('resize', queueProgress, { passive: true });
       updateProgress();
 
-      // Desktop-only hero depth. Disabled for coarse pointers and reduced-motion users.
+      // Desktop-only hero depth. `translate` layers on top of the existing floating transform animation.
       const heroVisual = document.querySelector('.hero__visual');
       const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -215,15 +215,15 @@ const analytics = site.analytics ?? { provider: 'none' } as any;
         const grid = heroVisual.querySelector('.hero__grid');
         const caption = heroVisual.querySelector('.hero__caption');
         const layers = [avatar, grid, caption].filter(Boolean);
-        layers.forEach((el) => { el.style.willChange = 'transform'; });
+        layers.forEach((el) => { el.style.willChange = 'translate'; });
 
         let heroFrame = 0;
         let nextX = 0;
         let nextY = 0;
         const renderHeroDepth = () => {
-          if (avatar) avatar.style.transform = `translate3d(${nextX * 7}px, ${nextY * 7}px, 0)`;
-          if (grid) grid.style.transform = `translate3d(${nextX * 3}px, ${nextY * 3}px, 0)`;
-          if (caption) caption.style.transform = `translate3d(${-nextX * 4}px, ${-nextY * 4}px, 0)`;
+          if (avatar) avatar.style.translate = `${nextX * 7}px ${nextY * 7}px`;
+          if (grid) grid.style.translate = `${nextX * 3}px ${nextY * 3}px`;
+          if (caption) caption.style.translate = `${-nextX * 4}px ${-nextY * 4}px`;
           heroFrame = 0;
         };
         const setHeroDepth = (x, y) => {
