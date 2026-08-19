@@ -18,10 +18,11 @@ const href = link(`/projects/${project.slug}`);
 const thumb = project.thumbnail || project.hero_image || '';
 const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) : '';
 const hasCaseStudy = Array.isArray(project.sections) && project.sections.length > 0;
+const isVideoProject = project.categories?.includes('motion') || false;
 ---
 <a
   href={href}
-  class:list={['pcard', `pcard--${variant}`]}
+  class:list={['pcard', `pcard--${variant}`, isVideoProject && 'pcard--video']}
   data-testid={`project-card-${project.slug}`}
   data-analytics="project-open"
   data-analytics-slug={project.slug}
@@ -224,6 +225,9 @@ const hasCaseStudy = Array.isArray(project.sections) && project.sections.length 
   .pcard--compact .pcard__media { aspect-ratio: 1 / 1; }
   .pcard--compact .pcard__title { font-size: 1.15rem; }
   .pcard--compact .pcard__body { padding: 18px 20px 22px; }
+
+  /* Video and motion projects keep native 16:9 thumbnail framing. */
+  .pcard--video .pcard__media { aspect-ratio: 16 / 9; }
 
   @media (hover: none), (pointer: coarse) {
     .pcard:hover {
