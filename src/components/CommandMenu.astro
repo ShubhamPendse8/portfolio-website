@@ -228,6 +228,7 @@ const statusItems = [
   let lastFocus = null;
   let statusIndex = 0;
   let statusTimer = 0;
+  let statusSwitchTimer = 0;
 
   const renderStatus = (index) => {
     if (!status || !statusLabel || !statusValue || !statusItems.length) return;
@@ -238,12 +239,13 @@ const statusItems = [
   };
   const startStatus = () => {
     window.clearInterval(statusTimer);
+    window.clearTimeout(statusSwitchTimer);
     statusIndex = 0;
     renderStatus(statusIndex);
     if (statusItems.length < 2 || reducedMotion.matches) return;
     statusTimer = window.setInterval(() => {
       status?.classList.add('is-switching');
-      window.setTimeout(() => {
+      statusSwitchTimer = window.setTimeout(() => {
         statusIndex = (statusIndex + 1) % statusItems.length;
         renderStatus(statusIndex);
         status?.classList.remove('is-switching');
@@ -252,7 +254,9 @@ const statusItems = [
   };
   const stopStatus = () => {
     window.clearInterval(statusTimer);
+    window.clearTimeout(statusSwitchTimer);
     statusTimer = 0;
+    statusSwitchTimer = 0;
     status?.classList.remove('is-switching');
   };
 
@@ -286,6 +290,7 @@ const statusItems = [
       close();
     } else if (!cmd?.hasAttribute('hidden')) {
       const visible = items.filter((el) => !el.parentElement?.hidden);
+      if (!visible.length) return;
       if (e.key === 'ArrowDown') { e.preventDefault(); active = (active + 1) % visible.length; updateActive(); }
       else if (e.key === 'ArrowUp') { e.preventDefault(); active = (active - 1 + visible.length) % visible.length; updateActive(); }
       else if (e.key === 'Enter') { e.preventDefault(); visible[active]?.click(); }
