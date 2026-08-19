@@ -174,6 +174,7 @@ const homeSchema = z.object({
   hero: z.object({
     eyebrow: z.string().optional().default(''),
     heading: z.string().min(1),
+    heading_accent: z.string().optional().default(''),
     subheading: z.string().min(1),
     primary_cta: linkSchema,
     secondary_cta: linkSchema,

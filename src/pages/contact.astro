@@ -91,6 +91,8 @@ const socialLinks = [
           data-formspree={formspree}
           data-web3forms={web3formsKey}
           data-mailto={site.email}
+          data-success-message={contact.success_message}
+          data-error-message={contact.error_message}
           novalidate
         >
           <div class="cform__row cform__row--2">
@@ -306,6 +308,8 @@ const socialLinks = [
     const formspree = form.dataset.formspree || '';
     const web3formsKey = form.dataset.web3forms || '';
     const mailto = form.dataset.mailto || '';
+    const successMessage = form.dataset.successMessage || 'Message received.';
+    const errorMessage = form.dataset.errorMessage || `Something went wrong sending your message. Please email me directly at ${mailto}.`;
     const btnLabel = form.querySelector('[data-btn-label]');
 
     const setStatus = (msg, kind) => {
@@ -351,7 +355,7 @@ const socialLinks = [
             body: JSON.stringify({ name, email, company, project_type: projectType, budget, message }),
           });
           if (!res.ok) throw new Error('Formspree returned ' + res.status);
-          setStatus('Message received. Let\'s create something worth showing off.', 'success');
+          setStatus(successMessage, 'success');
           form.reset();
         } else if (provider === 'web3forms' && web3formsKey) {
           const payload = new FormData();
@@ -366,7 +370,7 @@ const socialLinks = [
           const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: payload });
           const json = await res.json();
           if (!json.success) throw new Error(json.message || 'Web3Forms failed');
-          setStatus('Message received. Let\'s create something worth showing off.', 'success');
+          setStatus(successMessage, 'success');
           form.reset();
         } else {
           // Mailto fallback — clearly signalled, no fake success.
@@ -386,7 +390,7 @@ const socialLinks = [
         }
       } catch (err) {
         console.error(err);
-        setStatus(`Something went wrong sending your message. Please email me directly at ${mailto}.`, 'error');
+        setStatus(errorMessage, 'error');
       } finally {
         form.classList.remove('is-loading');
         if (btnLabel) btnLabel.textContent = 'Send message';

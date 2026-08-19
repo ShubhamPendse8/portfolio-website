@@ -2,6 +2,7 @@
   "hero": {
     "eyebrow": "Graphic Designer & UI/UX Designer — Mumbai, India",
     "heading": "Design that clears the noise and carries the message.",
+    "heading_accent": "and carries",
     "subheading": "I create visual identities, digital experiences and communication systems that turn complex ideas into clear and memorable design.",
     "primary_cta": { "label": "Explore My Work", "url": "/work" },
     "secondary_cta": { "label": "Contact Me", "url": "/contact" },
