@@ -62,6 +62,24 @@ const totalCount = projects.length;
             <ProjectCard project={p} variant="standard" index={i} />
           </div>
         ))}
+
+        <div class="pgrid__cell pgrid__cell--coming-soon" data-video-coming-soon hidden>
+          <article class="coming-card" aria-label="More video work coming soon">
+            <div class="coming-card__media" aria-hidden="true">
+              <div class="coming-card__play">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M8 6.5v11l9-5.5-9-5.5Z" />
+                </svg>
+              </div>
+              <span class="coming-card__kicker">Next cuts in progress</span>
+            </div>
+            <div class="coming-card__body">
+              <span class="coming-card__category">Video Editing & Motion</span>
+              <h3 class="coming-card__title">More video work coming soon</h3>
+              <p class="coming-card__copy">Additional client edits, reels and short-form work are being added.</p>
+            </div>
+          </article>
+        </div>
       </div>
       <div class="pgrid__empty" data-project-empty hidden>
         <span class="eyebrow">Nothing here yet</span>
@@ -135,6 +153,75 @@ const totalCount = projects.length;
   }
   .pgrid__cell { transition-delay: var(--stagger, 0ms); }
   .pgrid__cell.is-hidden { display: none; }
+
+  .coming-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    color: var(--text);
+    background: linear-gradient(145deg, var(--accent-soft), transparent 58%), var(--surface);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius-lg);
+  }
+  .coming-card__media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 50%, var(--accent-soft), transparent 38%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 16px),
+      var(--surface-2);
+    border-bottom: 1px dashed var(--border);
+  }
+  .coming-card__play {
+    width: 66px;
+    height: 66px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border-strong);
+    border-radius: 50%;
+    color: var(--accent);
+    background: var(--surface);
+    box-shadow: 0 18px 60px -32px var(--accent-glow);
+  }
+  .coming-card__kicker {
+    position: absolute;
+    left: 16px;
+    bottom: 14px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .coming-card__body {
+    flex: 1;
+    padding: 22px 24px 26px;
+  }
+  .coming-card__category {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--accent);
+    font-size: 0.76rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .coming-card__title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+  }
+  .coming-card__copy {
+    margin-top: 10px;
+    color: var(--text-muted);
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+
   @media (max-width: 900px) { .pgrid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
   @media (max-width: 560px) { .pgrid { grid-template-columns: 1fr; gap: 18px; } }
 
@@ -144,6 +231,7 @@ const totalCount = projects.length;
     .filters { top: calc(var(--nav-height) + 12px); padding: 10px 0; }
     .filters__bar { padding: 6px; }
     .chip { padding: 8px 12px; font-size: 0.82rem; }
+    .coming-card__body { padding: 18px 18px 22px; }
   }
 
   .pgrid__empty {
@@ -163,6 +251,7 @@ const totalCount = projects.length;
   const grid = document.querySelector('[data-project-grid]');
   const cells = Array.from(document.querySelectorAll('[data-cats]'));
   const empty = document.querySelector('[data-project-empty]');
+  const comingSoon = document.querySelector('[data-video-coming-soon]');
   const originalOrder = new Map(cells.map((el, index) => [el, index]));
 
   // Keep the main All Work grid untouched, but lead the UI/UX filter with
@@ -192,6 +281,8 @@ const totalCount = projects.length;
         return originalOrder.get(a) - originalOrder.get(b);
       })
       .forEach((el) => grid.appendChild(el));
+
+    if (comingSoon) grid.appendChild(comingSoon);
   };
 
   const applyFilter = (id) => {
@@ -204,6 +295,7 @@ const totalCount = projects.length;
       el.classList.toggle('is-hidden', !show);
       if (show) visible++;
     });
+    if (comingSoon) comingSoon.hidden = id !== 'motion';
     buttons.forEach((b) => {
       const active = b.dataset.filter === id;
       b.classList.toggle('is-active', active);
