@@ -3,12 +3,21 @@ import { site, hasResume } from '../lib/content';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const link = (p: string) => `${base}${p}`;
 
-const items = [
+type CmdItem = {
+  label: string;
+  href: string;
+  group: string;
+  action?: string;
+  external?: boolean;
+  download?: string;
+};
+
+const items: CmdItem[] = [
   { label: 'Go to Home',    href: link('/'),        group: 'Navigation' },
   { label: 'Go to Work',    href: link('/work'),    group: 'Navigation' },
   { label: 'Go to About',   href: link('/about'),   group: 'Navigation' },
   { label: 'Go to Contact', href: link('/contact'), group: 'Navigation' },
-  ...(hasResume() ? [{ label: 'Download Resume', href: link(site.resume!), group: 'Actions', external: true }] : []),
+  ...(hasResume() ? [{ label: 'Download Resume', href: link(site.resume!), group: 'Actions', download: 'Shubham-Pendse-Resume.pdf' }] : []),
   { label: 'Toggle Theme',  href: '#theme',                    group: 'Actions', action: 'toggle-theme' },
   { label: 'Email Shubham', href: 'mailto:' + site.email,      group: 'Actions' },
   ...(site.linkedin ? [{ label: 'Open LinkedIn', href: site.linkedin, group: 'Social', external: true }] : []),
@@ -33,16 +42,17 @@ const items = [
         data-testid="cmd-input"
       />
     </div>
-    <ul class="cmd__list" data-cmd-list role="listbox">
+    <ul class="cmd__list" data-cmd-list>
       {items.map((it, i) => (
         <li>
           <a
             href={it.href}
             data-cmd-item
             data-action={it.action || ''}
-            data-external={it.external ? '1' : ''}
             data-label={it.label.toLowerCase()}
-            role="option"
+            target={it.external ? '_blank' : undefined}
+            rel={it.external ? 'noopener' : undefined}
+            download={it.download || undefined}
             data-testid={`cmd-item-${i}`}
           >
             <span class="cmd__item-group">{it.group}</span>
@@ -212,7 +222,6 @@ const items = [
         close();
         return;
       }
-      if (el.getAttribute('data-external') === '1') el.setAttribute('target', '_blank');
       close();
     });
   });
