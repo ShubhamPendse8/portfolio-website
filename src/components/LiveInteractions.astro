@@ -1,0 +1,147 @@
+---
+// Progressive interaction layer: page transitions + capability-card service details.
+---
+
+<style is:global>
+  /* Lightweight page transitions: navigation stays stable while page content eases in/out. */
+  main,
+  .footer {
+    transition: opacity 160ms var(--ease), translate 220ms var(--ease-out);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    main {
+      animation: page-enter 360ms var(--ease-out) both;
+    }
+    .footer {
+      animation: page-enter 420ms 35ms var(--ease-out) both;
+    }
+    body.is-page-leaving main,
+    body.is-page-leaving .footer {
+      opacity: 0;
+      translate: 0 -4px;
+    }
+    @keyframes page-enter {
+      from { opacity: 0; translate: 0 7px; }
+      to { opacity: 1; translate: 0 0; }
+    }
+  }
+
+  /* Capability details are useful content first, motion second. */
+  .cap__skills {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    opacity: 0.58;
+    translate: 0 3px;
+    transition: opacity var(--dur) var(--ease), translate var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+  .cap__skill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 27px;
+    padding: 4px 9px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-muted);
+    background: var(--bg-elevated);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    line-height: 1.2;
+    letter-spacing: 0.045em;
+    transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), transform var(--dur) var(--ease-out);
+  }
+  .cap:hover .cap__skills {
+    opacity: 1;
+    translate: 0 0;
+    border-color: var(--border-strong);
+  }
+  .cap:hover .cap__skill {
+    color: var(--text);
+    border-color: var(--border-strong);
+    background: var(--accent-soft);
+  }
+  .cap:hover .cap__skill:nth-child(2) { transform: translateY(-1px); }
+  .cap:hover .cap__skill:nth-child(3) { transform: translateY(-2px); }
+  .cap:hover .cap__glyph {
+    transform: rotate(-3deg) scale(1.04);
+    border-color: var(--accent);
+  }
+  .cap__glyph {
+    transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease);
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    .cap__skills { opacity: 1; translate: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    main, .footer, .cap__skills, .cap__skill, .cap__glyph {
+      animation: none !important;
+      transition: none !important;
+      translate: none !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  // @ts-nocheck
+  const capabilitySkills = {
+    brand: ['Identity systems', 'Campaigns', 'Brand guidelines'],
+    social: ['Campaign systems', 'Carousels', 'Paid & organic'],
+    uiux: ['Websites', 'Product UI', 'Prototypes'],
+    deck: ['Pitch decks', 'Reports', 'Storytelling'],
+    print: ['Brochures', 'Editorial', 'Marketing collateral'],
+    motion: ['Social motion', 'Explainers', 'Video editing'],
+  };
+
+  Object.entries(capabilitySkills).forEach(([key, skills]) => {
+    const card = document.querySelector(`[data-testid="capability-${key}"]`);
+    if (!card || card.querySelector('.cap__skills')) return;
+
+    const list = document.createElement('div');
+    list.className = 'cap__skills';
+    list.setAttribute('aria-label', 'Examples');
+    skills.forEach((skill) => {
+      const item = document.createElement('span');
+      item.className = 'cap__skill';
+      item.textContent = skill;
+      list.appendChild(item);
+    });
+    card.appendChild(list);
+  });
+
+  // Keep navigation feeling connected without hijacking external, download, hash, or modified clicks.
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let leaving = false;
+  document.addEventListener('click', (event) => {
+    if (leaving || reducedMotion.matches || event.defaultPrevented || event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    const anchor = event.target?.closest?.('a[href]');
+    if (!anchor || anchor.hasAttribute('download') || anchor.target === '_blank') return;
+    const rawHref = anchor.getAttribute('href') || '';
+    if (!rawHref || rawHref.startsWith('#') || rawHref.startsWith('mailto:') || rawHref.startsWith('tel:') || rawHref.startsWith('javascript:')) return;
+
+    const url = new URL(anchor.href, window.location.href);
+    if (url.origin !== window.location.origin) return;
+    if (url.pathname === window.location.pathname && url.search === window.location.search && url.hash) return;
+    if (url.href === window.location.href) return;
+
+    event.preventDefault();
+    leaving = true;
+    document.body.classList.add('is-page-leaving');
+    window.setTimeout(() => { window.location.href = url.href; }, 150);
+  });
+
+  // bfcache restores can preserve classes; always return to the visible state.
+  window.addEventListener('pageshow', () => {
+    leaving = false;
+    document.body.classList.remove('is-page-leaving');
+  });
+</script>
