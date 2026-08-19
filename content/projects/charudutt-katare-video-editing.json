@@ -1,0 +1,97 @@
+{
+  "title": "Charudutt Katare — Video Editing",
+  "slug": "charudutt-katare-video-editing",
+  "client": "Charudutt Katare",
+  "year": "",
+  "categories": ["motion"],
+  "disciplines": ["Video Editing", "Long-form Content", "Brand & Event Video"],
+  "summary": "A selection of video work for Charudutt Katare spanning a channel trailer, a podcast episode and Diwali celebration highlights — showing a flexible editing approach across brand, long-form and event-led content.",
+  "thumbnail": "https://img.youtube.com/vi/0ZJRfNd4Uag/maxresdefault.jpg",
+  "thumbnail_alt": "Charudutt Katare podcast video thumbnail",
+  "hero_image": "https://img.youtube.com/vi/0ZJRfNd4Uag/maxresdefault.jpg",
+  "hero_image_alt": "Charudutt Katare podcast used as the video editing project cover",
+  "featured": true,
+  "published": true,
+  "show_on_home": true,
+  "order": 7,
+  "role": "Video Editor",
+  "tools": ["Adobe Premiere Pro", "Adobe After Effects"],
+  "services": ["Video Editing", "Post-Production", "Motion Graphics"],
+  "industry": "Personal Brand & Media",
+  "duration": "",
+  "team": "",
+  "deliverables": ["Channel Trailer", "Podcast Video", "Diwali Celebration Highlights"],
+  "outcome": "A compact set of video pieces covering three different communication needs: introducing the channel, sustaining a long-form conversation and capturing the energy of a festive moment.",
+  "seo": {
+    "title": "Charudutt Katare Video Editing | Shubham Pendse",
+    "description": "Video editing and post-production work for Charudutt Katare across a channel trailer, podcast content and Diwali celebration highlights."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "This collection brings together three video formats created for Charudutt Katare: a channel trailer, a podcast episode and a Diwali celebration highlights video. Each format needed a different editing rhythm — from a concise brand introduction to long-form conversation and a faster event-led montage — while still feeling consistent with the same personal brand."
+    },
+    {
+      "type": "project_snapshot",
+      "heading": "Project snapshot",
+      "client": "Charudutt Katare",
+      "industry": "Personal Brand & Media",
+      "role": "Video Editor",
+      "services": ["Video Editing", "Post-Production", "Motion Graphics"],
+      "deliverables": ["Channel Trailer", "Podcast Video", "Diwali Celebration Highlights"],
+      "tools": ["Adobe Premiere Pro", "Adobe After Effects"]
+    },
+    {
+      "type": "design_rationale",
+      "heading": "Editing approach",
+      "body": "The three videos serve very different purposes, so the edit needed to adapt without losing clarity or polish.",
+      "items": [
+        {
+          "title": "Brand introduction",
+          "body": "The channel trailer needed a concise, confident pace that quickly introduces the personality and direction of the channel."
+        },
+        {
+          "title": "Long-form pacing",
+          "body": "The podcast called for a more restrained editing rhythm, keeping the conversation natural while maintaining flow and viewer attention."
+        },
+        {
+          "title": "Event energy",
+          "body": "The Diwali highlights piece shifts into a more energetic montage style, using shot selection and sequencing to capture the mood and key moments of the celebration."
+        }
+      ]
+    },
+    {
+      "type": "rich_text",
+      "heading": "01 — Channel Trailer",
+      "body": "A concise introduction to the channel, edited to establish the personality, subject matter and overall tone quickly while keeping the presentation clean and engaging."
+    },
+    {
+      "type": "video",
+      "url": "https://www.youtube.com/embed/wk8eNarM1YM"
+    },
+    {
+      "type": "rich_text",
+      "heading": "02 — Podcast",
+      "body": "A long-form podcast edit focused on maintaining a natural conversational flow while keeping the pacing controlled and the overall viewing experience polished."
+    },
+    {
+      "type": "video",
+      "url": "https://www.youtube.com/embed/0ZJRfNd4Uag"
+    },
+    {
+      "type": "rich_text",
+      "heading": "03 — Diwali Celebration Highlights",
+      "body": "A celebration highlights video bringing together key Diwali moments in a shorter, more energetic format designed to preserve the atmosphere and movement of the event."
+    },
+    {
+      "type": "video",
+      "url": "https://www.youtube.com/embed/J6kEDVNU3Us"
+    },
+    {
+      "type": "reflection",
+      "heading": "Across the three videos",
+      "body": "The project demonstrates how the editing approach can shift with the format — concise for a trailer, measured for a podcast and energetic for event highlights — while keeping the final work clear and professionally finished."
+    }
+  ]
+}
