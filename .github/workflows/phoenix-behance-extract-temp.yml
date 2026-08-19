@@ -1,0 +1,90 @@
+name: Temporary Phoenix Behance extractor
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    if: github.head_ref == 'agent/extract-phoenix-behance'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out extraction branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Fetch and extract original Behance image modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p tmp
+          UA='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131 Safari/537.36'
+          curl -L --fail --retry 3 -A "$UA" -H 'Accept-Language: en-US,en;q=0.9' \
+            'https://www.behance.net/gallery/200531637/Website-Redesign-Phoenix-Ortho-Hospital' \
+            -o tmp/phoenix-gallery.html
+          curl -L --fail --retry 3 -A "$UA" -H 'Accept-Language: en-US,en;q=0.9' \
+            'https://www.behance.net/embed/project/200531637?ilo0=1' \
+            -o tmp/phoenix-embed.html || true
+
+          python - <<'PY'
+          import html as htmllib
+          import re
+          from pathlib import Path
+
+          parts=[]
+          for p in [Path('tmp/phoenix-gallery.html'), Path('tmp/phoenix-embed.html')]:
+              if p.exists():
+                  parts.append(p.read_text('utf-8', errors='ignore'))
+          raw='\n'.join(parts)
+          text=htmllib.unescape(raw)
+          replacements=[
+              ('\\u002F','/'),('\\/','/'),('\\u003A',':'),('\\u0026','&'),
+              ('\\u003D','='),('\\u002D','-'),('&amp;','&')
+          ]
+          for old,new in replacements:
+              text=text.replace(old,new)
+
+          # Pull every Behance CDN image URL, then prioritize project module assets.
+          url_pattern=re.compile(r'https?://[^"\'<>\s\\]+', re.I)
+          all_urls=[]
+          for u in url_pattern.findall(text):
+              u=u.rstrip('),;]}')
+              if ('behance.net' in u or 'adobe.com' in u) and re.search(r'\.(?:png|jpe?g|webp)(?:\?|$)',u,re.I):
+                  if u not in all_urls:
+                      all_urls.append(u)
+
+          modules=[u for u in all_urls if '/project_modules/' in u or '/project_modules_max_' in u or '/project_modules_source/' in u]
+          # Prefer 1400_webp module variants when available, matching the Yoga implementation.
+          preferred=[u for u in modules if '/project_modules/1400' in u]
+          output=preferred or modules or all_urls
+
+          Path('tmp/phoenix-behance-urls.txt').write_text('\n'.join(output)+('\n' if output else ''),encoding='utf-8')
+          Path('tmp/phoenix-behance-summary.txt').write_text(
+              f'gallery_bytes={Path("tmp/phoenix-gallery.html").stat().st_size if Path("tmp/phoenix-gallery.html").exists() else 0}\n'
+              f'embed_bytes={Path("tmp/phoenix-embed.html").stat().st_size if Path("tmp/phoenix-embed.html").exists() else 0}\n'
+              f'all_image_urls={len(all_urls)}\nmodule_urls={len(modules)}\npreferred_1400_urls={len(preferred)}\n',
+              encoding='utf-8'
+          )
+          print(Path('tmp/phoenix-behance-summary.txt').read_text())
+          print(Path('tmp/phoenix-behance-urls.txt').read_text()[:20000])
+          PY
+
+          rm -f tmp/phoenix-gallery.html tmp/phoenix-embed.html
+
+      - name: Commit extraction result to PR branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tmp/phoenix-behance-urls.txt tmp/phoenix-behance-summary.txt
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m 'Capture Phoenix Behance asset URLs'
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
