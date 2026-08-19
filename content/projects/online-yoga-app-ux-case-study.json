@@ -1,0 +1,105 @@
+{
+  "title": "Online Yoga App — UX Case Study",
+  "slug": "online-yoga-app-ux-case-study",
+  "client": "",
+  "year": "2024",
+  "categories": ["ui-ux"],
+  "disciplines": ["Mobile App UX/UI", "UX Case Study", "Health & Wellness"],
+  "summary": "A mobile yoga app concept documented as a visual UX case study, exploring how an online wellness experience can be structured and presented clearly for mobile users.",
+  "thumbnail": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/226d72191009147.65c8f4791484e.png",
+  "thumbnail_alt": "Online Yoga App UX case study cover",
+  "hero_image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/226d72191009147.65c8f4791484e.png",
+  "hero_image_alt": "Online Yoga App UX case study presentation",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 30,
+  "role": "UX/UI Designer",
+  "tools": ["Figma"],
+  "services": ["Mobile App UX Design", "UI Design", "Case Study Design"],
+  "industry": "Health & Wellness",
+  "duration": "",
+  "team": "",
+  "deliverables": ["Mobile App UX Case Study", "UX/UI Design"],
+  "outcome": "",
+  "seo": {
+    "title": "Online Yoga App UX Case Study | Shubham Pendse",
+    "description": "A mobile yoga app UX/UI case study by Shubham Pendse, presented through a structured visual case-study narrative created in Figma."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "This project explores the experience of an online yoga mobile app through a UX/UI case study. The work is presented as a concept project focused on organizing the mobile experience and communicating the design process through a structured visual narrative."
+    },
+    {
+      "type": "project_snapshot",
+      "heading": "Project snapshot",
+      "industry": "Health & Wellness",
+      "year": "2024",
+      "role": "UX/UI Designer",
+      "services": ["Mobile App UX Design", "UI Design", "Case Study Design"],
+      "deliverables": ["Mobile App UX Case Study", "UX/UI Design"],
+      "tools": ["Figma"]
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/21ab96191009147.65c9069e2066e.png",
+      "alt": "Online Yoga App UX case study panel 2"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/dd5828191009147.65c8f4791a17e.png",
+      "alt": "Online Yoga App UX case study panel 3"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/996553191009147.65c8f4791899c.png",
+      "alt": "Online Yoga App UX case study panel 4"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/3a0d65191009147.65c8f4791563a.png",
+      "alt": "Online Yoga App UX case study panel 5"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/973c97191009147.65c8f4791639b.png",
+      "alt": "Online Yoga App UX case study panel 6"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/263fcb191009147.65c8f47917147.png",
+      "alt": "Online Yoga App UX case study panel 7"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/93f6c0191009147.65c8f4791ac87.png",
+      "alt": "Online Yoga App UX case study panel 8"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/cc8103191009147.65c8f47913bdd.png",
+      "alt": "Online Yoga App UX case study panel 9"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/7db9df191009147.65c8f479196e6.png",
+      "alt": "Online Yoga App UX case study panel 10"
+    },
+    {
+      "type": "reflection",
+      "heading": "Scope note",
+      "body": "This is presented as a UX/UI concept case study. The portfolio page preserves the original visual case-study sequence without adding unsupported research metrics, commercial results or product-launch claims."
+    },
+    {
+      "type": "cta",
+      "heading": "See the original presentation",
+      "body": "The original case study is also available on Behance.",
+      "primary": {
+        "label": "View on Behance",
+        "url": "https://www.behance.net/gallery/191009147/Online-Yoga-App-UX-Case-Study"
+      }
+    }
+  ]
+}
