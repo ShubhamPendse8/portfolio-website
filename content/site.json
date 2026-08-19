@@ -17,7 +17,8 @@
     "og_image": "/assets/banners/social.jpg"
   },
   "contact_form": {
-    "provider": "auto"
+    "provider": "formspree",
+    "formspree_endpoint": "https://formspree.io/f/xzepkqqd"
   },
   "expertise_ticker": [
     "Graphic Design",
