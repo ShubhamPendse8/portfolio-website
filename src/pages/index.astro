@@ -7,6 +7,11 @@ const featured = getFeaturedProjects().slice(0, 6);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const link = (p: string) => `${base}${p}`;
 const showResume = hasResume();
+const heroHeading = home.hero.heading || '';
+const heroHeadingAccent = home.hero.heading_accent || '';
+const accentIndex = heroHeadingAccent ? heroHeading.indexOf(heroHeadingAccent) : -1;
+const heroHeadingBefore = accentIndex >= 0 ? heroHeading.slice(0, accentIndex) : heroHeading;
+const heroHeadingAfter = accentIndex >= 0 ? heroHeading.slice(accentIndex + heroHeadingAccent.length) : '';
 
 const glyphSVG: Record<string, string> = {
   brand:   '<path d="M4 6h16M4 12h10M4 18h16"/><circle cx="19" cy="12" r="2.4"/>',
@@ -17,7 +22,7 @@ const glyphSVG: Record<string, string> = {
   motion:  '<path d="M4 12h16"/><path d="M4 8l4 4-4 4"/><circle cx="18" cy="12" r="2.2"/>',
 };
 ---
-<BaseLayout title="Portfolio" description={site.seo.description} bodyClass="page-home">
+<BaseLayout description={site.seo.description} bodyClass="page-home">
 
   <!-- HERO -->
   <section class="hero">
@@ -25,7 +30,9 @@ const glyphSVG: Record<string, string> = {
       <div class="hero__text reveal">
         <span class="eyebrow">{home.hero.eyebrow}</span>
         <h1 class="hero__heading">
-          Design that clears the noise <em>and carries</em> the message.
+          {accentIndex >= 0 ? (
+            <>{heroHeadingBefore}<em>{heroHeadingAccent}</em>{heroHeadingAfter}</>
+          ) : heroHeading}
         </h1>
         <p class="hero__sub lead">{home.hero.subheading}</p>
 

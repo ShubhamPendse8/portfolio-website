@@ -78,6 +78,7 @@ content:
         fields:
           - { name: eyebrow,     label: Eyebrow Line,           type: string, description: "Small line above the heading. Ideal: 'Graphic Designer & UI/UX Designer — Mumbai, India'" }
           - { name: heading,     label: Hero Heading,           type: text }
+          - { name: heading_accent, label: Hero Heading Accent, type: string, description: "Optional exact phrase from the hero heading to display in orange italics." }
           - { name: subheading,  label: Hero Subheading,        type: text }
           - name: primary_cta
             label: Primary Button
