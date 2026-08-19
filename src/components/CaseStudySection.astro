@@ -350,16 +350,6 @@ const resolve = (p: string) => (p && !p.startsWith('http') ? `${base}${p.startsW
     background: #000;
   }
   .cs__video-embed iframe { width: 100%; height: 100%; border: 0; }
-  .cs__video-embed:has(iframe[src*="behance.net/embed/project/"]) {
-    aspect-ratio: auto;
-    height: clamp(1200px, 145vw, 1900px);
-    background: var(--surface-2);
-  }
-  @media (max-width: 640px) {
-    .cs__video-embed:has(iframe[src*="behance.net/embed/project/"]) {
-      height: 1500px;
-    }
-  }
 
   .cs--outcome {
     padding: clamp(32px, 5vw, 56px);
