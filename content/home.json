@@ -1,6 +1,6 @@
 {
   "hero": {
-    "eyebrow": "Graphic Designer & UI/UX Designer — Mumbai, India",
+    "eyebrow": "Graphic Designer · Video Editor · UI/UX Designer — Mumbai, India",
     "heading": "Design that clears the noise and carries the message.",
     "heading_accent": "and carries",
     "subheading": "I create visual identities, digital experiences and communication systems that turn complex ideas into clear and memorable design.",
@@ -12,19 +12,19 @@
     }
   },
   "capabilities": [
-    { "title": "Brand & Visual Design",   "description": "Identity systems, logo directions and brand assets built to stay consistent across every touchpoint.",   "glyph": "brand"  },
-    { "title": "Social Media Campaigns",  "description": "Scroll-friendly creatives, carousels and campaign visuals shaped for attention and clarity.",             "glyph": "social" },
-    { "title": "UI/UX Design",            "description": "Website and product interfaces designed around usability, hierarchy and confident user flow.",              "glyph": "uiux"   },
-    { "title": "Presentation Design",     "description": "Investor decks, pitch presentations and event slides that stay clean and confident under scrutiny.",        "glyph": "deck"   },
-    { "title": "Print & Editorial Design","description": "Brochures, whitepapers, calendars, banners and production-ready collateral built for print.",              "glyph": "print"  },
-    { "title": "Video & Motion Graphics", "description": "Edits and short-form motion that give ideas rhythm, movement and a strong visual close.",                  "glyph": "motion" }
+    { "title": "Brand & Visual Design",         "description": "Identity systems, logo directions and brand assets built to stay consistent across every touchpoint.",                         "glyph": "brand"  },
+    { "title": "Video Editing & Motion Graphics","description": "Long-form and short-form edits, motion graphics, sound design and visual pacing built to hold attention and land the message.", "glyph": "motion" },
+    { "title": "UI/UX Design",                  "description": "Website and product interfaces designed around usability, hierarchy and confident user flow.",                            "glyph": "uiux"   },
+    { "title": "Social Media Campaigns",        "description": "Scroll-friendly creatives, carousels and campaign visuals shaped for attention and clarity.",                           "glyph": "social" },
+    { "title": "Presentation Design",           "description": "Investor decks, pitch presentations and event slides that stay clean and confident under scrutiny.",                      "glyph": "deck"   },
+    { "title": "Print & Editorial Design",      "description": "Brochures, whitepapers, calendars, banners and production-ready collateral built for print.",                            "glyph": "print"  }
   ],
   "experience_snapshot": {
     "heading": "Experience at a glance",
     "body": "A quick snapshot of where I've worked, what I focus on, and how I'm currently available.",
     "stats": [
       { "label": "Experience",   "value": "6+ years" },
-      { "label": "Focus",        "value": "Graphic Design & UI/UX" },
+      { "label": "Focus",        "value": "Graphic Design · Video Editing · UI/UX" },
       { "label": "Context",      "value": "Agency and in-house" },
       { "label": "Based in",     "value": "Mumbai, India" },
       { "label": "Availability", "value": "Open to freelance & full-time" }

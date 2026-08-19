@@ -1,0 +1,106 @@
+{
+  "title": "The Dot HQ — Video Editing & Motion",
+  "slug": "the-dot-hq-video-editing-motion",
+  "client": "The Dot HQ",
+  "year": "",
+  "categories": ["motion"],
+  "disciplines": ["Video Editing", "Motion Graphics", "Sound Design", "Video Production"],
+  "summary": "A selection of long-form and brand-led video work for The Dot HQ, spanning milestone podcasts, a software update and a company introduction — with editing, motion graphics, sound design and, for one production, filming handled end to end.",
+  "thumbnail": "https://img.youtube.com/vi/sjwyHGXGfcY/maxresdefault.jpg",
+  "thumbnail_alt": "The Dot HQ company introduction video thumbnail",
+  "hero_image": "https://img.youtube.com/vi/sjwyHGXGfcY/maxresdefault.jpg",
+  "hero_image_alt": "The Dot HQ video editing and motion design project",
+  "featured": true,
+  "published": true,
+  "show_on_home": true,
+  "order": 6,
+  "role": "Video Editor & Motion Designer",
+  "tools": [],
+  "services": ["Video Editing", "Motion Graphics", "Sound Design", "Video Production"],
+  "industry": "B2B Professional Services",
+  "duration": "",
+  "team": "",
+  "deliverables": ["2 Podcast Videos", "Software Update Video", "Company Introduction Video"],
+  "outcome": "A varied body of video work demonstrating long-form storytelling, product communication and brand-led motion across different formats for the same business.",
+  "seo": {
+    "title": "The Dot HQ Video Editing & Motion | Shubham Pendse",
+    "description": "Video editing, motion graphics, sound design and video production work created for The Dot HQ across podcasts, software communication and company storytelling."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "This collection brings together four video projects created for The Dot HQ across different communication needs: two podcast productions, a software update video and a company introduction. The work ranges from long-form conversational editing to product communication and brand storytelling, with a consistent focus on pacing, clarity, motion and sound."
+    },
+    {
+      "type": "project_snapshot",
+      "heading": "Project snapshot",
+      "client": "The Dot HQ",
+      "industry": "B2B Professional Services",
+      "role": "Video Editor & Motion Designer; Videographer on the software update video",
+      "services": ["Video Editing", "Motion Graphics", "Sound Design", "Video Production"],
+      "deliverables": ["2 Podcast Videos", "Software Update Video", "Company Introduction Video"],
+      "tools": []
+    },
+    {
+      "type": "design_rationale",
+      "heading": "What I handled",
+      "body": "The scope changed slightly by format, but the core responsibility was shaping raw footage and information into clear, watchable finished pieces.",
+      "items": [
+        {
+          "title": "Editing & pacing",
+          "body": "Structured the footage through cuts, timing and sequencing so conversations and company information stayed focused without feeling over-edited."
+        },
+        {
+          "title": "Motion & sound",
+          "body": "Created intros, motion graphics, subtle animations and sound treatment where required to strengthen transitions, emphasis and overall finish."
+        },
+        {
+          "title": "Production when required",
+          "body": "For the software update video, I handled the shoot as well as the complete post-production process, allowing the visual capture and final edit to work as one system."
+        }
+      ]
+    },
+    {
+      "type": "rich_text",
+      "heading": "01 — Five-Year Milestone Podcast",
+      "body": "A special podcast produced around The Dot HQ's five-year milestone. I handled the complete post-production — cuts, pacing, intro treatment, motion graphics, sound work and final assembly — while the filming itself was handled separately."
+    },
+    {
+      "type": "video",
+      "url": "https://www.youtube.com/embed/u7bk4KSPpZ8"
+    },
+    {
+      "type": "rich_text",
+      "heading": "02 — Podcast Episode",
+      "body": "For this podcast, I again handled the complete edit after filming: shaping the conversation through clean cuts, building the intro, adding motion graphics and refining the sound and pacing for a polished long-form result."
+    },
+    {
+      "type": "video",
+      "url": "https://www.youtube.com/embed/CdS5SRIpf3s"
+    },
+    {
+      "type": "rich_text",
+      "heading": "03 — Software Update Video",
+      "body": "This project covered both production and post-production. I shot the video and then handled the edit, pacing, motion elements, sound treatment and final delivery, keeping the software-focused information clear and visually engaging."
+    },
+    {
+      "type": "video",
+      "url": "https://www.youtube.com/embed/gJ1bs82-7o4"
+    },
+    {
+      "type": "rich_text",
+      "heading": "04 — Company Introduction Video",
+      "body": "A brand-led company introduction where the post-production carried much of the storytelling. I handled the full edit together with motion design, sound design and subtle animation to give the piece energy while keeping the company message professional and easy to follow."
+    },
+    {
+      "type": "video",
+      "url": "https://www.youtube.com/embed/sjwyHGXGfcY"
+    },
+    {
+      "type": "reflection",
+      "heading": "Across the four videos",
+      "body": "The collection shows the range I bring to video work: long-form editorial judgement, motion-led brand communication, sound design and hands-on production when a project needs it."
+    }
+  ]
+}

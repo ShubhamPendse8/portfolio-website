@@ -148,7 +148,7 @@ export const categoryLabels: Record<string, string> = {
   branding: 'Branding',
   presentations: 'Presentations',
   print: 'Print & Editorial',
-  motion: 'Motion',
+  motion: 'Video Editing & Motion',
 };
 
 export function getCategories(): { id: string; label: string; count: number }[] {
