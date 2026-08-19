@@ -1,0 +1,75 @@
+name: Extract Phoenix Behance assets
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Behance project page
+        shell: bash
+        run: |
+          set -euxo pipefail
+          curl -L --fail --retry 3 \
+            -A 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131 Safari/537.36' \
+            -H 'Accept-Language: en-US,en;q=0.9' \
+            'https://www.behance.net/gallery/200531637/Website-Redesign-Phoenix-Ortho-Hospital' \
+            -o phoenix.html
+          wc -c phoenix.html
+
+      - name: Extract Behance image module URLs
+        shell: python
+        run: |
+          import html as htmllib
+          import re
+          from pathlib import Path
+
+          raw = Path('phoenix.html').read_text('utf-8', errors='ignore')
+          text = htmllib.unescape(raw)
+          for old, new in [
+              ('\\u002F', '/'), ('\\/', '/'), ('\\u003A', ':'), ('\\u0026', '&'),
+              ('&amp;', '&')]:
+              text = text.replace(old, new)
+
+          patterns = [
+              r'https?://[^"\'<>\\ ]*behance\.net/project_modules/[^"\'<>\\ ]+',
+              r'https?://[^"\'<>\\ ]*behance\.net/project_modules_max_[^"\'<>\\ ]+',
+              r'https?://[^"\'<>\\ ]*behance\.net/project_modules_source/[^"\'<>\\ ]+',
+              r'https?://[^"\'<>\\ ]*behance\.net/[^"\'<>\\ ]+\.(?:png|jpe?g|webp)(?:\?[^"\'<>\\ ]*)?'
+          ]
+          urls = []
+          for pattern in patterns:
+              for u in re.findall(pattern, text, flags=re.I):
+                  u = u.rstrip('),;]}')
+                  if u not in urls:
+                      urls.append(u)
+
+          # Prioritize actual project modules, preserving source order.
+          module_urls = [u for u in urls if '/project_modules/' in u or '/project_modules_max_' in u or '/project_modules_source/' in u]
+          output = module_urls if module_urls else urls
+          Path('behance-image-urls.txt').write_text('\n'.join(output) + ('\n' if output else ''), encoding='utf-8')
+          print(f'Found {len(output)} candidate image URLs')
+          for u in output:
+              print(u)
+
+          # Keep a compact diagnostic excerpt containing the project id / CDN refs.
+          diagnostic = []
+          for line in text.splitlines():
+              if '200531637' in line or 'project_modules' in line:
+                  diagnostic.append(line[:10000])
+          Path('diagnostic.txt').write_text('\n'.join(diagnostic[:500]), encoding='utf-8')
+
+      - name: Upload extracted data
+        uses: actions/upload-artifact@v4
+        with:
+          name: phoenix-behance-assets
+          path: |
+            behance-image-urls.txt
+            diagnostic.txt
+          if-no-files-found: error
