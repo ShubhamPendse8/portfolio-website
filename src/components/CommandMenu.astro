@@ -1,7 +1,8 @@
 ---
-import { site, hasResume } from '../lib/content';
+import { site, hasResume, getFeaturedProjects } from '../lib/content';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const link = (p: string) => `${base}${p}`;
+const latestProject = getFeaturedProjects()[0];
 
 type CmdItem = {
   label: string;
@@ -22,6 +23,12 @@ const items: CmdItem[] = [
   { label: 'Email Shubham', href: 'mailto:' + site.email,      group: 'Actions' },
   ...(site.linkedin ? [{ label: 'Open LinkedIn', href: site.linkedin, group: 'Social', external: true }] : []),
 ];
+
+const statusItems = [
+  { label: 'Currently', value: 'Designing across brand, digital & UI' },
+  ...(latestProject ? [{ label: 'Latest work', value: latestProject.title }] : []),
+  { label: 'Based in', value: site.location },
+];
 ---
 <div class="cmd" data-cmd hidden role="dialog" aria-modal="true" aria-labelledby="cmd-title" data-testid="cmd-menu">
   <div class="cmd__backdrop" data-cmd-close></div>
@@ -31,7 +38,7 @@ const items: CmdItem[] = [
       <span class="cmd__kbd"><kbd>ESC</kbd></span>
     </div>
     <div class="cmd__search">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
         <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
       </svg>
       <input
@@ -62,6 +69,16 @@ const items: CmdItem[] = [
         </li>
       ))}
     </ul>
+    <div
+      class="cmd__status"
+      data-cmd-status
+      data-statuses={JSON.stringify(statusItems)}
+      aria-label={`${statusItems[0].label}: ${statusItems[0].value}`}
+    >
+      <span class="cmd__status-dot" aria-hidden="true"></span>
+      <span class="cmd__status-label" data-cmd-status-label>{statusItems[0].label}</span>
+      <span class="cmd__status-value" data-cmd-status-value>{statusItems[0].value}</span>
+    </div>
   </div>
 </div>
 
@@ -147,6 +164,51 @@ const items: CmdItem[] = [
   .cmd__item-arrow { color: var(--accent); font-size: 0.9rem; opacity: 0; transition: opacity var(--dur) var(--ease); }
   .cmd__list a:hover .cmd__item-arrow, .cmd__list a.is-active .cmd__item-arrow { opacity: 1; }
   li[hidden] { display: none; }
+
+  .cmd__status {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+    min-height: 42px;
+    margin: 4px;
+    padding: 11px 12px 3px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    transition: opacity 160ms var(--ease), transform 160ms var(--ease);
+  }
+  .cmd__status.is-switching { opacity: 0; transform: translateY(2px); }
+  .cmd__status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .cmd__status-label {
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .cmd__status-value {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 520px) {
+    .cmd__list a { grid-template-columns: 76px 1fr auto; padding: 12px 10px; }
+    .cmd__status { grid-template-columns: auto auto 1fr; padding-inline: 8px; }
+    .cmd__status-value { font-size: 0.76rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cmd__status { transition: none; }
+  }
 </style>
 
 <script>
@@ -154,8 +216,49 @@ const items: CmdItem[] = [
   const cmd = document.querySelector('[data-cmd]');
   const input = document.querySelector('[data-cmd-input]');
   const items = Array.from(document.querySelectorAll('[data-cmd-item]'));
+  const status = document.querySelector('[data-cmd-status]');
+  const statusLabel = document.querySelector('[data-cmd-status-label]');
+  const statusValue = document.querySelector('[data-cmd-status-value]');
+  const statusItems = (() => {
+    try { return JSON.parse(status?.getAttribute('data-statuses') || '[]'); }
+    catch (e) { return []; }
+  })();
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let active = 0;
   let lastFocus = null;
+  let statusIndex = 0;
+  let statusTimer = 0;
+  let statusSwitchTimer = 0;
+
+  const renderStatus = (index) => {
+    if (!status || !statusLabel || !statusValue || !statusItems.length) return;
+    const item = statusItems[index % statusItems.length];
+    statusLabel.textContent = item.label;
+    statusValue.textContent = item.value;
+    status.setAttribute('aria-label', `${item.label}: ${item.value}`);
+  };
+  const startStatus = () => {
+    window.clearInterval(statusTimer);
+    window.clearTimeout(statusSwitchTimer);
+    statusIndex = 0;
+    renderStatus(statusIndex);
+    if (statusItems.length < 2 || reducedMotion.matches) return;
+    statusTimer = window.setInterval(() => {
+      status?.classList.add('is-switching');
+      statusSwitchTimer = window.setTimeout(() => {
+        statusIndex = (statusIndex + 1) % statusItems.length;
+        renderStatus(statusIndex);
+        status?.classList.remove('is-switching');
+      }, 160);
+    }, 3600);
+  };
+  const stopStatus = () => {
+    window.clearInterval(statusTimer);
+    window.clearTimeout(statusSwitchTimer);
+    statusTimer = 0;
+    statusSwitchTimer = 0;
+    status?.classList.remove('is-switching');
+  };
 
   const open = () => {
     if (!cmd) return;
@@ -164,9 +267,11 @@ const items: CmdItem[] = [
     setTimeout(() => input?.focus(), 30);
     active = 0;
     updateActive();
+    startStatus();
   };
   const close = () => {
     cmd?.setAttribute('hidden', '');
+    stopStatus();
     if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
   };
   const updateActive = () => {
@@ -185,6 +290,7 @@ const items: CmdItem[] = [
       close();
     } else if (!cmd?.hasAttribute('hidden')) {
       const visible = items.filter((el) => !el.parentElement?.hidden);
+      if (!visible.length) return;
       if (e.key === 'ArrowDown') { e.preventDefault(); active = (active + 1) % visible.length; updateActive(); }
       else if (e.key === 'ArrowUp') { e.preventDefault(); active = (active - 1 + visible.length) % visible.length; updateActive(); }
       else if (e.key === 'Enter') { e.preventDefault(); visible[active]?.click(); }
