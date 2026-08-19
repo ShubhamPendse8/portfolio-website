@@ -1,0 +1,95 @@
+{
+  "title": "Phoenix Ortho Hospital — Website Redesign",
+  "slug": "phoenix-ortho-hospital-website-redesign",
+  "client": "Phoenix Ortho & Superspeciality Hospital",
+  "year": "",
+  "categories": ["ui-ux"],
+  "disciplines": ["Website Redesign", "Healthcare UI/UX", "Information Hierarchy"],
+  "summary": "A healthcare website redesign case study for Phoenix Ortho & Superspeciality Hospital, reframing treatment, facility, doctor and contact information into a clearer patient-facing experience.",
+  "thumbnail": "",
+  "thumbnail_alt": "Phoenix Ortho Hospital website redesign case study",
+  "hero_image": "",
+  "hero_image_alt": "Phoenix Ortho Hospital website redesign presentation",
+  "featured": false,
+  "published": true,
+  "show_on_home": false,
+  "order": 31,
+  "role": "UI/UX Designer",
+  "tools": [],
+  "services": ["Website Redesign", "UI Design", "Content Hierarchy"],
+  "industry": "Healthcare / Orthopedics",
+  "duration": "",
+  "team": "",
+  "deliverables": ["Website Redesign Case Study"],
+  "outcome": "",
+  "seo": {
+    "title": "Phoenix Ortho Hospital Website Redesign | Shubham Pendse",
+    "description": "A healthcare website redesign case study for Phoenix Ortho & Superspeciality Hospital, focused on clearer treatment discovery, clinical trust and patient-facing information hierarchy."
+  },
+  "sections": [
+    {
+      "type": "rich_text",
+      "heading": "Project overview",
+      "body": "Phoenix Ortho & Superspeciality Hospital's existing website brings together the hospital introduction, treatments, facilities, doctor profiles, testimonials and contact information. This redesign case study reframes that content into a clearer, more contemporary digital experience focused on helping patients understand the hospital's services and find the right next step."
+    },
+    {
+      "type": "project_snapshot",
+      "heading": "Project snapshot",
+      "client": "Phoenix Ortho & Superspeciality Hospital",
+      "industry": "Healthcare / Orthopedics",
+      "role": "UI/UX Designer",
+      "services": ["Website Redesign", "UI Design", "Content Hierarchy"],
+      "deliverables": ["Website Redesign Case Study"],
+      "tools": []
+    },
+    {
+      "type": "audience_constraints",
+      "heading": "Redesign brief",
+      "brief": "Rework the hospital website so key care information — treatments, facilities, doctors and contact details — is easier to scan, understand and navigate.",
+      "audience": "Patients and families researching orthopedic and superspeciality care in and around Sangli.",
+      "constraints": "Preserve the hospital's established clinical offering and essential information while improving hierarchy, readability, trust and action clarity."
+    },
+    {
+      "type": "design_rationale",
+      "heading": "Redesign priorities",
+      "body": "The redesign direction is framed around the information patients need to evaluate a hospital and move confidently toward contact or care.",
+      "items": [
+        {
+          "title": "Clearer hierarchy",
+          "body": "Separate the hospital introduction, treatment information, facilities, doctor profiles and supporting proof into a more deliberate reading order."
+        },
+        {
+          "title": "Treatment-led discovery",
+          "body": "Make major orthopedic and superspeciality services easier to identify so visitors can quickly understand what the hospital treats."
+        },
+        {
+          "title": "Clinical trust",
+          "body": "Give doctors, facilities and patient-facing credibility content stronger visual structure instead of letting important information compete for attention."
+        },
+        {
+          "title": "Visible next steps",
+          "body": "Keep contact and appointment-oriented actions easy to find so the experience supports visitors who are ready to enquire or seek care."
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "heading": "Full redesign presentation",
+      "url": "https://www.behance.net/embed/project/200531637?ilo0=1"
+    },
+    {
+      "type": "reflection",
+      "heading": "Scope note",
+      "body": "This project is presented as a website redesign and UI/UX case study. The portfolio does not add unsupported user-research findings, usability-test results, implementation claims or performance metrics beyond what is documented in the original project."
+    },
+    {
+      "type": "cta",
+      "heading": "See the original presentation",
+      "body": "The complete redesign case study is also available on Behance.",
+      "primary": {
+        "label": "View on Behance",
+        "url": "https://www.behance.net/gallery/200531637/Website-Redesign-Phoenix-Ortho-Hospital"
+      }
+    }
+  ]
+}

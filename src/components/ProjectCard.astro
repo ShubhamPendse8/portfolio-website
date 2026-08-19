@@ -17,6 +17,7 @@ const cardLabel = project.disciplines?.[0] || catLabel;
 const href = link(`/projects/${project.slug}`);
 const thumb = project.thumbnail || project.hero_image || '';
 const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) : '';
+const hasCaseStudy = Array.isArray(project.sections) && project.sections.length > 0;
 ---
 <a
   href={href}
@@ -42,7 +43,7 @@ const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) :
         <span class="pcard__placeholder-mono">
           {project.title.split(' ').map((w) => w[0]).slice(0, 2).join('')}
         </span>
-        <span class="pcard__placeholder-label">Case study coming soon</span>
+        <span class="pcard__placeholder-label">{hasCaseStudy ? 'View case study' : 'Case study coming soon'}</span>
       </div>
     )}
     <span class="pcard__media-label" aria-hidden="true">
