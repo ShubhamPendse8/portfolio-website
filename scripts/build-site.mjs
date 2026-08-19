@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname, extname, join, resolve } from 'node:path';
+import { dirname, extname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import sharp from 'sharp';
@@ -12,8 +12,9 @@ const site = JSON.parse(readFileSync(join(ROOT, 'content', 'site.json'), 'utf8')
 const originals = new Map();
 
 const asPublicFile = (value) => {
-  if (!value || /^https?:\/\//i.test(value)) return null;
-  return join(PUBLIC, value.replace(/^\/+/, ''));
+  if (!value || /^(?:https?:)?\/\//i.test(value)) return null;
+  const candidate = resolve(PUBLIC, value.replace(/^\/+/, ''));
+  return candidate.startsWith(`${PUBLIC}${sep}`) ? candidate : null;
 };
 
 const kb = (bytes) => `${Math.round(bytes / 1024)} KB`;
