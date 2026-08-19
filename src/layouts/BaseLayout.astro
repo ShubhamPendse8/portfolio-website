@@ -26,7 +26,12 @@ const {
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const origin = (Astro.site ?? new URL('https://shubhampendse8.github.io')).origin;
-const pageTitle = title ? `${title} — ${site.name}` : site.seo.title;
+const suppliedTitle = title?.trim() || '';
+const pageTitle = suppliedTitle
+  ? suppliedTitle.toLowerCase().includes(site.name.toLowerCase())
+    ? suppliedTitle
+    : `${suppliedTitle} — ${site.name}`
+  : site.seo.title;
 const pageDesc = description || site.seo.description;
 const socialImgRaw = ogImage || site.seo.og_image || '';
 
@@ -157,6 +162,15 @@ const analytics = site.analytics ?? { provider: 'none' } as any;
         { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
       );
       document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+      // Make every resume CTA behave like its label: download the PDF rather than opening a new tab.
+      document.querySelectorAll('[data-analytics="resume-click"]').forEach((el) => {
+        if (el instanceof HTMLAnchorElement) {
+          el.setAttribute('download', 'Shubham-Pendse-Resume.pdf');
+          el.removeAttribute('target');
+          el.removeAttribute('rel');
+        }
+      });
 
       // Lightweight analytics event dispatch (only fires if an analytics provider is loaded).
       const track = (name, props) => {
