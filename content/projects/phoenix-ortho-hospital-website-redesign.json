@@ -6,10 +6,10 @@
   "categories": ["ui-ux"],
   "disciplines": ["Website Redesign", "Healthcare UI/UX", "Information Hierarchy"],
   "summary": "A healthcare website redesign case study for Phoenix Ortho & Superspeciality Hospital, reframing treatment, facility, doctor and contact information into a clearer patient-facing experience.",
-  "thumbnail": "",
-  "thumbnail_alt": "Phoenix Ortho Hospital website redesign case study",
-  "hero_image": "",
-  "hero_image_alt": "Phoenix Ortho Hospital website redesign presentation",
+  "thumbnail": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/a07a32200531637.6663e0500a73b.png",
+  "thumbnail_alt": "Phoenix Ortho Hospital website redesign case study cover",
+  "hero_image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/a07a32200531637.6663e0500a73b.png",
+  "hero_image_alt": "Phoenix Ortho Hospital website redesign case study cover",
   "featured": false,
   "published": true,
   "show_on_home": false,
@@ -73,9 +73,49 @@
       ]
     },
     {
-      "type": "video",
-      "heading": "Full redesign presentation",
-      "url": "https://www.behance.net/embed/project/200531637?ilo0=1"
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/3a1f25200531637.6663e0500b367.png",
+      "alt": "Phoenix Ortho Hospital website redesign case study panel 2"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/1d7213200531637.6663e0500ad47.png",
+      "alt": "Phoenix Ortho Hospital website redesign case study panel 3"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/4c44bc200531637.6663e05009f5a.png",
+      "alt": "Phoenix Ortho Hospital website redesign case study panel 4"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/f6de79200531637.6663e0500d5db.png",
+      "alt": "Phoenix Ortho Hospital website redesign case study panel 5"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/00f850200531637.6663e0500c95e.png",
+      "alt": "Phoenix Ortho Hospital website redesign case study panel 6"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/a0bd17200531637.6663e0500ddf5.png",
+      "alt": "Phoenix Ortho Hospital website redesign case study panel 7"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/5f9899200531637.6663e0500c26c.png",
+      "alt": "Phoenix Ortho Hospital website redesign case study panel 8"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/07ce90200531637.6663e0500b993.png",
+      "alt": "Phoenix Ortho Hospital website redesign case study panel 9"
+    },
+    {
+      "type": "image_full",
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/d20226200531637.6663e0500cf7e.png",
+      "alt": "Phoenix Ortho Hospital website redesign case study panel 10"
     },
     {
       "type": "cta",
