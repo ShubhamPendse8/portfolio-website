@@ -45,6 +45,10 @@ const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) :
         <span class="pcard__placeholder-label">Case study coming soon</span>
       </div>
     )}
+    <span class="pcard__media-label" aria-hidden="true">
+      <span>Explore project</span>
+      <span>↗</span>
+    </span>
     <span class="pcard__hover-arrow" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8">
         <path d="M7 17 L17 7" /><path d="M9 7h8v8" />
@@ -82,14 +86,15 @@ const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) :
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background var(--dur) var(--ease);
     position: relative;
     isolation: isolate;
   }
   .pcard:hover {
-    transform: translateY(-4px);
-    border-color: var(--border-strong);
-    box-shadow: var(--shadow);
+    transform: translateY(-5px);
+    border-color: color-mix(in srgb, var(--accent) 34%, var(--border-strong));
+    box-shadow: var(--shadow), 0 20px 70px -36px var(--accent-glow);
+    background: color-mix(in srgb, var(--surface) 94%, var(--accent) 6%);
   }
   .pcard:focus-visible {
     outline: 2px solid var(--accent);
@@ -101,12 +106,23 @@ const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) :
     position: relative;
     overflow: hidden;
   }
+  .pcard__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent 48%, rgba(5,5,5,0.68) 100%);
+    opacity: 0;
+    transition: opacity 420ms var(--ease);
+  }
   .pcard__media img {
     width: 100%; height: 100%;
     object-fit: cover;
-    transition: transform 900ms var(--ease-out);
+    transition: transform 900ms var(--ease-out), filter 500ms var(--ease);
+    will-change: transform;
   }
-  .pcard:hover .pcard__media img { transform: scale(1.04); }
+  .pcard:hover .pcard__media img { transform: scale(1.065) translateY(-2px); }
+  .pcard:hover .pcard__media::after { opacity: 1; }
   .pcard__placeholder {
     position: absolute; inset: 0;
     display: flex; flex-direction: column;
@@ -126,24 +142,53 @@ const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) :
   }
   .pcard__placeholder-label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); }
 
+  .pcard__media-label {
+    position: absolute;
+    left: 16px;
+    bottom: 14px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 11px;
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 999px;
+    background: rgba(8,8,9,0.66);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 320ms var(--ease), transform 420ms var(--ease-out);
+  }
+  .pcard:hover .pcard__media-label,
+  .pcard:focus-visible .pcard__media-label { opacity: 1; transform: translateY(0); }
+
   .pcard__hover-arrow {
     position: absolute;
     top: 16px; right: 16px;
+    z-index: 2;
     width: 36px; height: 36px;
     display: grid; place-items: center;
     border-radius: 50%;
     background: var(--accent);
     color: #0a0403;
-    opacity: 0; transform: translate(6px, -6px);
+    opacity: 0; transform: translate(6px, -6px) scale(0.94);
     transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
   }
-  .pcard:hover .pcard__hover-arrow { opacity: 1; transform: translate(0, 0); }
+  .pcard:hover .pcard__hover-arrow,
+  .pcard:focus-visible .pcard__hover-arrow { opacity: 1; transform: translate(0, 0) scale(1); }
 
   .pcard__body { padding: 22px 24px 26px; flex: 1; }
   .pcard__meta { display: flex; gap: 8px; align-items: center; color: var(--text-dim); font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
   .pcard__cat { color: var(--accent); }
   .pcard__dot { color: var(--text-dim); }
-  .pcard__title { font-family: var(--font-display); font-size: 1.35rem; letter-spacing: -0.015em; font-weight: 500; }
+  .pcard__title { font-family: var(--font-display); font-size: 1.35rem; letter-spacing: -0.015em; font-weight: 500; transition: color var(--dur-fast) var(--ease); }
+  .pcard:hover .pcard__title { color: var(--accent-warm); }
   .pcard__summary { color: var(--text-muted); margin-top: 10px; font-size: 0.94rem; line-height: 1.6; }
   .pcard__cta {
     display: inline-flex;
@@ -179,6 +224,14 @@ const resolvedThumb = thumb ? (thumb.startsWith('http') ? thumb : link(thumb)) :
   .pcard--compact .pcard__title { font-size: 1.15rem; }
   .pcard--compact .pcard__body { padding: 18px 20px 22px; }
 
+  @media (hover: none), (pointer: coarse) {
+    .pcard:hover { transform: none; }
+    .pcard__media-label { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pcard__media img, .pcard__media-label, .pcard__hover-arrow { transition: none; }
+    .pcard:hover .pcard__media img { transform: none; }
+  }
   @media (max-width: 540px) {
     .pcard--featured .pcard__title { font-size: 1.4rem; }
     .pcard__body { padding: 18px 18px 22px; }
