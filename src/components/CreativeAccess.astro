@@ -1,7 +1,7 @@
 ---
-import type { Project, Site } from '../lib/content';
+import type { Project, SiteConfig } from '../lib/content';
 
-export interface Props { projects: Project[]; site: Site; base: string; portrait: string; }
+export interface Props { projects: Project[]; site: SiteConfig; base: string; portrait: string; }
 const { projects, site, base, portrait } = Astro.props;
 const link = (p: string) => `${base}${p}`;
 const asset = (p: string) => p.startsWith('http') ? p : link(p);
