@@ -1,0 +1,138 @@
+---
+import type { Project, Site } from '../lib/content';
+
+export interface Props { projects: Project[]; site: Site; base: string; portrait: string; }
+const { projects, site, base, portrait } = Astro.props;
+const link = (p: string) => `${base}${p}`;
+const asset = (p: string) => p.startsWith('http') ? p : link(p);
+---
+
+<div class="ca-gate" data-ca-gate>
+  <div class="ca-grid"></div>
+  <div class="ca-top"><span><i></i> CREATIVE ACCESS SYSTEM</span><small>VER 1.0</small></div>
+  <div class="ca-location">MUMBAI, INDIA<br><small>UTC +05:30</small></div>
+  <div class="ca-stage">
+    <div class="ca-words">DESIGN<br>CREATE<br>BUILD<br>REPEAT<small>VISUAL DESIGN · UI/UX · MOTION · BRANDING</small></div>
+    <div class="ca-card-wrap" data-ca-wrap>
+      <div class="ca-lanyard">SP</div>
+      <article class="ca-card" data-ca-card>
+        <header><span>CREATIVE ACCESS<br><b>SP — 097</b></span><span>AUTHORISED<br><b class="orange">●</b> CREATIVE</span></header>
+        <div class="ca-card-main">
+          <div><h1>SHUBHAM<br>PENDSE</h1><p>GRAPHIC DESIGNER<br>UI / UX DESIGNER</p><em>Shubham</em></div>
+          <figure><img src={portrait} alt="Shubham Pendse" width="600" height="890"><figcaption>PORTRAIT / 01</figcaption></figure>
+        </div>
+        <div class="ca-data"><span>ACCESS ID<strong>SP — 097</strong></span><span>STATUS<strong><i></i> ACTIVE</strong></span><span>CLEARANCE<strong>CREATIVE</strong></span><b>↗</b></div>
+        <footer><div class="barcode"></div><span>BASED IN<br><b>MUMBAI, INDIA</b><br>EST. 2017</span></footer>
+      </article>
+    </div>
+    <div class="ca-side">A PORTFOLIO<br>OF IDEAS,<br>EXPERIENCES<br>AND EVERYTHING<br>IN BETWEEN.<small>SP — 097 / CREATIVE</small></div>
+  </div>
+  <button class="ca-enter" data-ca-enter><span>⌁</span><b data-ca-label>TAP TO ACCESS</b><strong>→</strong></button>
+  <div class="ca-status" data-ca-status>SYSTEM READY</div>
+</div>
+
+<div class="ca-site" data-ca-site>
+  <nav class="ca-nav">
+    <a href="#top" class="ca-brand"><b>SP</b><span>CREATIVE ACCESS<br><small>SP — 097</small></span></a>
+    <div><a href="#work">01 / WORK</a><a href="#expertise">02 / EXPERTISE</a><a href="#about">03 / ABOUT</a><a href="#contact">04 / CONTACT</a></div>
+    <a href="#contact" class="ca-live"><i></i> AVAILABLE</a>
+  </nav>
+  <main id="top">
+    <section class="ca-hero">
+      <div class="ca-meta"><span>ACCESS GRANTED</span><span>SP — 097</span><span>DESIGN / UI / UX</span></div>
+      <p>GRAPHIC DESIGNER · UI/UX DESIGNER · MOTION</p>
+      <h2>I DESIGN<br><em>VISUAL EXPERIENCES</em><br>THAT MAKE PEOPLE STOP.</h2>
+      <div class="ca-intro">I turn ideas into visual systems, digital experiences and motion that are clear enough to work — and distinctive enough to remember.</div>
+      <a href="#work" class="ca-link">ENTER THE WORK ↓</a>
+      <div class="ca-stamp">CREATIVE<br><b>ACTIVE</b><small>MUMBAI · INDIA</small></div>
+    </section>
+
+    <section class="ca-section" id="work">
+      <div class="ca-heading"><span>01 / PROJECT DATABASE</span><h2>Selected work<br><em>worth opening.</em></h2><p>A curated set of branding, digital, UI/UX and visual design projects.</p></div>
+      <div class="ca-projects">
+        {projects.map((project, index) => {
+          const thumb = project.thumbnail || project.hero_image || '';
+          return <a class:list={['ca-project', index === 0 && 'ca-project--wide']} href={link(`/projects/${project.slug}`)}>
+            <div class="ca-project-img">{thumb ? <img src={asset(thumb)} alt={project.thumbnail_alt || project.title} loading="lazy" /> : <b>{project.title.slice(0,2).toUpperCase()}</b>}<span>OPEN PROJECT ↗</span></div>
+            <small>{String(index + 1).padStart(2,'0')} / {project.year || 'PROJECT'}</small>
+            <h3>{project.title}</h3><p>{project.disciplines?.slice(0,3).join(' · ')}</p>
+          </a>;
+        })}
+      </div>
+      <a class="ca-all" href={link('/work')}>VIEW COMPLETE DATABASE <b>→</b></a>
+    </section>
+
+    <section class="ca-dark ca-section" id="expertise">
+      <div class="ca-heading"><span>02 / CREATIVE CLEARANCE</span><h2>What I'm<br><em>authorised to do.</em></h2></div>
+      <div class="ca-skills">
+        <article><b>01</b><h3>Visual Design</h3><p>Branding · Campaigns · Social · Print · Art Direction</p><span>↗</span></article>
+        <article><b>02</b><h3>UI / UX</h3><p>Interfaces · Design Systems · Prototypes · Web Experiences</p><span>↗</span></article>
+        <article><b>03</b><h3>Motion</h3><p>Motion Graphics · Video · Animation · Visual Storytelling</p><span>↗</span></article>
+        <article><b>04</b><h3>Creative AI</h3><p>Generative Visuals · Exploration · Rapid Prototyping</p><span>↗</span></article>
+      </div>
+    </section>
+
+    <section class="ca-section ca-tools">
+      <div class="ca-heading"><span>03 / TOOLKIT</span><h2>Tools of<br><em>the trade.</em></h2></div>
+      <div class="ca-tool-list"><span>ILLUSTRATOR</span><span>PHOTOSHOP</span><span>PREMIERE PRO</span><span>AFTER EFFECTS</span><span>FIGMA</span><span>AI TOOLS</span></div>
+    </section>
+
+    <section class="ca-section ca-log" id="about">
+      <div class="ca-heading"><span>04 / ACCESS HISTORY</span><h2>A designer's<br><em>journey.</em></h2></div>
+      <div class="ca-timeline">
+        <article><small>2017 — 2019</small><h3>THE FOUNDATION</h3><p>Multimedia design · visual communication · motion</p></article>
+        <article><small>2024</small><h3>THE DIGITAL SHIFT</h3><p>UI/UX specialisation · interface thinking · Figma</p></article>
+        <article><small>2025 — NOW</small><h3>THE DOT HQ</h3><p>Graphic design · fintech · digital campaigns · visual systems</p></article>
+      </div>
+    </section>
+
+    <section class="ca-about">
+      <img src={portrait} alt="Shubham Pendse" loading="lazy">
+      <div><span>05 / BEHIND THE ACCESS</span><h2>There is a person<br><em>behind the pixels.</em></h2><p>I'm Shubham — a graphic designer who moved from visual communication into digital experiences and UI/UX. I like design that looks considered, feels human and solves the actual problem instead of decorating it.</p><p>Six-plus years in design taught me that the best work usually sits somewhere between clarity and character.</p><a href={link('/about')}>READ MORE ABOUT ME →</a></div>
+    </section>
+
+    <section class="ca-contact ca-section" id="contact">
+      <div><span>06 / REQUEST ACCESS</span><h2>Have a project<br><em>worth building?</em></h2><p>Let's turn the brief into something people remember.</p></div>
+      <a href={link('/contact')}>START A CONVERSATION ↗</a>
+      <footer><span>{site.email}</span><span>{site.location}</span><span>SP — 097 / CREATIVE</span></footer>
+    </section>
+  </main>
+</div>
+
+<script is:inline>
+  const gate=document.querySelector('[data-ca-gate]'), siteEl=document.querySelector('[data-ca-site]'), enter=document.querySelector('[data-ca-enter]'), label=document.querySelector('[data-ca-label]'), status=document.querySelector('[data-ca-status]'), card=document.querySelector('[data-ca-card]'), wrap=document.querySelector('[data-ca-wrap]');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(gate&&siteEl&&enter){
+    document.documentElement.classList.add('ca-lock');
+    enter.addEventListener('click',()=>{
+      enter.disabled=true; label.textContent='AUTHENTICATING'; status.textContent='VERIFYING CREATIVE CLEARANCE…'; gate.classList.add('auth');
+      setTimeout(()=>{label.textContent='ACCESS GRANTED';status.textContent='IDENTITY VERIFIED · CLEARANCE ACTIVE';gate.classList.add('granted')},reduced?150:800);
+      setTimeout(()=>{gate.classList.add('out');siteEl.classList.add('live');document.documentElement.classList.remove('ca-lock')},reduced?300:1250);
+    });
+  }
+  if(card&&wrap&&!reduced){
+    wrap.addEventListener('pointermove',e=>{const r=wrap.getBoundingClientRect(),x=((e.clientX-r.left)/r.width-.5)*2,y=((e.clientY-r.top)/r.height-.5)*2;card.style.transform='rotateX('+(-y*4)+'deg) rotateY('+(x*5)+'deg) translateY(-4px)'},{passive:true});
+    wrap.addEventListener('pointerleave',()=>card.style.transform='',{passive:true});
+  }
+</script>
+
+<style>
+  :global(.creative-access-home){--bg:#ece7dd;--surface:#f6f2e9;--text:#151513;--text-muted:#615d55;--border:rgba(21,21,19,.14);--accent:#ed5a18;--font-display:'Instrument Sans',sans-serif}
+  :global(.creative-access-home) main{padding-top:0}:global(.creative-access-home) header,:global(.creative-access-home)>footer{display:none!important}:global(.ca-lock),:global(.ca-lock body){overflow:hidden}
+  .ca-gate{min-height:100svh;position:relative;display:grid;place-items:center;background:linear-gradient(120deg,#eee9df,#c8c1b5);color:#171613;overflow:hidden}.ca-grid{position:absolute;inset:0;opacity:.35;background:linear-gradient(rgba(20,20,18,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(20,20,18,.07) 1px,transparent 1px);background-size:84px 84px}.ca-gate:after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.05;background:radial-gradient(circle,#000 1px,transparent 1px);background-size:5px 5px}.ca-top,.ca-location{position:absolute;top:28px;z-index:3;font:500 .64rem var(--font-mono);letter-spacing:.14em}.ca-top{left:4vw}.ca-top i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:8px}.ca-top small{margin-left:14px;color:#777}.ca-location{right:4vw;text-align:right}.ca-location small{color:#777}
+  .ca-stage{width:min(1180px,92vw);display:grid;grid-template-columns:1fr minmax(360px,480px) 1fr;align-items:center;gap:5vw;z-index:2}.ca-words{font:800 clamp(2.4rem,5vw,5rem)/.82 var(--font-body);letter-spacing:-.07em;color:rgba(30,28,24,.22)}.ca-words small{display:block;margin-top:22px;font:500 .62rem/1.8 var(--font-mono);letter-spacing:.12em;color:#6e685f}.ca-side{justify-self:end;max-width:190px;text-align:right;font:500 .65rem/1.8 var(--font-mono);letter-spacing:.16em}.ca-side small{display:block;margin-top:25px;color:#777}
+  .ca-card-wrap{perspective:1100px}.ca-lanyard{width:80px;height:82px;background:#151513;color:#aaa;position:absolute;top:-64px;left:50%;transform:translateX(-50%);border-radius:0 0 16px 16px;z-index:2;display:grid;place-items:center;font-weight:700;box-shadow:0 10px 25px #0003}.ca-card{background:#eee9df;border:1px solid #211f1b33;border-radius:16px;padding:20px;box-shadow:0 30px 70px #28231b45;transition:transform .45s ease;transform-style:preserve-3d}.ca-card header,.ca-card footer{display:flex;justify-content:space-between;font:500 .53rem/1.5 var(--font-mono);letter-spacing:.1em;text-transform:uppercase}.ca-card header span:last-child{text-align:right}.ca-card header b{font-weight:600}.orange{color:var(--accent)}.ca-card-main{display:grid;grid-template-columns:1.1fr .9fr;gap:12px;margin:22px 0 12px;align-items:end}.ca-card-main h1{font:800 clamp(1.7rem,3vw,2.6rem)/.84 var(--font-body);letter-spacing:-.06em}.ca-card-main p{font:500 .57rem/1.7 var(--font-mono);letter-spacing:.12em;margin-top:16px;color:#686158}.ca-card-main em{display:block;font:italic 1.8rem cursive;transform:rotate(-7deg);margin-top:15px}.ca-card figure{margin:0;aspect-ratio:3/4;position:relative;overflow:hidden;background:var(--accent)}.ca-card figure:after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#ed5a18aa,transparent 45%);mix-blend-mode:multiply}.ca-card figure img{width:100%;height:100%;object-fit:cover;object-position:48% 18%;filter:contrast(1.04) saturate(.88)}.ca-card figcaption{position:absolute;z-index:2;bottom:6px;left:7px;color:white;font:500 .45rem var(--font-mono)}.ca-data{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;padding:13px 0;border-block:1px solid var(--border);font:500 .5rem var(--font-mono);letter-spacing:.08em;color:#80796f}.ca-data span{display:flex;flex-direction:column;gap:4px}.ca-data strong{color:#24221e;font-size:.57rem}.ca-data i{display:inline-block;width:5px;height:5px;border-radius:50%;background:#3aaf58}.ca-data>b{font:1.8rem var(--font-body);align-self:end}.ca-card footer{padding-top:13px;align-items:end;color:#80796f}.barcode{width:58%;height:27px;background:repeating-linear-gradient(90deg,#171613 0 2px,transparent 2px 5px)}.ca-enter{position:absolute;bottom:42px;left:50%;transform:translateX(-50%);width:min(430px,78vw);height:62px;border:1px solid #444039;border-radius:99px;background:#151513;color:#f2eee5;display:flex;align-items:center;padding:0 18px;gap:15px;z-index:4;cursor:pointer;box-shadow:0 18px 40px #0004;font:500 .67rem var(--font-mono);letter-spacing:.18em}.ca-enter:hover{transform:translateX(-50%) translateY(-3px)}.ca-enter span{width:32px;height:32px;border:1px solid #666;border-radius:50%;display:grid;place-items:center;font-size:1.4rem}.ca-enter strong{margin-left:auto;font-size:1.3rem}.ca-enter:after{content:'';position:absolute;left:28%;right:28%;bottom:-1px;height:3px;background:var(--accent);box-shadow:0 0 15px var(--accent)}.ca-status{position:absolute;bottom:17px;left:50%;transform:translateX(-50%);font:500 .53rem var(--font-mono);letter-spacing:.16em;color:#777;z-index:4}
+  .ca-gate.auth .ca-card{animation:pulse 1s infinite}.ca-gate.granted .ca-card{transform:scale(1.04)}.ca-gate.out{animation:gateOut .8s forwards}.ca-site{opacity:0;visibility:hidden;transform:translateY(25px);transition:.8s ease}.ca-site.live{opacity:1;visibility:visible;transform:none}@keyframes pulse{50%{filter:brightness(1.08)}}@keyframes gateOut{to{opacity:0;transform:scale(1.07);visibility:hidden}}
+  .ca-nav{height:72px;position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;background:#ece7ddea;backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}.ca-brand{display:flex;align-items:center;gap:10px;font:600 .6rem var(--font-mono);letter-spacing:.08em}.ca-brand>b{width:36px;height:36px;display:grid;place-items:center;background:#171613;color:#eee;border-radius:50%;font-family:var(--font-body)}.ca-brand small{color:#777}.ca-nav>div{display:flex;gap:30px;font:500 .6rem var(--font-mono)}.ca-nav a:hover{color:var(--accent)}.ca-live{font:500 .6rem var(--font-mono)}.ca-live i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#35a853;margin-right:6px}
+  .ca-hero{min-height:calc(100svh - 72px);padding:8vw;position:relative;display:flex;flex-direction:column;justify-content:center;overflow:hidden;border-bottom:1px solid var(--border)}.ca-hero:after{content:'SP — 097';position:absolute;right:-2vw;top:10vh;font:800 24vw/.7 var(--font-body);letter-spacing:-.1em;color:#1111;pointer-events:none}.ca-meta{display:flex;justify-content:space-between;font:500 .6rem var(--font-mono);letter-spacing:.12em;color:#777;margin-bottom:6vw}.ca-meta span:first-child,.ca-hero>p{color:var(--accent)}.ca-hero>p{font:500 .67rem var(--font-mono);letter-spacing:.17em}.ca-hero h2{font:800 clamp(3.3rem,9vw,9rem)/.84 var(--font-body);letter-spacing:-.075em;max-width:1200px;margin-top:20px}.ca-hero h2 em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px #151513}.ca-intro{max-width:520px;margin-top:30px;font-size:1.05rem;line-height:1.7;color:#615d55}.ca-link{margin-top:30px;font:600 .64rem var(--font-mono);letter-spacing:.13em;width:max-content;border-bottom:1px solid;padding-bottom:8px}.ca-link:hover{color:var(--accent)}.ca-stamp{position:absolute;right:8vw;bottom:10vh;width:120px;height:120px;border:1px solid #1114;border-radius:50%;display:grid;place-items:center;text-align:center;font:600 .55rem/1.5 var(--font-mono);letter-spacing:.1em;transform:rotate(-12deg)}.ca-stamp b{color:var(--accent)}
+  .ca-section{padding:12vw 8vw}.ca-heading{max-width:700px;margin-bottom:60px}.ca-heading>span,.ca-about>div>span,.ca-contact>div>span{font:500 .63rem var(--font-mono);letter-spacing:.15em;color:var(--accent)}.ca-heading h2,.ca-about h2,.ca-contact h2{font:800 clamp(3rem,7vw,7rem)/.87 var(--font-body);letter-spacing:-.075em;margin-top:20px}.ca-heading h2 em,.ca-about h2 em,.ca-contact h2 em{font-style:normal;color:var(--accent)}.ca-heading p{max-width:500px;margin-top:20px}
+  .ca-projects{display:grid;grid-template-columns:repeat(2,1fr);gap:5vw 3vw}.ca-project--wide{grid-column:span 2}.ca-project{color:var(--text)}.ca-project-img{aspect-ratio:4/3;position:relative;overflow:hidden;background:#c9c0b2}.ca-project--wide .ca-project-img{aspect-ratio:16/9}.ca-project-img img{width:100%;height:100%;object-fit:cover;transition:.8s cubic-bezier(.2,.8,.2,1)}.ca-project-img:after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#ed5a1830,transparent 40%);opacity:0;transition:.4s}.ca-project-img span{position:absolute;left:16px;bottom:16px;z-index:2;background:#171613;color:white;padding:9px 12px;font:500 .56rem var(--font-mono);opacity:0;transform:translateY(8px);transition:.4s}.ca-project:hover img{transform:scale(1.05)}.ca-project:hover .ca-project-img:after,.ca-project:hover .ca-project-img span{opacity:1}.ca-project>small{display:block;margin-top:15px;font:500 .56rem var(--font-mono);color:#8a8378}.ca-project h3{font:800 clamp(1.9rem,3.5vw,3.2rem)/.9 var(--font-body);letter-spacing:-.055em;margin-top:6px}.ca-project p{font:500 .62rem var(--font-mono);color:#817a70;margin-top:8px}.ca-project-img>b{display:grid;place-items:center;height:100%;font:800 5rem var(--font-body);color:var(--accent)}.ca-all{display:block;border-top:1px solid var(--border);margin-top:60px;padding-top:20px;font:600 .63rem var(--font-mono);letter-spacing:.12em}.ca-all b{color:var(--accent);float:right}
+  .ca-dark{background:#171613;color:#f1ede4}.ca-dark .ca-heading h2{color:#f1ede4}.ca-skills{border-top:1px solid #fff2}.ca-skills article{display:grid;grid-template-columns:60px 1fr 1.2fr 25px;gap:20px;align-items:center;padding:26px 0;border-bottom:1px solid #fff2;transition:.3s}.ca-skills article:hover{padding-inline:12px;background:#ed5a180b}.ca-skills b,.ca-skills article>p,.ca-skills article>span{font:500 .62rem var(--font-mono);color:#8e8880}.ca-skills h3{font:800 clamp(2rem,4vw,4rem)/.9 var(--font-body);letter-spacing:-.06em;color:#f1ede4}.ca-skills article>span{color:var(--accent);font-size:1rem}
+  .ca-tools{display:grid;grid-template-columns:1fr 1.4fr;background:#f5f0e7}.ca-tool-list{display:flex;flex-wrap:wrap;gap:10px;align-content:start}.ca-tool-list span{border:1px solid var(--border);padding:12px 15px;font:600 .62rem var(--font-mono);letter-spacing:.08em}.ca-tool-list span:hover{background:#171613;color:white}
+  .ca-log{background:#ddd6c9}.ca-timeline{border-left:1px solid #17161344;padding-left:50px}.ca-timeline article{position:relative;padding:0 0 55px}.ca-timeline article:before{content:'';position:absolute;left:-55px;top:2px;width:9px;height:9px;border-radius:50%;background:#171613;border:3px solid #ddd6c9}.ca-timeline small{font:500 .6rem var(--font-mono);color:#777}.ca-timeline h3{font:800 clamp(1.8rem,3vw,3rem)/.9 var(--font-body);margin:8px 0}.ca-timeline p{max-width:500px}
+  .ca-about{display:grid;grid-template-columns:.8fr 1.2fr;gap:8vw;align-items:center;padding:12vw 8vw}.ca-about>img{width:100%;max-width:470px;aspect-ratio:4/5;object-fit:cover;object-position:48% 18%;filter:contrast(1.05);background:#171613}.ca-about p{max-width:600px;margin-top:20px}.ca-about a{display:inline-block;margin-top:28px;font:600 .63rem var(--font-mono);letter-spacing:.1em;border-bottom:1px solid;padding-bottom:7px}.ca-about a:hover{color:var(--accent)}
+  .ca-contact{background:#171613;color:#f1ede4}.ca-contact h2{color:#f1ede4}.ca-contact p{margin-top:20px;color:#aaa49a}.ca-contact>a{display:inline-block;margin-top:40px;padding:17px 20px;border:1px solid #fff4;color:white;font:600 .64rem var(--font-mono);letter-spacing:.12em}.ca-contact>a:hover{background:var(--accent);border-color:var(--accent);color:#171613}.ca-contact footer{display:flex;justify-content:space-between;border-top:1px solid #fff2;margin-top:65px;padding-top:18px;color:#8f8980;font:500 .56rem var(--font-mono)}
+  @media(max-width:900px){.ca-stage{grid-template-columns:1fr;justify-items:center}.ca-words,.ca-side{display:none}.ca-card-wrap{width:min(480px,88vw)}.ca-nav>div{display:none}.ca-live{display:none}.ca-tools,.ca-about{grid-template-columns:1fr}.ca-about>img{max-width:520px}.ca-skills article{grid-template-columns:40px 1fr 25px}.ca-skills article>p{display:none}}
+  @media(max-width:620px){.ca-top{left:20px;top:18px}.ca-location{right:20px;top:18px}.ca-card{padding:15px}.ca-card-main h1{font-size:1.55rem}.ca-card-main{margin:17px 0 9px}.ca-data{gap:6px}.ca-enter{height:56px;bottom:32px}.ca-nav{height:62px}.ca-hero{min-height:calc(100svh - 62px);padding:55px 20px 80px}.ca-meta{font-size:.5rem;gap:8px}.ca-meta span:last-child{display:none}.ca-hero h2{font-size:clamp(3rem,14vw,5rem)}.ca-stamp{width:88px;height:88px;right:20px;bottom:25px}.ca-section,.ca-about{padding:80px 20px}.ca-heading{margin-bottom:38px}.ca-projects{grid-template-columns:1fr;gap:45px}.ca-project--wide{grid-column:auto}.ca-project h3{font-size:2rem}.ca-skills article{padding:21px 0}.ca-skills h3{font-size:2rem}.ca-contact footer{flex-direction:column;gap:9px}.ca-about h2,.ca-contact h2,.ca-heading h2{font-size:clamp(2.7rem,13vw,4.4rem)}}
+  @media(prefers-reduced-motion:reduce){.ca-gate,.ca-card,.ca-site{animation:none!important;transition:none!important}.ca-gate.out{display:none}.ca-site{opacity:1;visibility:visible;transform:none}}
+</style>
